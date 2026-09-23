@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MU Online - Tools Panel</title>
+  <!-- PODŁĄCZENIE NOWEJ CZCIONKI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="exp_data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <!-- WIELKI TYTUŁ STRONY Z LOKALNYMI LOGOTYPAMI -->
+  <header class="main-header">
+    <div class="brand-logos">
+      <img src="img/webzen.png" alt="Webzen Logo" class="logo-webzen">
+      <img src="img/mu_logo.png" alt="MU Online Logo" class="logo-mu">
+    </div>
+    
+    <h1 class="main-title">
+      <span class="nick">M4SS1V</span>
+      <span class="subtitle">Mu Online TOOLS PANEL</span>
+    </h1>
+  </header>
+  <!-- Przełącznik Zakładek -->
+  <div class="nav-tabs">
+    <button id="tabCalcBtn" class="tab-btn active">Kalkulator EXP</button>
+    <button id="tabBossBtn" class="tab-btn">Boss Timer</button>
+  </div>
+
+  <!-- WIDOK 1: KALKULATOR EXP -->
+  <div id="calcView" class="calculator-card">
+    <h2>MU Online - Kalkulator EXP</h2>
+
+    <div class="row">
+      <div class="field-group">
+        <label for="currentLvl">Aktualny Lvl:</label>
+        <input type="number" id="currentLvl" value="1" min="1">
+      </div>
+      <div class="field-group">
+        <label for="targetLvl">Docelowy Lvl:</label>
+        <input type="number" id="targetLvl" value="400" min="1">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label for="expPerSec">EXP na sekundę (EXP/s):</label>
+      <input type="number" id="expPerSec" placeholder="np. 2500" min="1">
+    </div>
+
+    <div class="field-group">
+      <label for="expBar">Bar (0 - 10):</label>
+      <input type="number" id="expBar" value="0" min="0" max="10" step="0.1" placeholder="np. 4.5">
+    </div>
+
+    <button id="calcBtn" class="btn-primary">Oblicz czas</button>
+
+    <div id="results" class="results-panel">
+      <p><strong>Brakujący EXP na obecnym poziomie:</strong> <span id="currentLevelRemainingExp">-</span></p>
+      <p><strong>Łączny brakujący EXP do celu:</strong> <span id="expNeeded">-</span></p>
+      <p><strong>Czas do docelowego poziomu:</strong> <span id="timeToTarget">-</span></p>
+    </div>
+
+    <div class="timer-section">
+      <h3>Timer testu</h3>
+      <div class="field-group">
+        <label for="timerMinutes">Ustaw czas (minuty):</label>
+        <input type="number" id="timerMinutes" value="10" min="1">
+      </div>
+      <div class="timer-display" id="timerDisplay">00:10:00</div>
+      <div class="button-row">
+        <button id="startTimerBtn" class="btn-success">Start</button>
+        <button id="stopTimerBtn" class="btn-danger">Stop / Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIDOK 2: BOSS TIMER -->
+  <div id="bossView" class="calculator-card hidden">
+    <h2>MU Online - Boss Timer</h2>
+
+    <!-- Górny panel dodawania i Zegar -->
+    <div class="boss-top-row">
+      <div class="boss-inputs">
+        <div class="field-group horizontal">
+          <label for="bossSelect">Boss:</label>
+          <select id="bossSelect">
+            <option value="Kundun">Kundun</option>
+            <option value="Medusa">Medusa</option>
+            <option value="Nightmare">Nightmare</option>
+            <option value="Selupan">Selupan</option>
+            <option value="Lord Silvester">Lord Silvester</option>
+            <option value="Core Magripi">Core Magripi</option>
+            <option value="Ferea Lord">Ferea Lord</option>
+            <option value="Nyx">Nyx</option>
+            <option value="GOD">GOD</option>
+          </select>
+          <label for="bossCh">CH:</label>
+          <input type="number" id="bossCh" value="1" min="1" class="small-input">
+        </div>
+
+        <div class="field-group horizontal">
+          <label for="bossTimeInput">Za ile (H:M):</label>
+          <input type="text" id="bossTimeInput" placeholder="np. 0:30" class="medium-input">
+          <button id="addBossBtn" class="btn-primary">DODAJ DO LISTY</button>
+        </div>
+      </div>
+
+      <div class="clock-box" id="systemClock">00:00:00</div>
+    </div>
+
+    <!-- Tabela Bossów -->
+    <div class="table-container">
+      <table class="boss-table">
+        <thead>
+          <tr>
+            <th>Lp.</th>
+            <th>Godzina</th>
+            <th>Nazwa Bossa</th>
+            <th>CH</th>
+            <th>Zostało</th>
+          </tr>
+        </thead>
+        <tbody id="bossTableBody">
+          <!-- Wiersze generowane dynamicznie w JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Akcje na liście -->
+    <div class="button-row" style="margin-top: 15px;">
+      <button id="removeSelectedBtn" class="btn-secondary">USUŃ ZAZNACZONE</button>
+      <button id="clearAllBossesBtn" class="btn-danger">WYCZYŚĆ CAŁĄ LISTĘ</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -28,8 +28,9 @@
   </header>
   <!-- Przełącznik Zakładek -->
   <div class="nav-tabs">
-    <button id="tabCalcBtn" class="tab-btn active">Kalkulator EXP</button>
-    <button id="tabBossBtn" class="tab-btn">Boss Timer</button>
+    <button id="tabCalcBtn" class="tab-btn active" onclick="switchTab('calcView')">Kalkulator EXP</button>
+    <button id="tabBossBtn" class="tab-btn" onclick="switchTab('bossView')">Boss Timer</button>
+    <button id="tabSpeedBtn" class="tab-btn" onclick="switchTab('speedView')">Speed Gaps</button>
   </div>
 
   <!-- WIDOK 1: KALKULATOR EXP -->
@@ -137,5 +138,60 @@
       <button id="clearAllBossesBtn" class="btn-danger">WYCZYŚĆ CAŁĄ LISTĘ</button>
     </div>
   </div>
+  <!-- WIDOK 3: SPEED GAPS -->
+  <div id="speedView" class="calculator-card hidden">
+    <h2>MU ONLINE - SPEED GAPS (ATTACK SPEED)</h2>
+    
+    <div class="class-selector">
+      <label for="hero-class">Wybierz klasę postaci:</label>
+      <select id="hero-class" onchange="updateSpeedGaps()">
+        <option value="dk">Dark Knight / BK / BM</option>
+        <option value="dw">Dark Wizard / SM / Grand Master</option>
+        <option value="elf">Fairy Elf / Muse Elf / High Elf</option>
+        <option value="mg">Magic Gladiator / Duel Master</option>
+        <option value="dl">Dark Lord / Lord Emperor</option>
+        <option value="sum">Summoner / Dimension Master</option>
+        <option value="rf">Rage Fighter / Fist Master</option>
+        <option value="gl">Grow Lancer / Mirage Lancer</option>
+        <option value="rw">Rune Wizard / Rune Master</option>
+        <option value="sl">Slayer / Royal Slayer</option>
+        <option value="gc">Gun Crusher / Master Gunner</option>
+        <option value="ww">White Wizard / Glory Wizard</option>
+        <option value="lem">Lemuria / Mage</option>
+        <option value="ik">Illusion Knight / Mystic Knight</option>
+        <option value="al">Alchemist / Alchemic Master</option>
+        <option value="cru">Crusader</option>
+      </select>
+    </div>
+
+    <!-- PIONOWY UKŁAD KARTY -->
+    <div class="gap-card-vertical">
+      <div class="hero-header-center">
+        <div class="hero-preview-center">
+          <img id="hero-img" src="img/sm.png" alt="Hero Preview">
+          <h3 id="hero-name">Dark Wizard / SM</h3>
+        </div>
+        
+        <div id="agi-ratio-container" class="agi-ratio-box-center">
+          <!-- Wklejane dynamicznie z JS -->
+        </div>
+      </div>
+      
+      <div id="gap-info-content" class="skills-tables-wrapper">
+        <!-- Generowane z JS -->
+      </div>
+    </div>
+  </div>
+  <!-- === KONIEC WIDOKU SPEED GAPS === -->
+  <footer class="main-footer">
+  <div class="footer-content">
+    <p class="copyright">&copy; 2026 <strong>M4SS1V</strong>. Wszelkie prawa zastrzeżone.</p>
+    <p class="disclaimer">
+      MU Online jest zarejestrowanym znakiem towarowym firmy Webzen Inc. 
+      Ta strona jest niezależnym projektem fanowskim i nie jest w żaden sposób powiązana, 
+      sponsorowana ani wspierana przez Webzen Inc.
+    </p>
+  </div>
+</footer>
 </body>
 </html>

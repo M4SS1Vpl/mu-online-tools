@@ -622,7 +622,7 @@ input:focus, select:focus {
 .event-tab-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
 
 .event-tab-btn.active {
-  background: #bb9900 !important;
+  background: #e6bc01 !important;
   color: #000000 !important;
   border-color: #ffd900 !important;
   box-shadow: 0 0 14px rgba(0, 230, 118, 0.35);

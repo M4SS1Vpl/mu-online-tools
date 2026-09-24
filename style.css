@@ -278,10 +278,10 @@ input:focus, select:focus {
   align-items: center;
   gap: 15px;
   margin-bottom: 20px;
-  background-color: #121214;
+  background-color: #323238;
   padding: 15px;
   border-radius: 8px;
-  border: 1px solid #29292e;
+  border: 1px solid #424242;
 }
 
 .boss-inputs { flex: 1; }

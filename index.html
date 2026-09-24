@@ -17,8 +17,8 @@
   <!-- NAGŁÓWEK Z LOGOTYPAMI I NICKIEM -->
   <header class="main-header">
     <div class="brand-logos">
-      <img src="img/webzen.png" alt="Webzen Logo" class="logo-webzen">
-      <img src="img/mu_logo.png" alt="MU Online Logo" class="logo-mu">
+      <img src="img/webzen.png" alt="Webzen Logo" class="logo-webzen" onerror="this.style.display='none'">
+      <img src="img/mu_logo.png" alt="MU Online Logo" class="logo-mu" onerror="this.style.display='none'">
     </div>
     
     <h1 class="main-title">
@@ -53,30 +53,42 @@
     </div>
 
     <div class="home-grid">
-      <!-- Box 1 -->
-      <div class="home-card" onclick="switchTab('calcView')">
-        <div class="home-card-icon">⚡</div>
-        <h3>Kalkulator EXP</h3>
-        <p>Przelicz czas potrzebny do wbicia docelowego poziomu na podstawie aktualnego EXP/sek.</p>
-        <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
+        <!-- Box 1 -->
+        <div class="home-card" onclick="switchTab('calcView')">
+          <div class="home-card-icon">⚡</div>
+          <h3>Kalkulator EXP</h3>
+          <p>Przelicz czas potrzebny do wbicia docelowego poziomu na podstawie aktualnego EXP/sek.</p>
+          <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="home-card" onclick="switchTab('bossView')">
+          <div class="home-card-icon">⏰</div>
+          <h3>Boss Timer</h3>
+          <p>Śledź czasy respawnu bossów z powiadomieniami dźwiękowymi dopasowanymi do Twojego czasu.</p>
+          <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="home-card" onclick="switchTab('speedView')">
+          <div class="home-card-icon">🗡️</div>
+          <h3>Speed Gaps</h3>
+          <p>Sprawdź progi prędkości ataku (Attack Speed) i uniknij zbugowanych animacji czarów.</p>
+          <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
+        </div>
+
+        <!-- Box 4: Events -->
+        <div class="home-card" onclick="switchTab('eventsView')">
+          <div class="home-card-icon">📅</div>
+          <h3>Events</h3>
+          <p>Śledź nadchodzące eventy globalne w MU Online, sprawdź godziny wejść i wymagane poziomy.</p>
+          <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
+        </div>
       </div>
 
-      <!-- Box 2 -->
-      <div class="home-card" onclick="switchTab('bossView')">
-        <div class="home-card-icon">⏱️</div>
-        <h3>Boss Timer</h3>
-        <p>Śledź czasy respawnu bossów z powiadomieniami dźwiękowymi dopasowanymi do Twojego czasu.</p>
-        <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
+      <div class="home-footer-note">
+        <small>💡 Wszystkie dane (np. zapamiętane czasy bossów) są bezpiecznie zapisywane w pamięci Twojej przeglądarki.</small>
       </div>
-
-      <!-- Box 3 -->
-      <div class="home-card" onclick="switchTab('speedView')">
-        <div class="home-card-icon">🗡️</div>
-        <h3>Speed Gaps</h3>
-        <p>Sprawdź progi prędkości ataku (Attack Speed) i uniknij zbugowanych animacji czarów.</p>
-        <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
-      </div>
-    </div>
 
     <div class="home-footer-note">
       <small>💡 Wszystkie dane (np. zapamiętane czasy bossów) są bezpiecznie zapisywane w pamięci Twojej przeglądarki.</small>
@@ -87,8 +99,9 @@
   <!-- WIDOK: TIMER (OSOBNA ZAKŁADKA) -->
   <!-- ========================================== -->
   <div id="timerView" class="calculator-card hidden">
-    <h2>Wielokrotny Timer</h2>
+    <h2>Wielokrotny Timer & Odliczanie</h2>
 
+    
     <!-- Panel dodawania nowego timera -->
     <div class="timer-add-panel">
       <div class="field-group">
@@ -118,79 +131,103 @@
     <div class="upcoming-events-section">
       <h3>Nadchodzące Eventy Global Mu Online</h3>
       <div id="upcomingEventsList" class="upcoming-events-grid">
-        <!-- Tutaj JS wygeneruje karty z odliczaniem w czasie rzeczywistym -->
+        <!-- JS generuje karty -->
       </div>
     </div>
 
-    <!-- Dolny panel: Tabele godzin poszczególnych eventów -->
+    <!-- Dolny panel: Przyciski przełączania + czytelna tabela -->
     <div class="events-tables-section">
-      <h3>Pełna Lista Godzin</h3>
+      <h3 class="section-subtitle-main">Pełna Lista Godzin & Wymagany Level</h3>
 
-      <!-- Blood Castle Table -->
-      <div class="event-schedule-box">
-        <h4>🏰 Blood Castle</h4>
-        <div class="table-container">
-          <table class="boss-table">
-            <thead>
-              <tr>
-                <th>Lp.</th>
-                <th>Czas Czasu Serwera (UTC)</th>
-                <th>Twój Czas Lokalny</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="bcTableBody">
-              <!-- Wiersze generowane w JS lub na podstawie danych z gry -->
-            </tbody>
-          </table>
-        </div>
+      <!-- Przyciski wyboru eventu -->
+      <div class="event-tabs-nav">
+        <button class="event-tab-btn active" data-tab="bc">🏰 Blood Castle</button>
+        <button class="event-tab-btn" data-tab="ds">😈 Devil Square</button>
+        <button class="event-tab-btn" data-tab="cc">⚔️ Chaos Castle</button>
       </div>
 
-      <!-- Devil Square Table -->
-      <div class="event-schedule-box" style="margin-top: 20px;">
-        <h4>😈 Devil Square</h4>
-        <div class="table-container">
-          <table class="boss-table">
-            <thead>
-              <tr>
-                <th>Lp.</th>
-                <th>Czas Serwera (UTC)</th>
-                <th>Twój Czas Lokalny</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="dsTableBody">
-              <!-- Wiersze generowane w JS -->
-            </tbody>
-          </table>
+      <!-- BLOOD CASTLE -->
+      <div class="event-schedule-box event-tab-content active" id="tab-bc">
+        <div class="event-box-header">
+          <h4>🏰 Blood Castle</h4>
+          <div class="level-badges-grid">
+            <div class="lvl-badge"><span class="lvl-tag">BC 1</span><span class="lvl-val">50 - 399</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">BC 2</span><span class="lvl-val">400 - 799</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">BC 3</span><span class="lvl-val">800 - 999</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">BC 4</span><span class="lvl-val">1000 - 1199</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">BC 5</span><span class="lvl-val">1200 - 1399</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">BC 6</span><span class="lvl-val">1400 - 1599</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">BC 7</span><span class="lvl-val">1600+</span></div>
+          </div>
         </div>
+        <table class="event-clean-table">
+          <thead>
+            <tr>
+              <th>Lp.</th>
+              <th>Godzina Wejścia (Czas Lokalny)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="bcTableBody"></tbody>
+        </table>
       </div>
 
-      <!-- Chaos Castle Table -->
-      <div class="event-schedule-box" style="margin-top: 20px;">
-        <h4>⚔️ Chaos Castle</h4>
-        <div class="table-container">
-          <table class="boss-table">
-            <thead>
-              <tr>
-                <th>Lp.</th>
-                <th>Czas Serwera (UTC)</th>
-                <th>Twój Czas Lokalny</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="ccTableBody">
-              <!-- Wiersze generowane w JS -->
-            </tbody>
-          </table>
+      <!-- DEVIL SQUARE -->
+      <div class="event-schedule-box event-tab-content" id="tab-ds" style="display: none;">
+        <div class="event-box-header">
+          <h4>😈 Devil Square</h4>
+          <div class="level-badges-grid">
+            <div class="lvl-badge"><span class="lvl-tag">DS 1</span><span class="lvl-val">50 - 399</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">DS 2</span><span class="lvl-val">400 - 799</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">DS 3</span><span class="lvl-val">800 - 999</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">DS 4</span><span class="lvl-val">1000 - 1199</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">DS 5</span><span class="lvl-val">1200 - 1399</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">DS 6</span><span class="lvl-val">1400 - 1599</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">DS 7</span><span class="lvl-val">1600+</span></div>
+          </div>
         </div>
+        <table class="event-clean-table">
+          <thead>
+            <tr>
+              <th>Lp.</th>
+              <th>Godzina Wejścia (Czas Lokalny)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="dsTableBody"></tbody>
+        </table>
       </div>
 
+      <!-- CHAOS CASTLE -->
+      <div class="event-schedule-box event-tab-content" id="tab-cc" style="display: none;">
+        <div class="event-box-header">
+          <h4>⚔️ Chaos Castle</h4>
+          <div class="level-badges-grid">
+            <div class="lvl-badge"><span class="lvl-tag">CC 1</span><span class="lvl-val">50 - 399</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">CC 2</span><span class="lvl-val">400 - 799</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">CC 3</span><span class="lvl-val">800 - 999</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">CC 4</span><span class="lvl-val">1000 - 1199</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">CC 5</span><span class="lvl-val">1200 - 1399</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">CC 6</span><span class="lvl-val">1400 - 1599</span></div>
+            <div class="lvl-badge"><span class="lvl-tag">CC 7</span><span class="lvl-val">1600+</span></div>
+          </div>
+        </div>
+        <table class="event-clean-table">
+          <thead>
+            <tr>
+              <th>Lp.</th>
+              <th>Godzina Wejścia (Czas Lokalny)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="ccTableBody"></tbody>
+        </table>
+      </div>
     </div>
   </div>
 
   <!-- ========================================== -->
-  <!-- WIDOK 1: KALKULATOR EXP (Usunięty stary timer) -->
+  <!-- WIDOK: KALKULATOR EXP -->
   <!-- ========================================== -->
   <div id="calcView" class="calculator-card hidden">
     <h2>MU Online - Kalkulator EXP</h2>
@@ -226,7 +263,7 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- WIDOK 2: BOSS TIMER -->
+  <!-- WIDOK: BOSS TIMER -->
   <!-- ========================================== -->
   <div id="bossView" class="calculator-card hidden">
     <h2>MU Online - Boss Timer</h2>
@@ -285,7 +322,7 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- WIDOK 3: SPEED GAPS -->
+  <!-- WIDOK: SPEED GAPS -->
   <!-- ========================================== -->
   <div id="speedView" class="calculator-card hidden">
     <h2>MU ONLINE - SPEED GAPS (ATTACK SPEED)</h2>

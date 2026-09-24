@@ -23,6 +23,7 @@ function switchTab(viewId) {
     updateSpeedGaps();
   }
 }
+window.switchTab = switchTab;
 
 // BAZA DANYCH SPEED GAPS I PRZELICZNIKÓW AGI
 const speedGapsData = {
@@ -34,14 +35,14 @@ const speedGapsData = {
       {
         skillName: "Meteor Storm",
         gaps: [
-          { lvlGap: "Lvl 1", speed: "1-127" },
+          { lvlGap: "Lvl 1", speed: "1 - 127" },
           { lvlGap: "Lvl 2", speed: "128 - 155" },
           { lvlGap: "Lvl 3", speed: "156 - 188" },
           { lvlGap: "Lvl 4", speed: "189 - 229" },
           { lvlGap: "Lvl 5", speed: "230 - 283" },
           { lvlGap: "Lvl 6", speed: "284 - 288" }
         ]
-      },
+      }
     ]
   },
   dk: {
@@ -52,14 +53,14 @@ const speedGapsData = {
       {
         skillName: "Blow",
         gaps: [
-          { lvlGap: "Lvl 1", speed: "1-131" },
+          { lvlGap: "Lvl 1", speed: "1 - 131" },
           { lvlGap: "Lvl 2", speed: "132 - 156" },
           { lvlGap: "Lvl 3", speed: "157 - 187" },
           { lvlGap: "Lvl 4", speed: "188 - 229" },
           { lvlGap: "Lvl 5", speed: "230 - 287" },
           { lvlGap: "Lvl 6", speed: "288" }
         ]
-      },
+      }
     ]
   },
   elf: {
@@ -77,7 +78,7 @@ const speedGapsData = {
         ]
       },
       {
-        skillName: "Triple Shot,Ice Arrow,Focus Shot",
+        skillName: "Triple Shot, Ice Arrow, Focus Shot",
         gaps: [
           { lvlGap: "Lvl 1", speed: "1 - 174" },
           { lvlGap: "Lvl 2", speed: "175 - 216" },
@@ -86,16 +87,16 @@ const speedGapsData = {
         ]
       },
       {
-        skillName: "Holy Bolt,Buffs",
+        skillName: "Holy Bolt, Buffs",
         gaps: [
           { lvlGap: "Lvl 1", speed: "1 - 119" },
           { lvlGap: "Lvl 2", speed: "120 - 141" },
           { lvlGap: "Lvl 3", speed: "142 - 167" },
           { lvlGap: "Lvl 4", speed: "168 - 199" },
           { lvlGap: "Lvl 5", speed: "200 - 238" },
-          { lvlGap: "Lvl 6", speed: "239 - FULL" },
+          { lvlGap: "Lvl 6", speed: "239 - FULL" }
         ]
-      },
+      }
     ]
   },
   mg: {
@@ -104,7 +105,7 @@ const speedGapsData = {
     agiRatio: "10 Agility = 1 Speed",
     skills: [
       {
-        skillName: "Chaos Blade,Fire Blood",
+        skillName: "Chaos Blade, Fire Blood",
         gaps: [
           { lvlGap: "Lvl 1", speed: "1 - 188" },
           { lvlGap: "Lvl 2", speed: "189 - 210" },
@@ -115,7 +116,7 @@ const speedGapsData = {
         ]
       },
       {
-        skillName: "Gigantic Storm, Havok Spear,Dark Blast",
+        skillName: "Gigantic Storm, Havok Spear, Dark Blast",
         gaps: [
           { lvlGap: "Lvl 1", speed: "1 - 186" },
           { lvlGap: "Lvl 2", speed: "187 - 208" },
@@ -124,7 +125,7 @@ const speedGapsData = {
           { lvlGap: "Lvl 5", speed: "282 - 339" },
           { lvlGap: "Lvl 6", speed: "340 - 351" }
         ]
-      },
+      }
     ]
   },
   dl: {
@@ -140,7 +141,7 @@ const speedGapsData = {
           { lvlGap: "Lvl 3", speed: "163 - 189" },
           { lvlGap: "Lvl 4", speed: "190 - 225" },
           { lvlGap: "Lvl 5", speed: "226 - 273" },
-          { lvlGap: "Lvl 6", speed: "274 - FULL" },
+          { lvlGap: "Lvl 6", speed: "274 - FULL" }
         ]
       }
     ]
@@ -157,7 +158,7 @@ const speedGapsData = {
           { lvlGap: "Lvl 2", speed: "103 - 124" },
           { lvlGap: "Lvl 3", speed: "125 - 151" },
           { lvlGap: "Lvl 4", speed: "152 - 187" },
-          { lvlGap: "Lvl 5", speed: "188 - FULL" },
+          { lvlGap: "Lvl 5", speed: "188 - FULL" }
         ]
       },
       {
@@ -167,9 +168,9 @@ const speedGapsData = {
           { lvlGap: "Lvl 2", speed: "120 - 134" },
           { lvlGap: "Lvl 3", speed: "135 - 151" },
           { lvlGap: "Lvl 4", speed: "152 - 170" },
-          { lvlGap: "Lvl 5", speed: "171 - FULL" },
+          { lvlGap: "Lvl 5", speed: "171 - FULL" }
         ]
-      },
+      }
     ]
   },
   rf: {
@@ -191,14 +192,14 @@ const speedGapsData = {
       {
         skillName: "Spirit Hook",
         gaps: [
-          { lvlGap: "Lvl 1", speed: "1 - 283" },
+          { lvlGap: "Lvl 1", speed: "1 - 161" },
           { lvlGap: "Lvl 2", speed: "162 - 199" },
           { lvlGap: "Lvl 3", speed: "200 - 245" },
           { lvlGap: "Lvl 4", speed: "246 - 298" },
           { lvlGap: "Lvl 5", speed: "299 - 366" },
-          { lvlGap: "Lvl 6", speed: "367 - FULL" },
+          { lvlGap: "Lvl 6", speed: "367 - FULL" }
         ]
-      },
+      }
     ]
   },
   gl: {
@@ -214,7 +215,7 @@ const speedGapsData = {
           { lvlGap: "Lvl 3", speed: "170 - 191" },
           { lvlGap: "Lvl 4", speed: "192 - 217" },
           { lvlGap: "Lvl 5", speed: "218 - 247" },
-          { lvlGap: "Lvl 6", speed: "248 - FULL" },
+          { lvlGap: "Lvl 6", speed: "248 - FULL" }
         ]
       },
       {
@@ -225,9 +226,9 @@ const speedGapsData = {
           { lvlGap: "Lvl 3", speed: "142 - 168" },
           { lvlGap: "Lvl 4", speed: "169 - 199" },
           { lvlGap: "Lvl 5", speed: "200 - 238" },
-          { lvlGap: "Lvl 6", speed: "239 - FULL" },
+          { lvlGap: "Lvl 6", speed: "239 - FULL" }
         ]
-      },
+      }
     ]
   },
   rw: {
@@ -238,7 +239,7 @@ const speedGapsData = {
       {
         skillName: "Lightning Storm",
         gaps: [
-          { lvlGap: "Lvl 1", speed: "0 - 165" },
+          { lvlGap: "Lvl 1", speed: "1 - 165" },
           { lvlGap: "Lvl 2", speed: "166 - 183" },
           { lvlGap: "Lvl 3", speed: "184 - 202" },
           { lvlGap: "Lvl 4", speed: "203 - 224" },
@@ -256,7 +257,7 @@ const speedGapsData = {
           { lvlGap: "Lvl 5", speed: "243 - 273" },
           { lvlGap: "Lvl 6", speed: "274 - FULL" }
         ]
-      },
+      }
     ]
   },
   sl: {
@@ -270,7 +271,7 @@ const speedGapsData = {
           { lvlGap: "Lvl 1", speed: "1 - 237" },
           { lvlGap: "Lvl 2", speed: "238 - 299" },
           { lvlGap: "Lvl 3", speed: "300 - 371" },
-          { lvlGap: "Lvl 4", speed: "372 - FULL" },
+          { lvlGap: "Lvl 4", speed: "372 - FULL" }
         ]
       },
       {
@@ -279,9 +280,9 @@ const speedGapsData = {
           { lvlGap: "Lvl 1", speed: "1 - 239" },
           { lvlGap: "Lvl 2", speed: "240 - 284" },
           { lvlGap: "Lvl 3", speed: "285 - 340" },
-          { lvlGap: "Lvl 4", speed: "341 - FULL" },
+          { lvlGap: "Lvl 4", speed: "341 - FULL" }
         ]
-      },
+      }
     ]
   },
   gc: {
@@ -315,7 +316,7 @@ const speedGapsData = {
           { lvlGap: "Lvl 3", speed: "156 - 188" },
           { lvlGap: "Lvl 4", speed: "189 - 229" },
           { lvlGap: "Lvl 5", speed: "230 - 283" },
-          { lvlGap: "Lvl 6", speed: "284 - 304" },
+          { lvlGap: "Lvl 6", speed: "284 - 304" }
         ]
       }
     ]
@@ -328,7 +329,7 @@ const speedGapsData = {
       {
         skillName: "Ultimate Force",
         gaps: [
-          { lvlGap: "Lvl 1", speed: "0 - 147" },
+          { lvlGap: "Lvl 1", speed: "1 - 147" },
           { lvlGap: "Lvl 2", speed: "148 - 164" },
           { lvlGap: "Lvl 3", speed: "165 - 184" },
           { lvlGap: "Lvl 4", speed: "185 - 211" },
@@ -390,7 +391,7 @@ const speedGapsData = {
           { lvlGap: "Lvl 6", speed: "183 - 210" },
           { lvlGap: "Lvl 7", speed: "211 - 243" },
           { lvlGap: "Lvl 8", speed: "244 - 284" },
-          { lvlGap: "Lvl 9", speed: "285" },
+          { lvlGap: "Lvl 9", speed: "285" }
         ]
       }
     ]
@@ -404,14 +405,17 @@ function updateSpeedGaps() {
 
   const selectedClass = heroSelect.value;
   const data = speedGapsData[selectedClass];
-
   if (!data) return;
 
-  // Podmiana danych nagłówka
-  document.getElementById('hero-name').innerText = data.name;
-  document.getElementById('hero-img').src = data.img;
+  const heroNameEl = document.getElementById('hero-name');
+  const heroImgEl = document.getElementById('hero-img');
+  
+  if (heroNameEl) heroNameEl.innerText = data.name;
+  if (heroImgEl) {
+    heroImgEl.src = data.img;
+    heroImgEl.onerror = function() { this.src = 'img/party.png'; };
+  }
 
-  // Podmiana przelicznika AGI w 2 liniach
   const agiContainer = document.getElementById('agi-ratio-container');
   if (agiContainer) {
     agiContainer.innerHTML = `
@@ -420,12 +424,10 @@ function updateSpeedGaps() {
     `;
   }
 
-  // Generowanie tabel dla umiejętności
   const container = document.getElementById('gap-info-content');
   if (!container) return;
 
   let html = '';
-
   data.skills.forEach(sk => {
     html += `
       <div class="skill-section">
@@ -460,14 +462,24 @@ function updateSpeedGaps() {
 
   container.innerHTML = html;
 }
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Zaznaczanie tekstu po podwójnym kliknięciu w inputy
   document.querySelectorAll('input').forEach(input => {
     input.addEventListener('dblclick', function () {
       this.select();
     });
   });
 
-  // AUDIO SYSTEM
+  // Nawigacja zakładkami
+  document.getElementById('tabHomeBtn')?.addEventListener('click', () => switchTab('homeView'));
+  document.getElementById('tabCalcBtn')?.addEventListener('click', () => switchTab('calcView'));
+  document.getElementById('tabBossBtn')?.addEventListener('click', () => switchTab('bossView'));
+  document.getElementById('tabTimerBtn')?.addEventListener('click', () => switchTab('timerView'));
+  document.getElementById('tabEventsBtn')?.addEventListener('click', () => switchTab('eventsView'));
+  document.getElementById('tabSpeedBtn')?.addEventListener('click', () => switchTab('speedView'));
+
+  // SYSTEM DŹWIĘKÓW
   const sounds = {
     click: new Audio('sound/eMeleeHit5.wav'),
     warning: new Audio('sound/eMedal.wav'),
@@ -558,50 +570,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // TIMER TESTU
-  let timerInterval = null;
-  const timerDisplay = document.getElementById('timerDisplay');
-
-  document.getElementById('startTimerBtn')?.addEventListener('click', () => {
-    clearInterval(timerInterval);
-    let sec = (parseInt(document.getElementById('timerMinutes').value) || 10) * 60;
-
-    const updateDisp = (s) => {
-      const h = Math.floor(s / 3600).toString().padStart(2, '0');
-      const m = Math.floor((s % 3600) / 60).toString().padStart(2, '0');
-      const sc = Math.floor(s % 60).toString().padStart(2, '0');
-      timerDisplay.innerText = `${h}:${m}:${sc}`;
-    };
-
-    updateDisp(sec);
-    timerInterval = setInterval(() => {
-      sec--;
-      if (sec <= 0) {
-        clearInterval(timerInterval);
-        updateDisp(0);
-        playSound('ready');
-        alert('Czas testu dobiegł końca!');
-      } else {
-        updateDisp(sec);
-      }
-    }, 1000);
-  });
-
-  document.getElementById('stopTimerBtn')?.addEventListener('click', () => {
-    clearInterval(timerInterval);
-    const mins = parseInt(document.getElementById('timerMinutes').value) || 10;
-    const h = Math.floor((mins * 60) / 3600).toString().padStart(2, '0');
-    const m = Math.floor(((mins * 60) % 3600) / 60).toString().padStart(2, '0');
-    timerDisplay.innerText = `${h}:${m}:00`;
-  });
-
   // 2. BOSS TIMER LOGIKA
   let bossData = JSON.parse(localStorage.getItem('mu_boss_data') || '[]');
   let selectedRowId = null;
 
   function updateSystemClock() {
-    const now = new Date();
-    document.getElementById('systemClock').innerText = now.toTimeString().split(' ')[0];
+    const clockEl = document.getElementById('systemClock');
+    if (clockEl) clockEl.innerText = new Date().toTimeString().split(' ')[0];
   }
   setInterval(updateSystemClock, 1000);
   updateSystemClock();
@@ -617,9 +592,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.getElementById('addBossBtn')?.addEventListener('click', () => {
-    const boss = document.getElementById('bossSelect').value;
-    const ch = document.getElementById('bossCh').value.trim();
-    const timeVal = document.getElementById('bossTimeInput').value.trim();
+    const bossSelect = document.getElementById('bossSelect');
+    const bossChEl = document.getElementById('bossCh');
+    const bossTimeEl = document.getElementById('bossTimeInput');
+
+    if (!bossSelect || !bossChEl || !bossTimeEl) return;
+
+    const boss = bossSelect.value;
+    const ch = bossChEl.value.trim();
+    const timeVal = bossTimeEl.value.trim();
 
     if (!ch) {
       alert("Podaj numer CH!");
@@ -659,7 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
     playSound('click');
     saveBosses();
     renderBossTable();
-    document.getElementById('bossTimeInput').value = '';
+    bossTimeEl.value = '';
   });
 
   function renderBossTable() {
@@ -748,9 +729,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   updateSpeedGaps();
-  // ==========================================
-  // LOGIKA DLA KARTY: WIELOKRROTNY TIMER
-  // ==========================================
+
+  // 3. WIELOKROTNE TIMERY
   let customTimers = [];
 
   document.getElementById('addCustomTimerBtn')?.addEventListener('click', () => {
@@ -823,24 +803,32 @@ document.addEventListener('DOMContentLoaded', () => {
     if (changed) renderCustomTimers();
   }, 1000);
 
-  // ==========================================
-  // LOGIKA DLA KARTY: HARMONOGRAM EVENTÓW
-  // ==========================================
+  // 4. HARMONOGRAM EVENTÓW
   const eventsData = {
-    bc: { name: "Blood Castle", times: ["00:10", "00:40", "01:10", "01:40", "02:10", "02:40", "03:10", "03:40", "05:10", "07:10", "09:10", "11:10", "13:10", "15:10", "17:10", "19:10", "21:10", "21:40", "22:10", "22:40", "23:10"] },
-    ds: { name: "Devil Square", times: ["00:20", "00:50", "01:20", "01:50", "02:20", "02:50", "03:20", "03:50", "05:20", "07:20", "09:20", "11:20", "13:20", "15:20", "17:20", "19:20", "21:20", "21:50", "22:20", "22:50", "23:20"] },
-    cc: { name: "Chaos Castle", times: ["01:00", "03:00", "05:00", "07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00", "23:00"] }
+    bc: { 
+      name: "Blood Castle", 
+      tbodyId: "bcTableBody",
+      times: ["00:10", "00:40", "01:10", "01:40", "02:10", "02:40", "03:10", "03:40", "05:10", "07:10", "09:10", "11:10", "13:10", "15:10", "17:10", "19:10", "21:10", "21:40", "22:10", "22:40", "23:10"]
+    },
+    ds: { 
+      name: "Devil Square", 
+      tbodyId: "dsTableBody",
+      times: ["00:20", "00:50", "01:20", "01:50", "02:20", "02:50", "03:20", "03:50", "05:20", "07:20", "09:20", "11:20", "13:20", "15:20", "17:20", "19:20", "21:20", "21:50", "22:20", "22:50", "23:20"]
+    },
+    cc: { 
+      name: "Chaos Castle", 
+      tbodyId: "ccTableBody",
+      times: ["01:00", "03:00", "05:00", "07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00", "23:00"]
+    }
   };
 
-  // Zwraca obiekty dat dla Wejścia (-5 min) oraz Startu (0 min)
   function getEventTimes(utcStr) {
     const [h, m] = utcStr.split(':').map(Number);
     const now = new Date();
     
     let startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
-    let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000); // 5 minut wcześniej
+    let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
 
-    // Jeśli sam start eventu już minął, przesuwamy całą para-datę na jutro
     if (startDate < now) {
       startDate.setUTCDate(startDate.getUTCDate() + 1);
       entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
@@ -858,6 +846,40 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${String(eventDate.getHours()).padStart(2, '0')}:${String(eventDate.getMinutes()).padStart(2, '0')}`;
   }
 
+  function renderTables(allUpcoming) {
+    Object.keys(eventsData).forEach(key => {
+      const ev = eventsData[key];
+      const tbody = document.getElementById(ev.tbodyId);
+      if (!tbody) return;
+
+      const activeEventForType = allUpcoming.find(u => u.typeKey === key);
+
+      tbody.innerHTML = '';
+      ev.times.forEach((utcTime, idx) => {
+        const isCurrent = activeEventForType && activeEventForType.utcTime === utcTime;
+        const row = document.createElement('tr');
+        
+        if (isCurrent) {
+          row.className = 'row-next-event';
+        }
+
+        let statusBadge = '<span style="opacity: 0.6;">Planowany</span>';
+        if (isCurrent) {
+          statusBadge = activeEventForType.isOpen 
+            ? '<span class="status-badge-next" style="background: #e74c3c; box-shadow: 0 0 10px rgba(231,76,60,0.8);">OTWARTY!</span>' 
+            : '<span class="status-badge-next">NAJBLIŻSZY</span>';
+        }
+
+        row.innerHTML = `
+          <td>${idx + 1}</td>
+          <td><strong class="time-text">${getLocalEntryTimeStr(utcTime)}</strong></td>
+          <td>${statusBadge}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    });
+  }
+
   function updateEventsSystem() {
     const now = new Date();
     let allUpcoming = [];
@@ -866,13 +888,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const ev = eventsData[key];
       ev.times.forEach(utcTime => {
         const { entryDate, startDate } = getEventTimes(utcTime);
-
-        // Stan eventu:
-        // 1. OTWARTY: jesteśmy między czasem wejścia a startem
-        // 2. NADCHODZĄCY: przed czasem wejścia
         const isOpen = now >= entryDate && now < startDate;
-        
-        // Wyliczamy różnicę do najważniejszego punktu (do startu jeśli otwarty, lub do wejścia jeśli nadchodzi)
         const diffMs = isOpen ? (startDate - now) : (entryDate - now);
 
         allUpcoming.push({
@@ -883,18 +899,14 @@ document.addEventListener('DOMContentLoaded', () => {
           startDate: startDate,
           isOpen: isOpen,
           diffMs: diffMs,
-          // Waga do sortowania: otwarte zawsze na samej górze
           sortKey: isOpen ? (startDate - now) : (entryDate - now + 10000000)
         });
       });
     });
 
-    // Sortujemy tak, żeby OTWARTE były pierwsze, a po nich te z najkrótszym czasem do wejścia
     allUpcoming.sort((a, b) => a.sortKey - b.sortKey);
-
     const top5 = allUpcoming.slice(0, 5);
 
-    // Renderowanie kafelków
     const gridContainer = document.querySelector('.upcoming-events-grid');
     if (gridContainer) {
       gridContainer.innerHTML = '';
@@ -906,17 +918,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const s = Math.floor(totalSec % 60);
         const localEntryStr = getLocalEntryTimeStr(item.utcTime);
 
-        // Formatowanie czasu (z podwójnymi cyframi dla ładniejszego wyglądu, np. 01m 05s)
         const mStr = String(m).padStart(2, '0');
         const sStr = String(s).padStart(2, '0');
 
-        let timerFormatted = hrs > 0 
-          ? `${hrs}h ${mStr}m ${sStr}s` 
-          : `${mStr}m ${sStr}s`;
-
+        let timerFormatted = hrs > 0 ? `${hrs}h ${mStr}m ${sStr}s` : `${mStr}m ${sStr}s`;
         let timerHTML = `<div class="event-card-timer">${timerFormatted}</div>`;
 
-        // Jeśli wejście jest otwarte, rozbijamy na nagłówek i odliczanie poniżej
         if (item.isOpen) {
           timerHTML = `
             <div class="event-card-timer-box">
@@ -937,43 +944,30 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Renderowanie tabel
-    const renderTable = (tbodyId, typeKey) => {
-      const tbody = document.getElementById(tbodyId);
-      if (!tbody) return;
-
-      const evTimes = eventsData[typeKey].times;
-      const activeEventForType = allUpcoming.find(u => u.typeKey === typeKey);
-
-      tbody.innerHTML = '';
-      evTimes.forEach((utcTime, idx) => {
-        const isCurrent = activeEventForType && activeEventForType.utcTime === utcTime;
-        const row = document.createElement('tr');
-        
-        if (isCurrent) {
-          row.className = activeEventForType.isOpen ? 'open-event-row' : 'next-event-row';
-        }
-
-        let statusText = 'Planowany';
-        if (isCurrent) {
-          statusText = activeEventForType.isOpen ? 'OTWARTY!' : 'NAJBLIŻSZY';
-        }
-
-        row.innerHTML = `
-          <td>${idx + 1}</td>
-          <td>${utcTime} UTC</td>
-          <td><strong>${getLocalEntryTimeStr(utcTime)}</strong></td>
-          <td><span class="status-tag ${isCurrent ? (activeEventForType.isOpen ? 'open' : 'next') : 'upcoming'}">${statusText}</span></td>
-        `;
-        tbody.appendChild(row);
-      });
-    };
-
-    renderTable('bcTableBody', 'bc');
-    renderTable('dsTableBody', 'ds');
-    renderTable('ccTableBody', 'cc');
+    renderTables(allUpcoming);
   }
 
   setInterval(updateEventsSystem, 1000);
   updateEventsSystem();
+
+  // Obsługa przełączania zakładek wewnątrz Eventów
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.event-tab-btn');
+    if (btn) {
+      document.querySelectorAll('.event-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.event-tab-content').forEach(box => {
+        box.style.display = 'none';
+        box.classList.remove('active');
+      });
+
+      const targetTab = btn.getAttribute('data-tab');
+      const activeBox = document.getElementById('tab-' + targetTab);
+      if (activeBox) {
+        activeBox.style.display = 'block';
+        activeBox.classList.add('active');
+      }
+    }
+  });
 });

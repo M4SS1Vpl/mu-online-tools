@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MU Online - Tools Panel</title>
-  <!-- PODŁĄCZENIE NOWEJ CZCIONKI -->
+  <!-- PODŁĄCZENIE CZCIONKI -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  <!-- WIELKI TYTUŁ STRONY Z LOKALNYMI LOGOTYPAMI -->
+  <!-- NAGŁÓWEK Z LOGOTYPAMI I NICKIEM -->
   <header class="main-header">
     <div class="brand-logos">
       <img src="img/webzen.png" alt="Webzen Logo" class="logo-webzen">
@@ -32,8 +32,8 @@
     <!-- Rząd 1 -->
     <div class="tab-row">
       <button id="tabHomeBtn" class="tab-btn active" onclick="switchTab('homeView')">Home</button>
-      <button class="tab-btn disabled" disabled>Wkrótce...</button>
-      <button class="tab-btn disabled" disabled>Wkrótce...</button>
+      <button id="tabTimerBtn" class="tab-btn" onclick="switchTab('timerView')">Timer</button>
+      <button id="tabEventsBtn" class="tab-btn" onclick="switchTab('eventsView')">Events</button>
     </div>
     <!-- Rząd 2 -->
     <div class="tab-row">
@@ -83,7 +83,115 @@
     </div>
   </div>
 
-  <!-- WIDOK 1: KALKULATOR EXP (Dodano ukrycie klasą 'hidden') -->
+  <!-- ========================================== -->
+  <!-- WIDOK: TIMER (OSOBNA ZAKŁADKA) -->
+  <!-- ========================================== -->
+  <div id="timerView" class="calculator-card hidden">
+    <h2>Wielokrotny Timer</h2>
+
+    <!-- Panel dodawania nowego timera -->
+    <div class="timer-add-panel">
+      <div class="field-group">
+        <label for="customTimerLabel">Opis timera:</label>
+        <input type="text" id="customTimerLabel" placeholder="np. Potka, Spot, Reset EXP...">
+      </div>
+      <div class="field-group">
+        <label for="customTimerMinutes">Czas (minuty):</label>
+        <input type="number" id="customTimerMinutes" value="10" min="1" max="1440">
+      </div>
+      <button id="addCustomTimerBtn" class="btn-primary">Dodaj Timer</button>
+    </div>
+
+    <!-- Kontener na aktywne timery -->
+    <div id="activeTimersContainer" class="timers-grid">
+      <!-- Timery będą generowane dynamicznie w JS -->
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- WIDOK: EVENTS (BLOOD CASTLE, DEVIL SQUARE, CHAOS CASTLE) -->
+  <!-- ========================================== -->
+  <div id="eventsView" class="calculator-card hidden">
+    <h2>Harmonogram Eventów</h2>
+
+    <!-- Górny panel: Najbliższe Eventy (Rozkład jazdy) -->
+    <div class="upcoming-events-section">
+      <h3>Nadchodzące Eventy Global Mu Online</h3>
+      <div id="upcomingEventsList" class="upcoming-events-grid">
+        <!-- Tutaj JS wygeneruje karty z odliczaniem w czasie rzeczywistym -->
+      </div>
+    </div>
+
+    <!-- Dolny panel: Tabele godzin poszczególnych eventów -->
+    <div class="events-tables-section">
+      <h3>Pełna Lista Godzin</h3>
+
+      <!-- Blood Castle Table -->
+      <div class="event-schedule-box">
+        <h4>🏰 Blood Castle</h4>
+        <div class="table-container">
+          <table class="boss-table">
+            <thead>
+              <tr>
+                <th>Lp.</th>
+                <th>Czas Czasu Serwera (UTC)</th>
+                <th>Twój Czas Lokalny</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="bcTableBody">
+              <!-- Wiersze generowane w JS lub na podstawie danych z gry -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Devil Square Table -->
+      <div class="event-schedule-box" style="margin-top: 20px;">
+        <h4>😈 Devil Square</h4>
+        <div class="table-container">
+          <table class="boss-table">
+            <thead>
+              <tr>
+                <th>Lp.</th>
+                <th>Czas Serwera (UTC)</th>
+                <th>Twój Czas Lokalny</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="dsTableBody">
+              <!-- Wiersze generowane w JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Chaos Castle Table -->
+      <div class="event-schedule-box" style="margin-top: 20px;">
+        <h4>⚔️ Chaos Castle</h4>
+        <div class="table-container">
+          <table class="boss-table">
+            <thead>
+              <tr>
+                <th>Lp.</th>
+                <th>Czas Serwera (UTC)</th>
+                <th>Twój Czas Lokalny</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="ccTableBody">
+              <!-- Wiersze generowane w JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- WIDOK 1: KALKULATOR EXP (Usunięty stary timer) -->
+  <!-- ========================================== -->
   <div id="calcView" class="calculator-card hidden">
     <h2>MU Online - Kalkulator EXP</h2>
 
@@ -115,26 +223,14 @@
       <p><strong>Łączny brakujący EXP do celu:</strong> <span id="expNeeded">-</span></p>
       <p><strong>Czas do docelowego poziomu:</strong> <span id="timeToTarget">-</span></p>
     </div>
-
-    <div class="timer-section">
-      <h3>Timer</h3>
-      <div class="field-group">
-        <label for="timerMinutes">Ustaw czas (minuty):</label>
-        <input type="number" id="timerMinutes" value="10" min="1">
-      </div>
-      <div class="timer-display" id="timerDisplay">00:10:00</div>
-      <div class="button-row">
-        <button id="startTimerBtn" class="btn-success">Start</button>
-        <button id="stopTimerBtn" class="btn-danger">Stop / Reset</button>
-      </div>
-    </div>
   </div>
 
+  <!-- ========================================== -->
   <!-- WIDOK 2: BOSS TIMER -->
+  <!-- ========================================== -->
   <div id="bossView" class="calculator-card hidden">
     <h2>MU Online - Boss Timer</h2>
 
-    <!-- Górny panel dodawania i Zegar -->
     <div class="boss-top-row">
       <div class="boss-inputs">
         <div class="field-group horizontal">
@@ -166,7 +262,6 @@
       </div>
     </div>
 
-    <!-- Tabela Bossów -->
     <div class="table-container">
       <table class="boss-table">
         <thead>
@@ -179,19 +274,19 @@
           </tr>
         </thead>
         <tbody id="bossTableBody">
-          <!-- Wiersze generowane dynamicznie w JS -->
         </tbody>
       </table>
     </div>
 
-    <!-- Akcje na liście -->
     <div class="button-row" style="margin-top: 15px;">
       <button id="removeSelectedBtn" class="btn-secondary">USUŃ ZAZNACZONE</button>
       <button id="clearAllBossesBtn" class="btn-danger">WYCZYŚĆ CAŁĄ LISTĘ</button>
     </div>
   </div>
 
+  <!-- ========================================== -->
   <!-- WIDOK 3: SPEED GAPS -->
+  <!-- ========================================== -->
   <div id="speedView" class="calculator-card hidden">
     <h2>MU ONLINE - SPEED GAPS (ATTACK SPEED)</h2>
     
@@ -217,7 +312,6 @@
       </select>
     </div>
 
-    <!-- PIONOWY UKŁAD KARTY -->
     <div class="gap-card-vertical">
       <div class="hero-header-center">
         <div class="hero-preview-center">
@@ -226,17 +320,15 @@
         </div>
         
         <div id="agi-ratio-container" class="agi-ratio-box-center">
-          <!-- Wklejane dynamicznie z JS -->
         </div>
       </div>
       
       <div id="gap-info-content" class="skills-tables-wrapper">
-        <!-- Generowane z JS -->
       </div>
     </div>
   </div>
-  <!-- === KONIEC WIDOKU SPEED GAPS === -->
 
+  <!-- STOPKA -->
   <footer class="main-footer">
     <div class="footer-content">
       <p class="copyright">&copy; 2026 <strong>M4SS1V</strong>. Wszelkie prawa zastrzeżone.</p>

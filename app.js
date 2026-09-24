@@ -16,6 +16,8 @@ function switchTab(viewId) {
   if (viewId === 'homeView') document.getElementById('tabHomeBtn')?.classList.add('active');
   if (viewId === 'calcView') document.getElementById('tabCalcBtn')?.classList.add('active');
   if (viewId === 'bossView') document.getElementById('tabBossBtn')?.classList.add('active');
+  if (viewId === 'timerView') document.getElementById('tabTimerBtn')?.classList.add('active');
+  if (viewId === 'eventsView') document.getElementById('tabEventsBtn')?.classList.add('active');
   if (viewId === 'speedView') {
     document.getElementById('tabSpeedBtn')?.classList.add('active');
     updateSpeedGaps();
@@ -458,7 +460,6 @@ function updateSpeedGaps() {
 
   container.innerHTML = html;
 }
-
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('input').forEach(input => {
     input.addEventListener('dblclick', function () {
@@ -747,4 +748,232 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   updateSpeedGaps();
+  // ==========================================
+  // LOGIKA DLA KARTY: WIELOKRROTNY TIMER
+  // ==========================================
+  let customTimers = [];
+
+  document.getElementById('addCustomTimerBtn')?.addEventListener('click', () => {
+    const labelInput = document.getElementById('customTimerLabel');
+    const minInput = document.getElementById('customTimerMinutes');
+
+    const label = labelInput ? labelInput.value.trim() || 'Timer' : 'Timer';
+    const minutes = minInput ? parseInt(minInput.value) || 10 : 10;
+
+    const newTimer = {
+      id: Date.now(),
+      label: label,
+      remainingSeconds: minutes * 60,
+      isRunning: true
+    };
+
+    customTimers.push(newTimer);
+    if (labelInput) labelInput.value = '';
+    playSound('click');
+    renderCustomTimers();
+  });
+
+  function renderCustomTimers() {
+    const container = document.getElementById('activeTimersContainer');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    customTimers.forEach(timer => {
+      const card = document.createElement('div');
+      card.className = `timer-card ${timer.remainingSeconds <= 0 ? 'finished' : ''}`;
+
+      const m = String(Math.floor(timer.remainingSeconds / 60)).padStart(2, '0');
+      const s = String(timer.remainingSeconds % 60).padStart(2, '0');
+
+      card.innerHTML = `
+        <div class="timer-card-title">${timer.label}</div>
+        <div class="timer-card-time">${m}:${s}</div>
+        <div class="timer-card-controls">
+          <button class="btn-secondary toggle-btn">${timer.isRunning ? 'Pauza' : 'Start'}</button>
+          <button class="btn-danger delete-btn">Usuń</button>
+        </div>
+      `;
+
+      card.querySelector('.toggle-btn').addEventListener('click', () => {
+        timer.isRunning = !timer.isRunning;
+        renderCustomTimers();
+      });
+
+      card.querySelector('.delete-btn').addEventListener('click', () => {
+        customTimers = customTimers.filter(t => t.id !== timer.id);
+        renderCustomTimers();
+      });
+
+      container.appendChild(card);
+    });
+  }
+
+  setInterval(() => {
+    let changed = false;
+    customTimers.forEach(timer => {
+      if (timer.isRunning && timer.remainingSeconds > 0) {
+        timer.remainingSeconds--;
+        changed = true;
+        if (timer.remainingSeconds === 0) {
+          playSound('ready');
+        }
+      }
+    });
+    if (changed) renderCustomTimers();
+  }, 1000);
+
+  // ==========================================
+  // LOGIKA DLA KARTY: HARMONOGRAM EVENTÓW
+  // ==========================================
+  const eventsData = {
+    bc: { name: "Blood Castle", times: ["00:10", "00:40", "01:10", "01:40", "02:10", "02:40", "03:10", "03:40", "05:10", "07:10", "09:10", "11:10", "13:10", "15:10", "17:10", "19:10", "21:10", "21:40", "22:10", "22:40", "23:10"] },
+    ds: { name: "Devil Square", times: ["00:20", "00:50", "01:20", "01:50", "02:20", "02:50", "03:20", "03:50", "05:20", "07:20", "09:20", "11:20", "13:20", "15:20", "17:20", "19:20", "21:20", "21:50", "22:20", "22:50", "23:20"] },
+    cc: { name: "Chaos Castle", times: ["01:00", "03:00", "05:00", "07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00", "23:00"] }
+  };
+
+  // Zwraca obiekty dat dla Wejścia (-5 min) oraz Startu (0 min)
+  function getEventTimes(utcStr) {
+    const [h, m] = utcStr.split(':').map(Number);
+    const now = new Date();
+    
+    let startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
+    let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000); // 5 minut wcześniej
+
+    // Jeśli sam start eventu już minął, przesuwamy całą para-datę na jutro
+    if (startDate < now) {
+      startDate.setUTCDate(startDate.getUTCDate() + 1);
+      entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
+    }
+
+    return { entryDate, startDate };
+  }
+
+  function getLocalEntryTimeStr(utcStr) {
+    const [h, m] = utcStr.split(':').map(Number);
+    const now = new Date();
+    const eventDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
+    eventDate.setMinutes(eventDate.getMinutes() - 5);
+
+    return `${String(eventDate.getHours()).padStart(2, '0')}:${String(eventDate.getMinutes()).padStart(2, '0')}`;
+  }
+
+  function updateEventsSystem() {
+    const now = new Date();
+    let allUpcoming = [];
+
+    Object.keys(eventsData).forEach(key => {
+      const ev = eventsData[key];
+      ev.times.forEach(utcTime => {
+        const { entryDate, startDate } = getEventTimes(utcTime);
+
+        // Stan eventu:
+        // 1. OTWARTY: jesteśmy między czasem wejścia a startem
+        // 2. NADCHODZĄCY: przed czasem wejścia
+        const isOpen = now >= entryDate && now < startDate;
+        
+        // Wyliczamy różnicę do najważniejszego punktu (do startu jeśli otwarty, lub do wejścia jeśli nadchodzi)
+        const diffMs = isOpen ? (startDate - now) : (entryDate - now);
+
+        allUpcoming.push({
+          typeKey: key,
+          name: ev.name,
+          utcTime: utcTime,
+          entryDate: entryDate,
+          startDate: startDate,
+          isOpen: isOpen,
+          diffMs: diffMs,
+          // Waga do sortowania: otwarte zawsze na samej górze
+          sortKey: isOpen ? (startDate - now) : (entryDate - now + 10000000)
+        });
+      });
+    });
+
+    // Sortujemy tak, żeby OTWARTE były pierwsze, a po nich te z najkrótszym czasem do wejścia
+    allUpcoming.sort((a, b) => a.sortKey - b.sortKey);
+
+    const top5 = allUpcoming.slice(0, 5);
+
+    // Renderowanie kafelków
+    const gridContainer = document.querySelector('.upcoming-events-grid');
+    if (gridContainer) {
+      gridContainer.innerHTML = '';
+
+      top5.forEach((item) => {
+        const totalSec = Math.floor(item.diffMs / 1000);
+        const hrs = Math.floor(totalSec / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = Math.floor(totalSec % 60);
+        const localEntryStr = getLocalEntryTimeStr(item.utcTime);
+
+        // Formatowanie czasu (z podwójnymi cyframi dla ładniejszego wyglądu, np. 01m 05s)
+        const mStr = String(m).padStart(2, '0');
+        const sStr = String(s).padStart(2, '0');
+
+        let timerFormatted = hrs > 0 
+          ? `${hrs}h ${mStr}m ${sStr}s` 
+          : `${mStr}m ${sStr}s`;
+
+        let timerHTML = `<div class="event-card-timer">${timerFormatted}</div>`;
+
+        // Jeśli wejście jest otwarte, rozbijamy na nagłówek i odliczanie poniżej
+        if (item.isOpen) {
+          timerHTML = `
+            <div class="event-card-timer-box">
+              <span class="open-label">OTWARTE!</span>
+              <span class="event-card-timer">${mStr}m ${sStr}s</span>
+            </div>
+          `;
+        }
+
+        const card = document.createElement('div');
+        card.className = `event-card ${item.isOpen ? 'open-now' : ''}`;
+        card.innerHTML = `
+          <div class="event-card-name">${item.name}</div>
+          ${timerHTML}
+          <div class="event-card-localtime">Wejście: <strong>${localEntryStr}</strong> (lokalny)</div>
+        `;
+        gridContainer.appendChild(card);
+      });
+    }
+
+    // Renderowanie tabel
+    const renderTable = (tbodyId, typeKey) => {
+      const tbody = document.getElementById(tbodyId);
+      if (!tbody) return;
+
+      const evTimes = eventsData[typeKey].times;
+      const activeEventForType = allUpcoming.find(u => u.typeKey === typeKey);
+
+      tbody.innerHTML = '';
+      evTimes.forEach((utcTime, idx) => {
+        const isCurrent = activeEventForType && activeEventForType.utcTime === utcTime;
+        const row = document.createElement('tr');
+        
+        if (isCurrent) {
+          row.className = activeEventForType.isOpen ? 'open-event-row' : 'next-event-row';
+        }
+
+        let statusText = 'Planowany';
+        if (isCurrent) {
+          statusText = activeEventForType.isOpen ? 'OTWARTY!' : 'NAJBLIŻSZY';
+        }
+
+        row.innerHTML = `
+          <td>${idx + 1}</td>
+          <td>${utcTime} UTC</td>
+          <td><strong>${getLocalEntryTimeStr(utcTime)}</strong></td>
+          <td><span class="status-tag ${isCurrent ? (activeEventForType.isOpen ? 'open' : 'next') : 'upcoming'}">${statusText}</span></td>
+        `;
+        tbody.appendChild(row);
+      });
+    };
+
+    renderTable('bcTableBody', 'bc');
+    renderTable('dsTableBody', 'ds');
+    renderTable('ccTableBody', 'cc');
+  }
+
+  setInterval(updateEventsSystem, 1000);
+  updateEventsSystem();
 });

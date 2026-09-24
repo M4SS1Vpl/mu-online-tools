@@ -38,11 +38,37 @@
   font-size: 70px;
   font-weight: 900;
   letter-spacing: 3px;
-  background: linear-gradient(180deg, #FFFFFF 20%, #00b37e 100%);
+  
+  /* Rozszerzamy tło gradientu, aby przebłysk miał miejsce na przesunięcie */
+  background: linear-gradient(
+    110deg, 
+    #ffffff 20%, 
+    #00ffaa 40%, 
+    #ffffff 50%, 
+    #00b37e 70%, 
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 20px rgba(0, 179, 126, 0.5), 0 0 40px rgba(0, 179, 126, 0.2);
+  
+  text-shadow: 0 0 20px rgba(0, 179, 126, 0.5), 0 0 40px rgba(0, 179, 126, 0.3);
   filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+
+  /* Podpięcie animacji: trwa 4 sekundy i powtarza się w nieskończoność */
+  animation: shine 4s linear infinite;
+}
+
+/* Klatki kluczowe animacji przebłysku */
+@keyframes shine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
 }
 
 .main-title .subtitle {

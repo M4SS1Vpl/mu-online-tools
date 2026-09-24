@@ -880,6 +880,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Obiekt globalny dźwięku dla eventów
+  const eventSound = new Audio('sound/iEventStart.wav');
+  const eventAlertPlayed = new Set(); // Zapobiega wielokrotnemu odtwarzaniu w tej samej sekundzie otwarcia
+
   function updateEventsSystem() {
     const now = new Date();
     let allUpcoming = [];
@@ -906,6 +910,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     allUpcoming.sort((a, b) => a.sortKey - b.sortKey);
     const top5 = allUpcoming.slice(0, 5);
+
+    // SPRAWDZENIE DŹWIĘKU DLA NAJBLIŻSZEGO EVENTU (Gdy włącza się czerwona animacja "OTWARTE!")
+    const soundToggle = document.getElementById('eventSoundToggle');
+    if (top5.length > 0 && soundToggle && soundToggle.checked) {
+      const nearest = top5[0];
+      const eventUniqueKey = nearest.typeKey + "_" + nearest.utcTime;
+
+      // Jeśli event właśnie wszedł w stan otwarcia (isOpen) i jeszcze nie zagrał dźwięk
+      if (nearest.isOpen) {
+        if (!eventAlertPlayed.has(eventUniqueKey)) {
+          eventSound.currentTime = 0;
+          eventSound.play().catch(e => console.log("Odtwarzanie dźwięku zablokowane przez przeglądarkę:", e));
+          eventAlertPlayed.add(eventUniqueKey);
+        }
+      } else {
+        // Resetujemy stan, gdy event minie lub jeszcze nie nadszedł
+        eventAlertPlayed.delete(eventUniqueKey);
+      }
+    }
 
     const gridContainer = document.querySelector('.upcoming-events-grid');
     if (gridContainer) {

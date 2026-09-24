@@ -100,7 +100,7 @@
   <!-- WIDOK: TIMER (OSOBNA ZAKŁADKA) -->
   <!-- ========================================== -->
   <div id="timerView" class="calculator-card hidden">
-    <h2>Wielokrotny Timer & Odliczanie</h2>
+    <h2>Wielokrotny Timer</h2>
 
     
     <!-- Panel dodawania nowego timera -->
@@ -127,6 +127,11 @@
   <!-- ========================================== -->
   <div id="eventsView" class="calculator-card hidden">
     <h2>Harmonogram Eventów</h2>
+    <!-- Przełącznik powiadomień dźwiękowych dla Eventów -->
+    <div class="event-sound-toggle" style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #aaa;">
+      <input type="checkbox" id="eventSoundToggle" checked style="cursor: pointer; accent-color: #f39c12;">
+      <label for="eventSoundToggle" style="cursor: pointer;">Dźwięk ostrzegawczy 5 min przed eventem</label>
+    </div>
 
     <!-- Górny panel: Najbliższe Eventy (Rozkład jazdy) -->
     <div class="upcoming-events-section">
@@ -291,7 +296,7 @@
         <div class="field-group horizontal">
           <label for="bossTimeInput">Za ile (H:M):</label>
           <input type="text" id="bossTimeInput" placeholder="np. 0:30" class="medium-input">
-          <button id="addBossBtn" class="btn-primary">DODAJ DO LISTY</button>
+          <button id="addBossBtn" class="btn-primary" style="white-space: nowrap; width: auto; padding: 8px 10px;">DODAJ DO LISTY</button>
         </div>
       </div>
       <div class="clock-box">

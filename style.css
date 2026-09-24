@@ -622,9 +622,9 @@ input:focus, select:focus {
 .event-tab-btn:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
 
 .event-tab-btn.active {
-  background: #00e676 !important;
+  background: #bb9900 !important;
   color: #000000 !important;
-  border-color: #00e676 !important;
+  border-color: #ffd900 !important;
   box-shadow: 0 0 14px rgba(0, 230, 118, 0.35);
 }
 
@@ -836,4 +836,34 @@ tr.row-next-event td {
   background: rgba(255, 255, 255, 0.02) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+/* --- POPRAWA WYGLĄDU I ODLEGŁOŚCI NAGŁÓWKÓW W EVENTS --- */
+
+/* Odstępy (żeby nic nie było ściśnięte) oraz styl nagłówków podtytułów */
+.events-section-subtitle, 
+.section-subtitle-main, 
+#eventsView h3 {
+  margin-top: 35px !important;
+  margin-bottom: 15px !important;
+  font-size: 1.15rem !important;
+  letter-spacing: 0.5px !important;
+  color: #ffffff !important;
+  position: relative !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 15px rgba(243, 156, 18, 0.15) !important;
+}
+
+/* Pierwszy nagłówek pod głównym tytułem harmonogramu */
+#eventsView h3:first-of-type {
+  margin-top: 25px !important;
+}
+
+/* Dodanie subtelnej linii akcentującej pod nagłówkami dla lepszej głębi */
+.section-subtitle-main::after {
+  content: '' !important;
+  display: block !important;
+  width: 40px !important;
+  height: 2px !important;
+  background: #f39c12 !important;
+  margin-top: 6px !important;
+  box-shadow: 0 0 8px #f39c12 !important;
 }

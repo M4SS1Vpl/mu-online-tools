@@ -619,3 +619,129 @@ input:focus, select:focus {
   color: #00b37e;
   font-weight: bold;
 }
+.clock-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.clock-label {
+  font-size: 11px;
+  color: #8a8d93;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+/* Układ przycisków menu w 2 rzędach */
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+}
+
+.tab-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* Przycisk nieaktywny (Wkrótce) */
+.tab-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: transparent;
+}
+
+/* Karta Home */
+.home-hero {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.home-hero h2 {
+  color: #00b37e;
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+}
+
+.home-hero p {
+  color: #a0a5b1;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.home-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 179, 126, 0.2);
+  border-radius: 8px;
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-card:hover {
+  background: rgba(0, 179, 126, 0.08);
+  border-color: #00b37e;
+  transform: translateY(-2px);
+}
+
+.home-card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.home-card h3 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.home-card p {
+  color: #8a8d93;
+  font-size: 0.85rem;
+  line-height: 1.3;
+  flex-grow: 1;
+  margin-bottom: 12px;
+}
+
+.home-card-btn {
+  color: #00b37e;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.home-footer-note {
+  text-align: center;
+  color: #666;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* Dopasowanie do urządzeń mobilnych (telefony) */
+@media (max-width: 480px) {
+  .tab-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+  
+  .tab-btn {
+    font-size: 0.75rem;
+    padding: 8px 4px;
+  }
+
+  .home-grid {
+    grid-template-columns: 1fr; /* Na telefonach boxy jeden pod drugim */
+  }
+}

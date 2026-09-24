@@ -13,6 +13,7 @@ function switchTab(viewId) {
   const buttons = document.querySelectorAll('.tab-btn');
   buttons.forEach(btn => btn.classList.remove('active'));
 
+  if (viewId === 'homeView') document.getElementById('tabHomeBtn')?.classList.add('active');
   if (viewId === 'calcView') document.getElementById('tabCalcBtn')?.classList.add('active');
   if (viewId === 'bossView') document.getElementById('tabBossBtn')?.classList.add('active');
   if (viewId === 'speedView') {

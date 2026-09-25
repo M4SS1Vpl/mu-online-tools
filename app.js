@@ -895,32 +895,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  function getEventTimes(utcStr) {
-    const [h, m] = utcStr.split(':').map(Number);
+  function getEventTimes(timeStr) {
+    const [h, m] = timeStr.split(':').map(Number);
     const now = new Date();
     
-    // Tworzymy bazową datę eventu w UTC
-    let startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
+    // Tworzymy datę bezpośrednio jako czas lokalny dzisiejszego dnia
+    let startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0);
     let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
 
-    // Jeśli event w ujęciu UTC na dzisiaj już minął, przesuwamy na jutro
+    // Jeśli event w ujęciu lokalnym na dzisiaj już minął, przesuwamy na jutro
     if (startDate < now) {
-      startDate.setUTCDate(startDate.getUTCDate() + 1);
+      startDate.setDate(startDate.getDate() + 1);
       entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
     }
 
     return { entryDate, startDate };
   }
 
-  function getLocalEntryTimeStr(utcStr) {
-    const [h, m] = utcStr.split(':').map(Number);
-    
-    // Tworzymy obiekt daty dla godziny UTC z tablicy
+  function getLocalEntryTimeStr(timeStr) {
+    const [h, m] = timeStr.split(':').map(Number);
     const now = new Date();
-    let eventDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
+    
+    // Tworzymy obiekt daty bezpośrednio dla lokalnej godziny z tablicy
+    let eventDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0);
     eventDate.setMinutes(eventDate.getMinutes() - 5);
 
-    // Zwracamy czas w formacie lokalnym przeglądarki (automatyczna konwersja UTC -> Polska/lokalny)
     const localH = String(eventDate.getHours()).padStart(2, '0');
     const localM = String(eventDate.getMinutes()).padStart(2, '0');
     return `${localH}:${localM}`;
@@ -1080,10 +1079,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const now = new Date();
     const nowMs = now.getTime();
 
-    // --- Obsługa Eventów (wiele eventów w tym samym czasie) ---
+    // --- Obsługa Eventów (pobieramy identycznie jak w updateEventsSystem) ---
     const homeEventsListEl = document.getElementById('homeEventsList');
     if (homeEventsListEl && typeof eventsData !== 'undefined') {
-      let allEvents = [];
+      let allUpcoming = [];
 
       Object.keys(eventsData).forEach(key => {
         const ev = eventsData[key];
@@ -1091,30 +1090,38 @@ document.addEventListener('DOMContentLoaded', () => {
           const { entryDate, startDate } = getEventTimes(utcTime);
           const isOpen = now >= entryDate && now < startDate;
           const diffMs = isOpen ? (startDate - now) : (entryDate - now);
-          
-          if (diffMs > 0) {
-            allEvents.push({
-              name: ev.name,
-              isOpen: isOpen,
-              diffMs: diffMs,
-              sortKey: isOpen ? (startDate - now) : (entryDate - now)
-            });
-          }
+
+          allUpcoming.push({
+            typeKey: key,
+            name: ev.name,
+            utcTime: utcTime,
+            entryDate: entryDate,
+            startDate: startDate,
+            isOpen: isOpen,
+            diffMs: diffMs,
+            sortKey: isOpen ? (startDate - now) : (entryDate - now + 10000000)
+          });
         });
       });
 
-      allEvents.sort((a, b) => a.sortKey - b.sortKey);
+      // Sortujemy dokładnie tak samo jak w tabeli eventów
+      allUpcoming.sort((a, b) => a.sortKey - b.sortKey);
+      const topEvents = allUpcoming.slice(0, 3); // Bierzemy najbliższe
 
-      if (allEvents.length > 0) {
-        const shortestDiff = allEvents[0].sortKey;
-        const simultaneousEvents = allEvents.filter(ev => Math.abs(ev.sortKey - shortestDiff) < 3000);
+      if (topEvents.length > 0) {
+        const shortestDiff = topEvents[0].sortKey;
+        const simultaneousEvents = topEvents.filter(ev => Math.abs(ev.sortKey - shortestDiff) < 3000);
 
         let htmlContent = '';
         simultaneousEvents.forEach(nearest => {
           const totalSec = Math.floor(nearest.diffMs / 1000);
+          const hrs = Math.floor(totalSec / 3600);
           const m = Math.floor((totalSec % 3600) / 60);
           const s = totalSec % 60;
-          const timeStr = `${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+          
+          const mStr = String(m).padStart(2, '0');
+          const sStr = String(s).padStart(2, '0');
+          const timeStr = hrs > 0 ? `${hrs}h ${mStr}m ${sStr}s` : `${mStr}m ${sStr}s`;
 
           if (nearest.isOpen) {
             htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #e74c3c; font-weight: bold; animation: pulse 1s infinite;">OTWARTE! (${nearest.name}) - ${timeStr}</span></div>`;
@@ -1128,7 +1135,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // --- Obsługa Bossów (wiele bossów w tym samym czasie / alarmowych) ---
+    // --- Obsługa Bossów ---
     const homeBossesListEl = document.getElementById('homeBossesList');
     if (homeBossesListEl && typeof bossData !== 'undefined' && bossData.length > 0) {
       let activeBosses = bossData.map(b => {

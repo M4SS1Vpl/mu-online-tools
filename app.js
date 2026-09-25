@@ -899,14 +899,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const [h, m] = timeStr.split(':').map(Number);
     const now = new Date();
     
-    // Tworzymy datę bezpośrednio jako czas lokalny dzisiejszego dnia
-    let startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0);
+    // Tworzymy datę w UTC na podstawie godziny z tablicy i konwertujemy automatycznie na czas lokalny
+    let utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0);
+    let startDate = new Date(utcMs);
     let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
 
-    // Jeśli event w ujęciu lokalnym na dzisiaj już minął, przesuwamy na jutro
+    // Jeśli event w czasie lokalnym już dzisiaj minął, przesuwamy go na jutro
     if (startDate < now) {
-      startDate.setDate(startDate.getDate() + 1);
-      entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
+      startDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000);
+      entryDate = new Date(entryDate.getTime() + 24 * 60 * 60 * 1000);
     }
 
     return { entryDate, startDate };
@@ -916,8 +917,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const [h, m] = timeStr.split(':').map(Number);
     const now = new Date();
     
-    // Tworzymy obiekt daty bezpośrednio dla lokalnej godziny z tablicy
-    let eventDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0);
+    // Przeliczamy godzinę UTC z tablicy na lokalny czas w Polsce (np. 00:05 UTC -> 02:05 czasu lokalnego)
+    let utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0);
+    let eventDate = new Date(utcMs);
     eventDate.setMinutes(eventDate.getMinutes() - 5);
 
     const localH = String(eventDate.getHours()).padStart(2, '0');

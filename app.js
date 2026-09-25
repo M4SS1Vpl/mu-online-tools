@@ -660,25 +660,33 @@ document.addEventListener('DOMContentLoaded', () => {
       let statusClass = '';
       let rowStatusClass = ''; // Nowa zmienna dla stylu wiersza
 
+      // Sprawdzamy stan przełącznika dźwięków
+      const soundToggle = document.getElementById('bossSoundToggle');
+      const isSoundEnabled = !soundToggle || soundToggle.checked;
+
       if (secs > 120) {
         const mins = Math.ceil(secs / 60);
         remainsText = mins >= 60 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${mins} min`;
       } else if (secs > 0) {
         remainsText = `${Math.floor(secs)} sek!`;
         statusClass = 'status-warning';
-        rowStatusClass = 'boss-warning'; // Dodaje klasę pomarańczowego mrugania dla wiersza
+        rowStatusClass = 'boss-warning';
 
         if (!playedWarning.has(item.id)) {
-          playSound('warning');
+          if (isSoundEnabled) {
+            playSound('warning');
+          }
           playedWarning.add(item.id);
         }
       } else {
         remainsText = '!!! READY !!!';
         statusClass = 'status-ready';
-        rowStatusClass = 'boss-ready'; // Dodaje klasę czerwonego, pulsującego wiersza
+        rowStatusClass = 'boss-ready';
 
         if (!playedReady.has(item.id)) {
-          playSound('ready');
+          if (isSoundEnabled) {
+            playSound('ready');
+          }
           playedReady.add(item.id);
         }
       }
@@ -759,24 +767,22 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(renderBossTable, 1000);
   renderBossTable();
 
-  // Przycisk usuwania zaznaczonych pozycji
+  // Przycisk usuwania zaznaczonych pozycji (bezpośrednie usunięcie bez pytania)
   document.getElementById('removeSelectedBtn')?.addEventListener('click', () => {
     if (selectedBossIds.size === 0) {
       alert("Nie zaznaczono żadnych bossów do usunięcia.");
       return;
     }
 
-    if (confirm(`Czy na pewno chcesz usunąć zaznaczone pozycje (${selectedBossIds.size})?`)) {
-      selectedBossIds.forEach(id => {
-        playedWarning.delete(id);
-        playedReady.delete(id);
-      });
+    selectedBossIds.forEach(id => {
+      playedWarning.delete(id);
+      playedReady.delete(id);
+    });
 
-      bossData = bossData.filter(b => !selectedBossIds.has(b.id));
-      selectedBossIds.clear();
-      saveBosses();
-      renderBossTable();
-    }
+    bossData = bossData.filter(b => !selectedBossIds.has(b.id));
+    selectedBossIds.clear();
+    saveBosses();
+    renderBossTable();
   });
 
   document.getElementById('clearAllBossesBtn')?.addEventListener('click', () => {
@@ -785,17 +791,6 @@ document.addEventListener('DOMContentLoaded', () => {
       playedWarning.clear();
       playedReady.clear();
       selectedBossIds.clear();
-      saveBosses();
-      renderBossTable();
-    }
-  });
-
-  document.getElementById('clearAllBossesBtn')?.addEventListener('click', () => {
-    if (confirm("Wyczyścić całą listę bossów?")) {
-      bossData = [];
-      playedWarning.clear();
-      playedReady.clear();
-      selectedRowId = null;
       saveBosses();
       renderBossTable();
     }
@@ -1126,9 +1121,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const timeStr = hrs > 0 ? `${hrs}h ${mStr}m ${sStr}s` : `${mStr}m ${sStr}s`;
 
           if (nearest.isOpen) {
-            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #e74c3c; font-weight: bold; animation: pulse 1s infinite;">OTWARTE! (${nearest.name}) - ${timeStr}</span></div>`;
+            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #eb776a; font-weight: bold; animation: pulse 1s infinite;">OTWARTE! (${nearest.name}) - ${timeStr}</span></div>`;
           } else {
-            htmlContent += `<div style="margin-bottom: 5px;"><strong>${nearest.name}</strong> za: <span style="color: #4cd137;">${timeStr}</span></div>`;
+            htmlContent += `<div style="margin-bottom: 5px;"><strong>${nearest.name}</strong> za: <span style="color: #fbc531;">${timeStr}</span></div>`;
           }
         });
         homeEventsListEl.innerHTML = htmlContent;
@@ -1160,9 +1155,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const timeStr = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${String(s).padStart(2, '0')}s`;
 
           if (totalSec <= 120 && totalSec > 0) {
-            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #e74c3c; font-weight: bold;">GOTOWY WKRÓTCE! (${nearestBoss.boss} - CH ${nearestBoss.ch}) - ${timeStr}</span></div>`;
+            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #e79d3c; font-weight: bold;">GOTOWY WKRÓTCE! (${nearestBoss.boss} - CH ${nearestBoss.ch}) - ${timeStr}</span></div>`;
           } else if (totalSec <= 0) {
-            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #e74c3c; font-weight: bold; animation: pulse 1s infinite;">RESP (SZUKAJ)! (${nearestBoss.boss} - CH ${nearestBoss.ch})</span></div>`;
+            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #eb776a; font-weight: bold; animation: pulse 1s infinite;">RESP SZUKAJ! (${nearestBoss.boss} - CH ${nearestBoss.ch})</span></div>`;
           } else {
             htmlContent += `<div style="margin-bottom: 5px;"><strong>${nearestBoss.boss}</strong> (CH ${nearestBoss.ch}): <span style="color: #fbc531;">${timeStr}</span></div>`;
           }

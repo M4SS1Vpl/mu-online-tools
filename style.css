@@ -705,13 +705,18 @@ input:focus, select:focus {
 /* NOWE STYLE DLA LEVELL BADGES & NAJBLIŻSZEGO EVENTU */
 /* ========================================== */
 
-/* Kafelki poziomów wejścia */
+/* Kafelki poziomów wejścia - równa siatka 3 kolumn dla BC, DS, CC */
 .level-badges-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  justify-content: center;
   margin: 12px 0 18px 0;
+}
+
+.lvl-badge {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center; /* Wyśrodkowanie treści w kafelku */
 }
 
 .lvl-badge {
@@ -831,4 +836,17 @@ input:focus, select:focus {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
   }
+}
+/* Kontener na przyciski leveli (np. Blood Castle) */
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* Zawsze 3 równe kolumny */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Opcjonalnie: upewnienie się, że przyciski ładnie wypełniają miejsce */
+.level-grid .level-btn { /* Dopasuj do swojej nazwy klasy przycisku levelu */
+  width: 100%;
+  text-align: center;
 }

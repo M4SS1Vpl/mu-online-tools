@@ -90,10 +90,22 @@
       <div class="home-footer-note">
         <small>💡 Wszystkie dane (np. zapamiętane czasy bossów) są bezpiecznie zapisywane w pamięci Twojej przeglądarki.</small>
       </div>
+    <!-- SEKCJA SZYBKIEGO PODGLĄDU - wklej wewnątrz głównego boksu strony -->
+<div class="home-widgets-container" style="margin-top: 25px; display: flex; flex-direction: column; gap: 12px; width: 100%; box-sizing: border-box;">
+  
+  <!-- Najbliższy Event -->
+<div class="home-quick-card" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(0,179,126,0.2); padding: 12px; border-radius: 8px;">
+  <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Najbliższy Event</div>
+  <div id="homeEventsList" style="font-size: 0.95rem; color: #fff;">Ładowanie...</div>
+</div>
 
-    <div class="home-footer-note">
-      <small>💡 Wszystkie dane (np. zapamiętane czasy bossów) są bezpiecznie zapisywane w pamięci Twojej przeglądarki.</small>
-    </div>
+<!-- Najbliższy Boss -->
+<div class="home-quick-card" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(0,179,126,0.2); padding: 12px; border-radius: 8px; margin-top: 10px;">
+  <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Najbliższy Boss</div>
+  <div id="homeBossesList" style="font-size: 0.95rem; color: #fff;">Brak aktywnych bossów</div>
+</div>
+
+</div>
   </div>
 
   <!-- ========================================== -->
@@ -273,7 +285,11 @@
   <!-- ========================================== -->
   <div id="bossView" class="calculator-card hidden">
     <h2>MU Online - Boss Timer</h2>
-
+  <!-- Centralny zegar -->
+  <div style="text-align: center; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 179, 126, 0.3); padding: 10px; border-radius: 8px; margin: 15px 0;">
+    <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px;">Czas lokalny</div>
+    <div id="systemClock" style="font-size: 24px; font-weight: bold; color: #00b37e; font-family: monospace;">00:00:00</div>
+  </div>
     <div class="boss-top-row">
       <div class="boss-inputs">
         <div class="field-group horizontal">
@@ -299,10 +315,7 @@
           <button id="addBossBtn" class="btn-primary" style="white-space: nowrap; width: auto; padding: 8px 10px;">DODAJ DO LISTY</button>
         </div>
       </div>
-      <div class="clock-box">
-        <span class="clock-label">Czas Lokalny</span>
-        <div id="systemClock" class="clock-time">10:20:31</div>
-      </div>
+      
     </div>
 
     <div class="table-container">

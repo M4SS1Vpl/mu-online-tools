@@ -961,7 +961,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.innerHTML = `
           <div class="event-card-name">${item.name}</div>
           ${timerHTML}
-          <div class="event-card-localtime">Wejście: <strong>${localEntryStr}</strong> (lokalny)</div>
+          <div class="event-card-localtime">Wejście: <strong>${localEntryStr}</strong></div>
         `;
         gridContainer.appendChild(card);
       });
@@ -993,4 +993,99 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+  // ==========================================
+  // 5. WIDŻETY SZYBKIEGO PODGLĄDU NA STRONIE GŁÓWNEJ
+  // ==========================================
+  function updateHomeQuickWidgets() {
+    const now = new Date();
+    const nowMs = now.getTime();
+
+    // --- Obsługa Eventów (wiele eventów w tym samym czasie) ---
+    const homeEventsListEl = document.getElementById('homeEventsList');
+    if (homeEventsListEl && typeof eventsData !== 'undefined') {
+      let allEvents = [];
+
+      Object.keys(eventsData).forEach(key => {
+        const ev = eventsData[key];
+        ev.times.forEach(utcTime => {
+          const { entryDate, startDate } = getEventTimes(utcTime);
+          const isOpen = now >= entryDate && now < startDate;
+          const diffMs = isOpen ? (startDate - now) : (entryDate - now);
+          
+          if (diffMs > 0) {
+            allEvents.push({
+              name: ev.name,
+              isOpen: isOpen,
+              diffMs: diffMs,
+              sortKey: isOpen ? (startDate - now) : (entryDate - now)
+            });
+          }
+        });
+      });
+
+      allEvents.sort((a, b) => a.sortKey - b.sortKey);
+
+      if (allEvents.length > 0) {
+        const shortestDiff = allEvents[0].sortKey;
+        const simultaneousEvents = allEvents.filter(ev => Math.abs(ev.sortKey - shortestDiff) < 3000);
+
+        let htmlContent = '';
+        simultaneousEvents.forEach(nearest => {
+          const totalSec = Math.floor(nearest.diffMs / 1000);
+          const m = Math.floor((totalSec % 3600) / 60);
+          const s = totalSec % 60;
+          const timeStr = `${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+
+          if (nearest.isOpen) {
+            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #e74c3c; font-weight: bold; animation: pulse 1s infinite;">OTWARTE! (${nearest.name}) - ${timeStr}</span></div>`;
+          } else {
+            htmlContent += `<div style="margin-bottom: 5px;"><strong>${nearest.name}</strong> za: <span style="color: #4cd137;">${timeStr}</span></div>`;
+          }
+        });
+        homeEventsListEl.innerHTML = htmlContent;
+      } else {
+        homeEventsListEl.innerHTML = `<span style="opacity: 0.6;">Brak nadchodzących eventów</span>`;
+      }
+    }
+
+    // --- Obsługa Bossów (wiele bossów w tym samym czasie / alarmowych) ---
+    const homeBossesListEl = document.getElementById('homeBossesList');
+    if (homeBossesListEl && typeof bossData !== 'undefined' && bossData.length > 0) {
+      let activeBosses = bossData.map(b => {
+        const targetTime = new Date(b.targetTime).getTime();
+        return { ...b, diff: targetTime - nowMs };
+      }).filter(b => b.diff > -60000);
+
+      activeBosses.sort((a, b) => a.diff - b.diff);
+
+      if (activeBosses.length > 0) {
+        const shortestDiff = activeBosses[0].diff;
+        const simultaneousBosses = activeBosses.filter(b => b.diff <= 120000 || Math.abs(b.diff - shortestDiff) < 3000);
+
+        let htmlContent = '';
+        simultaneousBosses.slice(0, 4).forEach(nearestBoss => {
+          const totalSec = Math.floor(nearestBoss.diff / 1000);
+          const hrs = Math.floor(totalSec / 3600);
+          const m = Math.floor((totalSec % 3600) / 60);
+          const s = totalSec % 60;
+          const timeStr = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${String(s).padStart(2, '0')}s`;
+
+          if (totalSec <= 120 && totalSec > 0) {
+            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #e74c3c; font-weight: bold;">GOTOWY WKRÓTCE! (${nearestBoss.boss} - CH ${nearestBoss.ch}) - ${timeStr}</span></div>`;
+          } else if (totalSec <= 0) {
+            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #e74c3c; font-weight: bold; animation: pulse 1s infinite;">RESP (SZUKAJ)! (${nearestBoss.boss} - CH ${nearestBoss.ch})</span></div>`;
+          } else {
+            htmlContent += `<div style="margin-bottom: 5px;"><strong>${nearestBoss.boss}</strong> (CH ${nearestBoss.ch}): <span style="color: #fbc531;">${timeStr}</span></div>`;
+          }
+        });
+
+        homeBossesListEl.innerHTML = htmlContent;
+      } else {
+        homeBossesListEl.innerHTML = `<span style="opacity: 0.6;">Brak aktywnych bossów</span>`;
+      }
+    }
+  }
+
+  setInterval(updateHomeQuickWidgets, 1000);
+  updateHomeQuickWidgets();
 });

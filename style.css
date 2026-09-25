@@ -789,14 +789,3 @@ input:focus, select:focus {
 #eventsView h3:first-of-type {
   margin-top: 25px !important;
 }
-
-/* Dodanie subtelnej linii akcentującej pod nagłówkami dla lepszej głębi */
-.section-subtitle-main::after {
-  content: '' !important;
-  display: block !important;
-  width: 40px !important;
-  height: 2px !important;
-  background: #f39c12 !important;
-  margin-top: 6px !important;
-  box-shadow: 0 0 8px #f39c12 !important;
-}

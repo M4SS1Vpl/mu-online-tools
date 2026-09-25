@@ -899,13 +899,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const [h, m] = utcStr.split(':').map(Number);
     const now = new Date();
     
-    // Tworzymy datę bezpośrednio w czasie lokalnym, a nie UTC
-    let startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0);
+    // Tworzymy bazową datę eventu w UTC
+    let startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
     let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
 
-    // Jeśli event z tą godziną dzisiaj już minął, ustawiamy go na jutro
+    // Jeśli event w ujęciu UTC na dzisiaj już minął, przesuwamy na jutro
     if (startDate < now) {
-      startDate.setDate(startDate.getDate() + 1);
+      startDate.setUTCDate(startDate.getUTCDate() + 1);
       entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
     }
 
@@ -914,11 +914,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function getLocalEntryTimeStr(utcStr) {
     const [h, m] = utcStr.split(':').map(Number);
+    
+    // Tworzymy obiekt daty dla godziny UTC z tablicy
     const now = new Date();
-    const eventDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
+    let eventDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
     eventDate.setMinutes(eventDate.getMinutes() - 5);
 
-    return `${String(eventDate.getHours()).padStart(2, '0')}:${String(eventDate.getMinutes()).padStart(2, '0')}`;
+    // Zwracamy czas w formacie lokalnym przeglądarki (automatyczna konwersja UTC -> Polska/lokalny)
+    const localH = String(eventDate.getHours()).padStart(2, '0');
+    const localM = String(eventDate.getMinutes()).padStart(2, '0');
+    return `${localH}:${localM}`;
   }
 
   function renderTables(allUpcoming) {

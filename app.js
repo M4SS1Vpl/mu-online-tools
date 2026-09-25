@@ -658,6 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let remainsText = '';
       let statusClass = '';
+      let rowStatusClass = ''; // Nowa zmienna dla stylu wiersza
 
       if (secs > 120) {
         const mins = Math.ceil(secs / 60);
@@ -665,6 +666,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (secs > 0) {
         remainsText = `${Math.floor(secs)} sek!`;
         statusClass = 'status-warning';
+        rowStatusClass = 'boss-warning'; // Dodaje klasę pomarańczowego mrugania dla wiersza
 
         if (!playedWarning.has(item.id)) {
           playSound('warning');
@@ -673,6 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         remainsText = '!!! READY !!!';
         statusClass = 'status-ready';
+        rowStatusClass = 'boss-ready'; // Dodaje klasę czerwonego, pulsującego wiersza
 
         if (!playedReady.has(item.id)) {
           playSound('ready');
@@ -681,11 +684,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const tr = document.createElement('tr');
-      const isChecked = selectedBossIds.has(item.id);
-      if (isChecked) tr.classList.add('selected');
+      
+      // Przypisanie klas CSS do wiersza
+      let classList = [];
+      if (rowStatusClass) classList.push(rowStatusClass);
+      if (selectedBossIds.has(item.id)) classList.push('selected');
+      if (classList.length > 0) {
+        tr.className = classList.join(' ');
+      }
 
       tr.innerHTML = `
-        <td style="text-align: center;"><input type="checkbox" class="boss-row-checkbox" data-id="${item.id}" ${isChecked ? 'checked' : ''} style="cursor: pointer;"></td>
+        <td style="text-align: center;"><input type="checkbox" class="boss-row-checkbox" data-id="${item.id}" ${selectedBossIds.has(item.id) ? 'checked' : ''} style="cursor: pointer;"></td>
         <td>${index + 1}</td>
         <td>${formatHM(tObj)}</td>
         <td class="${statusClass}">${item.boss}</td>
@@ -696,7 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Obsługa kliknięcia w checkbox wiersza
       const checkbox = tr.querySelector('.boss-row-checkbox');
       checkbox.addEventListener('click', (e) => {
-        e.stopPropagation(); // Zapobiega konfliktom kliknięcia w wiersz
+        e.stopPropagation();
         if (checkbox.checked) {
           selectedBossIds.add(item.id);
           tr.classList.add('selected');
@@ -707,7 +716,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSelectAllMasterCheckbox();
       });
 
-      // Kliknięcie w cały wiersz też zaznacza checkbox (dla wygody)
+      // Kliknięcie w cały wiersz zaznacza checkbox
       tr.addEventListener('click', () => {
         checkbox.checked = !checkbox.checked;
         if (checkbox.checked) {

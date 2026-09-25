@@ -899,11 +899,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const [h, m] = utcStr.split(':').map(Number);
     const now = new Date();
     
-    let startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
+    // Tworzymy datę bezpośrednio w czasie lokalnym, a nie UTC
+    let startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m, 0);
     let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
 
+    // Jeśli event z tą godziną dzisiaj już minął, ustawiamy go na jutro
     if (startDate < now) {
-      startDate.setUTCDate(startDate.getUTCDate() + 1);
+      startDate.setDate(startDate.getDate() + 1);
       entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
     }
 

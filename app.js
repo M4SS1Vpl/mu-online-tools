@@ -572,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. BOSS TIMER LOGIKA
   let bossData = JSON.parse(localStorage.getItem('mu_boss_data') || '[]');
-  let selectedRowId = null;
+  let selectedBossIds = new Set(); // Przechowuje ID zaznaczonych checkboxami bossów
 
   function updateSystemClock() {
     const clockEl = document.getElementById('systemClock');
@@ -681,9 +681,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const tr = document.createElement('tr');
-      if (item.id === selectedRowId) tr.classList.add('selected');
+      const isChecked = selectedBossIds.has(item.id);
+      if (isChecked) tr.classList.add('selected');
 
       tr.innerHTML = `
+        <td style="text-align: center;"><input type="checkbox" class="boss-row-checkbox" data-id="${item.id}" ${isChecked ? 'checked' : ''} style="cursor: pointer;"></td>
         <td>${index + 1}</td>
         <td>${formatHM(tObj)}</td>
         <td class="${statusClass}">${item.boss}</td>
@@ -691,30 +693,92 @@ document.addEventListener('DOMContentLoaded', () => {
         <td class="${statusClass}">${remainsText}</td>
       `;
 
+      // Obsługa kliknięcia w checkbox wiersza
+      const checkbox = tr.querySelector('.boss-row-checkbox');
+      checkbox.addEventListener('click', (e) => {
+        e.stopPropagation(); // Zapobiega konfliktom kliknięcia w wiersz
+        if (checkbox.checked) {
+          selectedBossIds.add(item.id);
+          tr.classList.add('selected');
+        } else {
+          selectedBossIds.delete(item.id);
+          tr.classList.remove('selected');
+        }
+        updateSelectAllMasterCheckbox();
+      });
+
+      // Kliknięcie w cały wiersz też zaznacza checkbox (dla wygody)
       tr.addEventListener('click', () => {
-        document.querySelectorAll('#bossTableBody tr').forEach(r => r.classList.remove('selected'));
-        tr.classList.add('selected');
-        selectedRowId = item.id;
+        checkbox.checked = !checkbox.checked;
+        if (checkbox.checked) {
+          selectedBossIds.add(item.id);
+          tr.classList.add('selected');
+        } else {
+          selectedBossIds.delete(item.id);
+          tr.classList.remove('selected');
+        }
+        updateSelectAllMasterCheckbox();
       });
 
       tbody.appendChild(tr);
     });
+
+    updateSelectAllMasterCheckbox();
   }
+
+  // Funkcja synchronizująca główny checkbox w nagłówku
+  function updateSelectAllMasterCheckbox() {
+    const masterCheckbox = document.getElementById('selectAllBosses');
+    if (!masterCheckbox || bossData.length === 0) {
+      if (masterCheckbox) masterCheckbox.checked = false;
+      return;
+    }
+    const allChecked = bossData.every(b => selectedBossIds.has(b.id));
+    masterCheckbox.checked = allChecked;
+  }
+
+  // Obsługa głównego checkboxa "Zaznacz wszystkie" w nagłówku
+  document.getElementById('selectAllBosses')?.addEventListener('change', function() {
+    if (this.checked) {
+      bossData.forEach(b => selectedBossIds.add(b.id));
+    } else {
+      selectedBossIds.clear();
+    }
+    renderBossTable();
+  });
 
   setInterval(renderBossTable, 1000);
   renderBossTable();
 
+  // Przycisk usuwania zaznaczonych pozycji
   document.getElementById('removeSelectedBtn')?.addEventListener('click', () => {
-    if (!selectedRowId) {
-      alert("Zaznacz wiersz w tabeli, który chcesz usunąć.");
+    if (selectedBossIds.size === 0) {
+      alert("Nie zaznaczono żadnych bossów do usunięcia.");
       return;
     }
-    bossData = bossData.filter(b => b.id !== selectedRowId);
-    playedWarning.delete(selectedRowId);
-    playedReady.delete(selectedRowId);
-    selectedRowId = null;
-    saveBosses();
-    renderBossTable();
+
+    if (confirm(`Czy na pewno chcesz usunąć zaznaczone pozycje (${selectedBossIds.size})?`)) {
+      selectedBossIds.forEach(id => {
+        playedWarning.delete(id);
+        playedReady.delete(id);
+      });
+
+      bossData = bossData.filter(b => !selectedBossIds.has(b.id));
+      selectedBossIds.clear();
+      saveBosses();
+      renderBossTable();
+    }
+  });
+
+  document.getElementById('clearAllBossesBtn')?.addEventListener('click', () => {
+    if (confirm("Wyczyścić całą listę bossów?")) {
+      bossData = [];
+      playedWarning.clear();
+      playedReady.clear();
+      selectedBossIds.clear();
+      saveBosses();
+      renderBossTable();
+    }
   });
 
   document.getElementById('clearAllBossesBtn')?.addEventListener('click', () => {

@@ -311,7 +311,18 @@
             <option value="GOD">GOD</option>
           </select>
           <label for="bossCh">CH:</label>
-          <input type="number" id="bossCh" value="1" min="1" class="small-input">
+          <select id="bossCh" class="small-input" style="background: rgba(0,0,0,0.5); color: #fff; border: 1px solid rgba(0,179,126,0.3); padding: 5px; border-radius: 4px;">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
         </div>
 
         <div class="field-group horizontal">
@@ -327,6 +338,7 @@
       <table class="boss-table">
         <thead>
           <tr>
+            <th style="width: 40px;"><input type="checkbox" id="selectAllBosses" style="cursor: pointer;"></th>
             <th>Lp.</th>
             <th>Godzina</th>
             <th>Nazwa Bossa</th>
@@ -343,7 +355,6 @@
       <button id="removeSelectedBtn" class="btn-secondary">USUŃ ZAZNACZONE</button>
       <button id="clearAllBossesBtn" class="btn-danger">WYCZYŚĆ CAŁĄ LISTĘ</button>
     </div>
-  </div>
 
   <!-- ========================================== -->
   <!-- WIDOK: SPEED GAPS -->

@@ -285,75 +285,82 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
   <!-- WIDOK: BOSS TIMER -->
-  <!-- ========================================== -->
-  <div id="bossView" class="calculator-card hidden">
-    <h2>MU Online - Boss Timer</h2>
-  <!-- Centralny zegar -->
-  <div style="text-align: center; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(0, 179, 126, 0.3); padding: 10px; border-radius: 8px; margin: 15px 0;">
-    <div style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px;">Czas lokalny</div>
-    <div id="systemClock" style="font-size: 24px; font-weight: bold; color: #00b37e; font-family: monospace;">00:00:00</div>
-  </div>
-    <div class="boss-top-row">
-      <div class="boss-inputs">
-        <div class="field-group horizontal">
-          <label for="bossSelect">Boss:</label>
-          <select id="bossSelect">
-            <option value="Kundun">Kundun</option>
-            <option value="Medusa">Medusa</option>
-            <option value="Nightmare">Nightmare</option>
-            <option value="Selupan">Selupan</option>
-            <option value="Lord Silvester">Lord Silvester</option>
-            <option value="Core Magripi">Core Magripi</option>
-            <option value="Ferea Lord">Ferea Lord</option>
-            <option value="Nyx">Nyx</option>
-            <option value="GOD">GOD</option>
-          </select>
-          <label for="bossCh">CH:</label>
-          <select id="bossCh" class="small-input" style="background: rgba(0,0,0,0.5); color: #fff; border: 1px solid rgba(0,179,126,0.3); padding: 5px; border-radius: 4px;">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
+    <div id="bossView" class="calculator-card hidden">
+      <h2>MU ONLINE - BOSS TIMER</h2>
+
+      <!-- Zegar systemowy w nowoczesnej ramce -->
+      <div class="boss-clock-box">
+        <span class="clock-label">CZAS LOKALNY</span>
+        <div id="systemClock" class="clock-value">--:--:--</div>
+      </div>
+
+      <!-- Panel dodawania bossa -->
+      <div class="boss-control-panel">
+        <div class="boss-form-grid">
+          <div class="field-group">
+            <label for="bossSelect">Boss:</label>
+            <select id="bossSelect" class="modern-select">
+              <option value="Kundun">Kundun</option>
+              <option value="Medusa">Medusa</option>
+              <option value="Nightmare">Nightmare</option>
+              <option value="Selupan">Selupan</option>
+              <option value="Lord Silvester">Lord Silvester</option>
+              <option value="Core Magripi">Core Magripi</option>
+              <option value="Ferea Lord">Ferea Lord</option>
+              <option value="Nyx">Nyx</option>
+              <option value="GOD">GOD</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="bossCh">Channel:</label>
+            <select id="bossCh" class="modern-select">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
         </div>
 
-        <div class="field-group horizontal">
-          <label for="bossTimeInput">Za ile (H:M):</label>
-          <input type="text" id="bossTimeInput" placeholder="np. 0:30" class="medium-input">
-          <button id="addBossBtn" class="btn-primary" style="white-space: nowrap; width: auto; padding: 8px 10px;">DODAJ DO LISTY</button>
+        <div class="boss-form-row-bottom">
+          <div class="field-group" style="flex: 1; margin-bottom: 0;">
+            <label for="bossTimeInput">Za ile (H:M):</label>
+            <input type="text" id="bossTimeInput" placeholder="np. 0:30" class="modern-input">
+          </div>
+          <button id="addBossBtn" class="btn-primary">DODAJ DO LISTY</button>
         </div>
       </div>
-      
-    </div>
 
-    <div class="table-container">
-      <table class="boss-table">
-        <thead>
-          <tr>
-            <th style="width: 40px;"><input type="checkbox" id="selectAllBosses" style="cursor: pointer;"></th>
-            <th>Lp.</th>
-            <th>Godzina</th>
-            <th>Nazwa Bossa</th>
-            <th>CH</th>
-            <th>Zostało</th>
-          </tr>
-        </thead>
-        <tbody id="bossTableBody">
-        </tbody>
-      </table>
-    </div>
+      <!-- Tabela bossów -->
+      <div class="table-container" style="margin-top: 20px;">
+        <table class="boss-table">
+          <thead>
+            <tr>
+              <th style="width: 40px; text-align: center;"><input type="checkbox" id="selectAllBosses" style="cursor: pointer;"></th>
+              <th>Lp.</th>
+              <th>Godzina</th>
+              <th>Nazwa Bossa</th>
+              <th>CH</th>
+              <th>Zostało</th>
+            </tr>
+          </thead>
+          <tbody id="bossTableBody">
+          </tbody>
+        </table>
+      </div>
 
-    <div class="button-row" style="margin-top: 15px;">
-      <button id="removeSelectedBtn" class="btn-secondary">USUŃ ZAZNACZONE</button>
-      <button id="clearAllBossesBtn" class="btn-danger">WYCZYŚĆ CAŁĄ LISTĘ</button>
+      <div class="button-row" style="margin-top: 20px;">
+        <button id="removeSelectedBtn" class="btn-secondary">USUŃ ZAZNACZONE</button>
+        <button id="clearAllBossesBtn" class="btn-danger">WYCZYŚĆ CAŁĄ LISTĘ</button>
+      </div>
     </div>
 
   <!-- ========================================== -->

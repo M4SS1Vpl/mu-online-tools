@@ -320,8 +320,8 @@ input:focus, select:focus {
 
 /* TABELE */
 .table-container {
-  background-color: #121214;
-  border: 1px solid #29292e;
+  background-color: #ffffff08;
+  border: 1px solid #ffffff1a;
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 15px;
@@ -332,6 +332,7 @@ input:focus, select:focus {
   border-collapse: collapse;
   text-align: center;
   font-size: 13px;
+  font-weight: bold;
 }
 
 .boss-table th {
@@ -343,7 +344,7 @@ input:focus, select:focus {
 
 .boss-table td {
   padding: 10px 5px;
-  border-bottom: 1px solid #29292e;
+  border-bottom: 1px solid #34343a;
 }
 
 .boss-table tr:hover { background-color: #202024; cursor: pointer; }
@@ -956,7 +957,7 @@ input:focus, select:focus {
   padding: 10px;
 }
 /* ========================================== */
-/* EFEKTY W TABELI BOSSÓW (OSTRZEŻENIE I GOTOWOŚĆ) */
+/* NOWOCZESNE I ŻYWE EFEKTY W TABELI BOSSÓW    */
 /* ========================================== */
 
 /* Domyślne style dla statusu w kolumnie "Zostało" */
@@ -965,35 +966,51 @@ input:focus, select:focus {
   font-weight: bold;
 }
 
-/* Stan ostrzegawczy (< 2 minut): Pomarańczowe mruganie */
+/* Stan ostrzegawczy (< 2 minut): Energetyczne, ciepłe bursztynowe pulsowanie */
 .boss-table tr.boss-warning td,
 .status-warning-blink {
-  color: #f39c12 !important;
-  animation: bossPulseOrange 1s infinite alternate;
+  color: #ffb142 !important;
+  animation: bossPulseOrange 0.9s infinite ease-in-out alternate;
 }
 
-/* Stan gotowy (czas minął): Czerwone, wyraziste miganie */
+/* Stan gotowy (czas minął): Żywy, neonowy czerwony impuls z mocniejszą poświatą */
 .boss-table tr.boss-ready td,
 .status-ready-blink {
-  color: #ff3333 !important;
-  animation: bossPulseRed 0.8s infinite alternate;
+  color: #ff4757 !important;
+  animation: bossPulseRed 0.6s infinite ease-in-out alternate;
 }
 
 @keyframes bossPulseOrange {
-  0% { opacity: 0.6; text-shadow: 0 0 2px rgba(243, 156, 18, 0.4); }
-  100% { opacity: 1; text-shadow: 0 0 10px rgba(243, 156, 18, 0.9); }
+  0% { 
+    opacity: 0.7; 
+    text-shadow: 0 0 4px rgba(255, 177, 66, 0.5); 
+  }
+  100% { 
+    opacity: 1; 
+    text-shadow: 0 0 14px rgba(255, 177, 66, 0.9); 
+  }
 }
 
 @keyframes bossPulseRed {
-  0% { opacity: 0.5; text-shadow: 0 0 3px rgba(255, 51, 51, 0.5); }
-  100% { opacity: 1; text-shadow: 0 0 12px rgba(255, 51, 51, 1); }
+  0% { 
+    opacity: 0.6; 
+    transform: scale(0.99);
+    text-shadow: 0 0 6px rgba(255, 71, 87, 0.6); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1.01);
+    text-shadow: 0 0 18px rgba(255, 71, 87, 1); 
+  }
 }
 
-/* Delikatne podświetlenie całego wiersza w stanie gotowości */
+/* Wyraźniejsze, ale eleganckie podświetlenie całego wiersza */
 .boss-table tr.boss-ready {
-  background-color: rgba(255, 51, 51, 0.08) !important;
+  background-color: rgba(255, 71, 87, 0.15) !important;
+  border-left: 4px solid #ff4757;
 }
 
 .boss-table tr.boss-warning {
-  background-color: rgba(243, 156, 18, 0.08) !important;
+  background-color: rgba(255, 177, 66, 0.12) !important;
+  border-left: 4px solid #ffb142;
 }

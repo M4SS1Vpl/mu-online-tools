@@ -658,9 +658,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let remainsText = '';
       let statusClass = '';
-      let rowStatusClass = ''; // Nowa zmienna dla stylu wiersza
+      let rowStatusClass = ''; 
 
-      // Sprawdzamy stan przełącznika dźwięków
       const soundToggle = document.getElementById('bossSoundToggle');
       const isSoundEnabled = !soundToggle || soundToggle.checked;
 
@@ -693,7 +692,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const tr = document.createElement('tr');
       
-      // Przypisanie klas CSS do wiersza
       let classList = [];
       if (rowStatusClass) classList.push(rowStatusClass);
       if (selectedBossIds.has(item.id)) classList.push('selected');
@@ -710,7 +708,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <td class="${statusClass}">${remainsText}</td>
       `;
 
-      // Obsługa kliknięcia w checkbox wiersza
       const checkbox = tr.querySelector('.boss-row-checkbox');
       checkbox.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -724,7 +721,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSelectAllMasterCheckbox();
       });
 
-      // Kliknięcie w cały wiersz zaznacza checkbox
       tr.addEventListener('click', () => {
         checkbox.checked = !checkbox.checked;
         if (checkbox.checked) {
@@ -743,7 +739,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSelectAllMasterCheckbox();
   }
 
-  // Funkcja synchronizująca główny checkbox w nagłówku
   function updateSelectAllMasterCheckbox() {
     const masterCheckbox = document.getElementById('selectAllBosses');
     if (!masterCheckbox || bossData.length === 0) {
@@ -754,7 +749,6 @@ document.addEventListener('DOMContentLoaded', () => {
     masterCheckbox.checked = allChecked;
   }
 
-  // Obsługa głównego checkboxa "Zaznacz wszystkie" w nagłówku
   document.getElementById('selectAllBosses')?.addEventListener('change', function() {
     if (this.checked) {
       bossData.forEach(b => selectedBossIds.add(b.id));
@@ -767,7 +761,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(renderBossTable, 1000);
   renderBossTable();
 
-  // Przycisk usuwania zaznaczonych pozycji (bezpośrednie usunięcie bez pytania)
   document.getElementById('removeSelectedBtn')?.addEventListener('click', () => {
     if (selectedBossIds.size === 0) {
       alert("Nie zaznaczono żadnych bossów do usunięcia.");
@@ -894,12 +887,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const [h, m] = timeStr.split(':').map(Number);
     const now = new Date();
     
-    // Tworzymy datę w UTC na podstawie godziny z tablicy i konwertujemy automatycznie na czas lokalny
     let utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0);
     let startDate = new Date(utcMs);
     let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
 
-    // Jeśli event w czasie lokalnym już dzisiaj minął, przesuwamy go na jutro
     if (startDate < now) {
       startDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000);
       entryDate = new Date(entryDate.getTime() + 24 * 60 * 60 * 1000);
@@ -912,7 +903,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const [h, m] = timeStr.split(':').map(Number);
     const now = new Date();
     
-    // Przeliczamy godzinę UTC z tablicy na lokalny czas w Polsce (np. 00:05 UTC -> 02:05 czasu lokalnego)
     let utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0);
     let eventDate = new Date(utcMs);
     eventDate.setMinutes(eventDate.getMinutes() - 5);
@@ -956,9 +946,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Obiekt globalny dźwięku dla eventów
   const eventSound = new Audio('sound/iEventStart.wav');
-  const eventAlertPlayed = new Set(); // Zapobiega wielokrotnemu odtwarzaniu w tej samej sekundzie otwarcia
+  const eventAlertPlayed = new Set();
 
   function updateEventsSystem() {
     const now = new Date();
@@ -987,13 +976,11 @@ document.addEventListener('DOMContentLoaded', () => {
     allUpcoming.sort((a, b) => a.sortKey - b.sortKey);
     const top5 = allUpcoming.slice(0, 5);
 
-    // SPRAWDZENIE DŹWIĘKU DLA NAJBLIŻSZEGO EVENTU (Gdy włącza się czerwona animacja "OTWARTE!")
     const soundToggle = document.getElementById('eventSoundToggle');
     if (top5.length > 0 && soundToggle && soundToggle.checked) {
       const nearest = top5[0];
       const eventUniqueKey = nearest.typeKey + "_" + nearest.utcTime;
 
-      // Jeśli event właśnie wszedł w stan otwarcia (isOpen) i jeszcze nie zagrał dźwięk
       if (nearest.isOpen) {
         if (!eventAlertPlayed.has(eventUniqueKey)) {
           eventSound.currentTime = 0;
@@ -1001,7 +988,6 @@ document.addEventListener('DOMContentLoaded', () => {
           eventAlertPlayed.add(eventUniqueKey);
         }
       } else {
-        // Resetujemy stan, gdy event minie lub jeszcze nie nadszedł
         eventAlertPlayed.delete(eventUniqueKey);
       }
     }
@@ -1049,7 +1035,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateEventsSystem, 1000);
   updateEventsSystem();
 
-  // Obsługa przełączania zakładek wewnątrz Eventów
   document.addEventListener('click', function(e) {
     const btn = e.target.closest('.event-tab-btn');
     if (btn) {
@@ -1069,8 +1054,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
   // ==========================================
-  // 5. WIDŻETY SZYBKIEGO PODGLĄDU NA STRONIE GŁÓWNEJ (4 KAFELKI)
+  // 5. WIDŻETY SZYBKIEGO PODGLĄDU NA STRONIE GŁÓWNEJ
   // ==========================================
   function updateHomeQuickWidgets() {
     const gridContainer = document.getElementById('homeQuickGrid');
@@ -1079,7 +1065,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const now = new Date();
     const nowMs = now.getTime();
 
-    // 1. Pobieramy 2 najbliższe eventy
     let allUpcomingEvents = [];
     if (typeof eventsData !== 'undefined') {
       Object.keys(eventsData).forEach(key => {
@@ -1102,7 +1087,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const top2Events = allUpcomingEvents.slice(0, 2);
 
-    // 2. Pobieramy 2 najbliższych bossów
     let activeBosses = [];
     if (typeof bossData !== 'undefined') {
       activeBosses = bossData.map(b => {
@@ -1113,7 +1097,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const top2Bosses = activeBosses.slice(0, 2);
 
-    // Generujemy HTML dla szybkich widgetów
     let htmlContent = '';
     
     if (top2Events.length > 0) {
@@ -1124,7 +1107,6 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }
     
-    // Renderowanie Eventów
     top2Events.forEach(item => {
       const totalSec = Math.floor(item.diffMs / 1000);
       const hrs = Math.floor(totalSec / 3600);
@@ -1158,14 +1140,12 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     });
 
-    // POJEDYNCZY NAGŁÓWEK DLA BOSSÓW
     htmlContent += `
       <div style="text-align: center; color: #c9c9c9; margin: 15px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
         Incoming Boss
       </div>
     `;
 
-    // Renderowanie Bossów lub Teasera
     if (top2Bosses.length > 0) {
       top2Bosses.forEach(boss => {
         const totalSec = Math.floor(boss.diff / 1000);
@@ -1200,7 +1180,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const isLoggedIn = localStorage.getItem("mu_logged_in") === "true";
       const actionText = isLoggedIn ? "Dodaj respawn" : "Zaloguj się powyżej";
       const icon = isLoggedIn ? "🔓" : "🔒";
-      // Jeśli użytkownik jest zalogowany, kliknięcie otwiera bossView. Jeśli niezalogowany, nie robi nic (brak kursora pointer i onclick).
       const clickAttr = isLoggedIn ? `cursor: pointer; border-style: dashed;" onclick="switchTab('bossView')` : `cursor: default; border-style: dashed;"`;
       const arrow = isLoggedIn ? " &rarr;" : "";
 
@@ -1222,6 +1201,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setInterval(updateHomeQuickWidgets, 1000);
   updateHomeQuickWidgets();
+
   // ==========================================
   // GOOGLE AUTHENTICATION (LOGOWANIE)
   // ==========================================
@@ -1230,7 +1210,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function initGoogleAuth() {
       if (typeof google === 'undefined') return;
       
-      // Jeśli użytkownik jest zalogowany, nie renderuj przycisku logowania
       if (localStorage.getItem("mu_logged_in") === "true") return;
 
       google.accounts.id.initialize({
@@ -1240,7 +1219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const loginButtonEl = document.getElementById("google-login-button");
       if (loginButtonEl) {
-          loginButtonEl.innerHTML = ""; // Czyści stary przycisk, jeśli został po wylogowaniu
+          loginButtonEl.innerHTML = ""; 
           google.accounts.id.renderButton(
               loginButtonEl,
               { theme: "outline", size: "large", width: "100%", text: "signin_with", locale: "pl" }
@@ -1265,7 +1244,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
     return JSON.parse(jsonPayload);
-}
+  }
 
   function checkAuthUI() {
       const isLoggedIn = localStorage.getItem("mu_logged_in") === "true";
@@ -1280,7 +1259,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
           setAccessRestrictions(true);
       } else {
-          // TUTAJ: Zanim przycisk zostanie wyrenderowany lub pokazany, musi mieć block
           if(loginBtnContainer) {
               loginBtnContainer.style.display = "block";
           }
@@ -1288,26 +1266,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
           setAccessRestrictions(false);
           
-          // Jeśli użytkownik jest wylogowany, wywołaj ponowne renderowanie przycisku Google,
-          // żeby biblioteka wiedziała, że ma go na powrót wyświetlić!
           if (typeof google !== 'undefined' && loginBtnContainer && loginBtnContainer.innerHTML === "") {
               initGoogleAuth();
           }
       }
+  }
 
-      const logoutBtn = document.getElementById("logout-btn");
-      if(logoutBtn) {
-          // Użyj addEventListener zamiast .onclick, żeby nie nadpisywać ewentualnych innych akcji
-          logoutBtn.onclick = () => {
-              localStorage.removeItem("mu_logged_in");
-              localStorage.removeItem("mu_user_email");
-              localStorage.removeItem("mu_user_name");
-              
-              // Zamiast pełnego reloadu (lub przed nim) wyczyść stan UI:
-              checkAuthUI();
-              window.location.reload();
-          };
-      }
+  const logoutBtn = document.getElementById("logout-btn");
+  if(logoutBtn) {
+      logoutBtn.onclick = () => {
+          localStorage.removeItem("mu_logged_in");
+          localStorage.removeItem("mu_user_email");
+          localStorage.removeItem("mu_user_name");
+          
+          if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+              google.accounts.id.disableAutoSelect();
+          }
+
+          checkAuthUI();
+
+          setTimeout(() => {
+              if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+                  const loginBtnContainer = document.getElementById("google-login-button");
+                  if (loginBtnContainer) {
+                      loginBtnContainer.innerHTML = "";
+                      google.accounts.id.renderButton(
+                          loginBtnContainer,
+                          { theme: "outline", size: "large", width: "100%", text: "signin_with", locale: "pl" }
+                      );
+                  }
+              }
+          }, 100);
+      };
   }
 
   function setAccessRestrictions(fullAccess) {
@@ -1327,8 +1317,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // Inicjalizacja autoryzacji przy starcie wewnątrz głównego DOMContentLoaded
-  initGoogleAuth();
+  // Inicjalizacja autoryzacji przy starcie
   checkAuthUI();
+  initGoogleAuth();
 
-}); // <-- To jest domknięcie głównego document.addEventListener dla całej aplikacji
+}); // <-- Prawidłowe domknięcie głównego event listenera DOMContentLoaded

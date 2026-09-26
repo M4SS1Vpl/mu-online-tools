@@ -1,5 +1,5 @@
 // ==========================================
-// FUNKCJA PRZEŁĄCZANIA ZAKŁADOK (GLOBALNA)
+// 1. GLOBALNE FUNKCJE I ZAKŁADKI
 // ==========================================
 function switchTab(viewId) {
   const cards = document.querySelectorAll('.calculator-card');
@@ -25,7 +25,9 @@ function switchTab(viewId) {
 }
 window.switchTab = switchTab;
 
-// BAZA DANYCH SPEED GAPS I PRZELICZNIKÓW AGI
+// ==========================================
+// 2. BAZA DANYCH SPEED GAPS
+// ==========================================
 const speedGapsData = {
   dw: {
     name: "Dark Wizard / SM / Grand Master",
@@ -398,7 +400,6 @@ const speedGapsData = {
   }
 };
 
-// FUNKCJA DYNAMICZNIE RENDERUJĄCA PIONOWY UKŁAD SPEED GAPS
 function updateSpeedGaps() {
   const heroSelect = document.getElementById('hero-class');
   if (!heroSelect) return;
@@ -463,21 +464,27 @@ function updateSpeedGaps() {
   container.innerHTML = html;
 }
 
+// ==========================================
+// 3. GŁÓWNY START APLIKACJI
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Zaznaczanie tekstu po podwójnym kliknięciu w inputy
+  // Podwójne kliknięcie zaznacza input
   document.querySelectorAll('input').forEach(input => {
     input.addEventListener('dblclick', function () {
       this.select();
     });
   });
 
-  // Nawigacja zakładkami
+  // Przypisanie nawigacji zakładek
   document.getElementById('tabHomeBtn')?.addEventListener('click', () => switchTab('homeView'));
   document.getElementById('tabCalcBtn')?.addEventListener('click', () => switchTab('calcView'));
   document.getElementById('tabBossBtn')?.addEventListener('click', () => switchTab('bossView'));
   document.getElementById('tabTimerBtn')?.addEventListener('click', () => switchTab('timerView'));
   document.getElementById('tabEventsBtn')?.addEventListener('click', () => switchTab('eventsView'));
   document.getElementById('tabSpeedBtn')?.addEventListener('click', () => switchTab('speedView'));
+
+  // Listener zmiany klasy w speed gaps
+  document.getElementById('hero-class')?.addEventListener('change', updateSpeedGaps);
 
   // SYSTEM DŹWIĘKÓW
   const sounds = {
@@ -503,14 +510,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function playSound(type) {
     if (sounds[type]) {
       sounds[type].currentTime = 0;
-      sounds[type].play().catch(err => console.log("Przeglądarka zablokowała dźwięk:", err));
+      sounds[type].play().catch(err => console.log("Audio zablokowane:", err));
     }
   }
 
   const playedWarning = new Set();
   const playedReady = new Set();
 
-  // 1. KALKULATOR EXP
+  // ==========================================
+  // 4. KALKULATOR EXP
+  // ==========================================
   const calcBtn = document.getElementById('calcBtn');
 
   function calculateTime(currentLevel, desiredLevel, expPerSecond, barValue, expDatabase) {
@@ -570,9 +579,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 2. BOSS TIMER LOGIKA
+  // ==========================================
+  // 5. BOSS TIMER LOGIKA
+  // ==========================================
   let bossData = JSON.parse(localStorage.getItem('mu_boss_data') || '[]');
-  let selectedBossIds = new Set(); // Przechowuje ID zaznaczonych checkboxami bossów
+  let selectedBossIds = new Set();
 
   function updateSystemClock() {
     const clockEl = document.getElementById('systemClock');
@@ -672,9 +683,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rowStatusClass = 'boss-warning';
 
         if (!playedWarning.has(item.id)) {
-          if (isSoundEnabled) {
-            playSound('warning');
-          }
+          if (isSoundEnabled) playSound('warning');
           playedWarning.add(item.id);
         }
       } else {
@@ -683,21 +692,16 @@ document.addEventListener('DOMContentLoaded', () => {
         rowStatusClass = 'boss-ready';
 
         if (!playedReady.has(item.id)) {
-          if (isSoundEnabled) {
-            playSound('ready');
-          }
+          if (isSoundEnabled) playSound('ready');
           playedReady.add(item.id);
         }
       }
 
       const tr = document.createElement('tr');
-      
       let classList = [];
       if (rowStatusClass) classList.push(rowStatusClass);
       if (selectedBossIds.has(item.id)) classList.push('selected');
-      if (classList.length > 0) {
-        tr.className = classList.join(' ');
-      }
+      if (classList.length > 0) tr.className = classList.join(' ');
 
       tr.innerHTML = `
         <td style="text-align: center;"><input type="checkbox" class="boss-row-checkbox" data-id="${item.id}" ${selectedBossIds.has(item.id) ? 'checked' : ''} style="cursor: pointer;"></td>
@@ -709,19 +713,8 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       const checkbox = tr.querySelector('.boss-row-checkbox');
-      checkbox.addEventListener('click', (e) => {
+      const toggleSelection = (e) => {
         e.stopPropagation();
-        if (checkbox.checked) {
-          selectedBossIds.add(item.id);
-          tr.classList.add('selected');
-        } else {
-          selectedBossIds.delete(item.id);
-          tr.classList.remove('selected');
-        }
-        updateSelectAllMasterCheckbox();
-      });
-
-      tr.addEventListener('click', () => {
         checkbox.checked = !checkbox.checked;
         if (checkbox.checked) {
           selectedBossIds.add(item.id);
@@ -731,7 +724,10 @@ document.addEventListener('DOMContentLoaded', () => {
           tr.classList.remove('selected');
         }
         updateSelectAllMasterCheckbox();
-      });
+      };
+
+      checkbox.addEventListener('click', toggleSelection);
+      tr.addEventListener('click', toggleSelection);
 
       tbody.appendChild(tr);
     });
@@ -745,8 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (masterCheckbox) masterCheckbox.checked = false;
       return;
     }
-    const allChecked = bossData.every(b => selectedBossIds.has(b.id));
-    masterCheckbox.checked = allChecked;
+    masterCheckbox.checked = bossData.every(b => selectedBossIds.has(b.id));
   }
 
   document.getElementById('selectAllBosses')?.addEventListener('change', function() {
@@ -789,9 +784,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  updateSpeedGaps();
-
-  // 3. WIELOKROTNE TIMERY
+  // ==========================================
+  // 6. WIELOKROTNE TIMERY
+  // ==========================================
   let customTimers = [];
 
   document.getElementById('addCustomTimerBtn')?.addEventListener('click', () => {
@@ -801,14 +796,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const label = labelInput ? labelInput.value.trim() || 'Timer' : 'Timer';
     const minutes = minInput ? parseInt(minInput.value) || 10 : 10;
 
-    const newTimer = {
+    customTimers.push({
       id: Date.now(),
       label: label,
       remainingSeconds: minutes * 60,
       isRunning: true
-    };
+    });
 
-    customTimers.push(newTimer);
     if (labelInput) labelInput.value = '';
     playSound('click');
     renderCustomTimers();
@@ -856,15 +850,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (timer.isRunning && timer.remainingSeconds > 0) {
         timer.remainingSeconds--;
         changed = true;
-        if (timer.remainingSeconds === 0) {
-          playSound('ready');
-        }
+        if (timer.remainingSeconds === 0) playSound('ready');
       }
     });
     if (changed) renderCustomTimers();
   }, 1000);
 
-  // 4. HARMONOGRAM EVENTÓW
+  // ==========================================
+  // 7. HARMONOGRAM EVENTÓW
+  // ==========================================
   const eventsData = {
     bc: { 
       name: "Blood Castle", 
@@ -887,8 +881,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const [h, m] = timeStr.split(':').map(Number);
     const now = new Date();
     
-    let utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0);
-    let startDate = new Date(utcMs);
+    let startDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
     let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
 
     if (startDate < now) {
@@ -902,14 +895,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function getLocalEntryTimeStr(timeStr) {
     const [h, m] = timeStr.split(':').map(Number);
     const now = new Date();
-    
-    let utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0);
-    let eventDate = new Date(utcMs);
+    let eventDate = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0));
     eventDate.setMinutes(eventDate.getMinutes() - 5);
 
-    const localH = String(eventDate.getHours()).padStart(2, '0');
-    const localM = String(eventDate.getMinutes()).padStart(2, '0');
-    return `${localH}:${localM}`;
+    return `${String(eventDate.getHours()).padStart(2, '0')}:${String(eventDate.getMinutes()).padStart(2, '0')}`;
   }
 
   function renderTables(allUpcoming) {
@@ -924,15 +913,12 @@ document.addEventListener('DOMContentLoaded', () => {
       ev.times.forEach((utcTime, idx) => {
         const isCurrent = activeEventForType && activeEventForType.utcTime === utcTime;
         const row = document.createElement('tr');
-        
-        if (isCurrent) {
-          row.className = 'row-next-event';
-        }
+        if (isCurrent) row.className = 'row-next-event';
 
         let statusBadge = '<span style="opacity: 0.6;">Planowany</span>';
         if (isCurrent) {
           statusBadge = activeEventForType.isOpen 
-            ? '<span class="status-badge-next" style="background: #e74c3c; box-shadow: 0 0 10px rgba(231,76,60,0.8);">OTWARTY!</span>' 
+            ? '<span class="status-badge-next" style="background: #e74c3c;">OTWARTY!</span>' 
             : '<span class="status-badge-next">NAJBLIŻSZY</span>';
         }
 
@@ -958,16 +944,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ev.times.forEach(utcTime => {
         const { entryDate, startDate } = getEventTimes(utcTime);
         const isOpen = now >= entryDate && now < startDate;
-        const diffMs = isOpen ? (startDate - now) : (entryDate - now);
 
         allUpcoming.push({
           typeKey: key,
           name: ev.name,
           utcTime: utcTime,
-          entryDate: entryDate,
-          startDate: startDate,
           isOpen: isOpen,
-          diffMs: diffMs,
+          diffMs: isOpen ? (startDate - now) : (entryDate - now),
           sortKey: isOpen ? (startDate - now) : (entryDate - now + 10000000)
         });
       });
@@ -984,7 +967,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (nearest.isOpen) {
         if (!eventAlertPlayed.has(eventUniqueKey)) {
           eventSound.currentTime = 0;
-          eventSound.play().catch(e => console.log("Odtwarzanie dźwięku zablokowane przez przeglądarkę:", e));
+          eventSound.play().catch(() => {});
           eventAlertPlayed.add(eventUniqueKey);
         }
       } else {
@@ -1001,13 +984,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const hrs = Math.floor(totalSec / 3600);
         const m = Math.floor((totalSec % 3600) / 60);
         const s = Math.floor(totalSec % 60);
-        const localEntryStr = getLocalEntryTimeStr(item.utcTime);
 
         const mStr = String(m).padStart(2, '0');
         const sStr = String(s).padStart(2, '0');
-
-        let timerFormatted = hrs > 0 ? `${hrs}h ${mStr}m ${sStr}s` : `${mStr}m ${sStr}s`;
-        let timerHTML = `<div class="event-card-timer">${timerFormatted}</div>`;
+        let timerHTML = `<div class="event-card-timer">${hrs > 0 ? `${hrs}h ${mStr}m${sStr}s` : `${mStr}m${sStr}s`}</div>`;
 
         if (item.isOpen) {
           timerHTML = `
@@ -1023,7 +1003,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.innerHTML = `
           <div class="event-card-name">${item.name}</div>
           ${timerHTML}
-          <div class="event-card-localtime">Wejście: <strong>${localEntryStr}</strong></div>
+          <div class="event-card-localtime">Wejście: <strong>${getLocalEntryTimeStr(item.utcTime)}</strong></div>
         `;
         gridContainer.appendChild(card);
       });
@@ -1035,6 +1015,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateEventsSystem, 1000);
   updateEventsSystem();
 
+  // Obsługa zakładek w panelu eventów
   document.addEventListener('click', function(e) {
     const btn = e.target.closest('.event-tab-btn');
     if (btn) {
@@ -1046,17 +1027,16 @@ document.addEventListener('DOMContentLoaded', () => {
         box.classList.remove('active');
       });
 
-      const targetTab = btn.getAttribute('data-tab');
-      const activeBox = document.getElementById('tab-' + targetTab);
-      if (activeBox) {
-        activeBox.style.display = 'block';
-        activeBox.classList.add('active');
+      const targetBox = document.getElementById('tab-' + btn.getAttribute('data-tab'));
+      if (targetBox) {
+        targetBox.style.display = 'block';
+        targetBox.classList.add('active');
       }
     }
   });
 
   // ==========================================
-  // 5. WIDŻETY SZYBKIEGO PODGLĄDU NA STRONIE GŁÓWNEJ
+  // 8. WIDŻETY SZYBKIEGO PODGLĄDU NA GŁÓWNEJ
   // ==========================================
   function updateHomeQuickWidgets() {
     const gridContainer = document.getElementById('homeQuickGrid');
@@ -1066,45 +1046,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const nowMs = now.getTime();
 
     let allUpcomingEvents = [];
-    if (typeof eventsData !== 'undefined') {
-      Object.keys(eventsData).forEach(key => {
-        const ev = eventsData[key];
-        ev.times.forEach(utcTime => {
-          const { entryDate, startDate } = getEventTimes(utcTime);
-          const isOpen = now >= entryDate && now < startDate;
-          const diffMs = isOpen ? (startDate - now) : (entryDate - now);
-
-          allUpcomingEvents.push({
-            name: ev.name,
-            utcTime: utcTime,
-            isOpen: isOpen,
-            diffMs: diffMs,
-            sortKey: isOpen ? (startDate - now) : (entryDate - now + 10000000)
-          });
+    Object.keys(eventsData).forEach(key => {
+      const ev = eventsData[key];
+      ev.times.forEach(utcTime => {
+        const { entryDate, startDate } = getEventTimes(utcTime);
+        const isOpen = now >= entryDate && now < startDate;
+        allUpcomingEvents.push({
+          name: ev.name,
+          utcTime: utcTime,
+          isOpen: isOpen,
+          diffMs: isOpen ? (startDate - now) : (entryDate - now),
+          sortKey: isOpen ? (startDate - now) : (entryDate - now + 10000000)
         });
       });
-      allUpcomingEvents.sort((a, b) => a.sortKey - b.sortKey);
-    }
+    });
+    allUpcomingEvents.sort((a, b) => a.sortKey - b.sortKey);
     const top2Events = allUpcomingEvents.slice(0, 2);
 
-    let activeBosses = [];
-    if (typeof bossData !== 'undefined') {
-      activeBosses = bossData.map(b => {
-        const targetTime = new Date(b.targetTime).getTime();
-        return { ...b, diff: targetTime - nowMs };
-      }).filter(b => b.diff > -60000);
-      activeBosses.sort((a, b) => a.diff - b.diff);
-    }
+    let activeBosses = bossData.map(b => ({
+      ...b,
+      diff: new Date(b.targetTime).getTime() - nowMs
+    })).filter(b => b.diff > -60000);
+    activeBosses.sort((a, b) => a.diff - b.diff);
     const top2Bosses = activeBosses.slice(0, 2);
 
     let htmlContent = '';
     
     if (top2Events.length > 0) {
-      htmlContent += `
-        <div style="text-align: center; color: #c9c9c9; margin: 1px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
-          Incoming Events
-        </div>
-      `;
+      htmlContent += `<div style="text-align: center; color: #c9c9c9; margin: 1px 0; font-size: 1.0rem; font-weight: bold;">Nadchodzące Eventy</div>`;
     }
     
     top2Events.forEach(item => {
@@ -1112,39 +1081,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const hrs = Math.floor(totalSec / 3600);
       const m = Math.floor((totalSec % 3600) / 60);
       const s = Math.floor(totalSec % 60);
-      const localEntryStr = getLocalEntryTimeStr(item.utcTime);
-
       const mStr = String(m).padStart(2, '0');
       const sStr = String(s).padStart(2, '0');
-      const timerFormatted = hrs > 0 ? `${hrs}h ${mStr}m ${sStr}s` : `${mStr}m ${sStr}s`;
 
-      let timerHTML = `<div class="event-card-timer">${timerFormatted}</div>`;
+      let timerHTML = `<div class="event-card-timer">${hrs > 0 ? `${hrs}h ${mStr}m${sStr}s` : `${mStr}m${sStr}s`}</div>`;
       let cardClass = "event-card";
 
       if (item.isOpen) {
         cardClass += " open-now";
-        timerHTML = `
-          <div class="event-card-timer-box">
-            <span class="open-label">OTWARTE!</span>
-            <span class="event-card-timer">${mStr}m ${sStr}s</span>
-          </div>
-        `;
+        timerHTML = `<div class="event-card-timer-box"><span class="open-label">OTWARTE!</span><span class="event-card-timer">${mStr}m ${sStr}s</span></div>`;
       }
 
       htmlContent += `
         <div class="${cardClass}" style="margin: 0; width: 100%;">
-          <div class="event-card-name"> ${item.name}</div>
+          <div class="event-card-name">${item.name}</div>
           ${timerHTML}
-          <div class="event-card-localtime">Wejście: <strong>${localEntryStr}</strong></div>
+          <div class="event-card-localtime">Wejście: <strong>${getLocalEntryTimeStr(item.utcTime)}</strong></div>
         </div>
       `;
     });
 
-    htmlContent += `
-      <div style="text-align: center; color: #c9c9c9; margin: 15px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
-        Incoming Boss
-      </div>
-    `;
+    htmlContent += `<div style="text-align: center; color: #c9c9c9; margin: 15px 0 1px 0; font-size: 1.0rem; font-weight: bold;">Nadchodzący Boss</div>`;
 
     if (top2Bosses.length > 0) {
       top2Bosses.forEach(boss => {
@@ -1152,10 +1109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const hrs = Math.floor(totalSec / 3600);
         const m = Math.floor((totalSec % 3600) / 60);
         const s = Math.floor(totalSec % 60);
-        const timeStr = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${String(s).padStart(2, '0')}s`;
 
         let statusClass = "event-card";
-        let timerDisplay = timeStr;
+        let timerDisplay = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${String(s).padStart(2, '0')}s`;
 
         if (totalSec <= 120 && totalSec > 0) {
           statusClass += " open-now";
@@ -1165,35 +1121,23 @@ document.addEventListener('DOMContentLoaded', () => {
           timerDisplay = "!!! READY !!!";
         }
 
-        const tObj = new Date(boss.targetTime);
-        const timeHM = formatHM(tObj);
-
         htmlContent += `
           <div class="${statusClass}" style="margin: 0; width: 100%;">
-            <div class="event-card-name" style="color: #ffffff;"> ${boss.boss} (CH ${boss.ch})</div>
+            <div class="event-card-name" style="color: #ffffff;">${boss.boss} (CH ${boss.ch})</div>
             <div class="event-card-timer" style="font-size: 1.0rem;">${timerDisplay}</div>
-            <div class="event-card-localtime">Resp: <strong>${timeHM}</strong></div>
+            <div class="event-card-localtime">Resp: <strong>${formatHM(new Date(boss.targetTime))}</strong></div>
           </div>
         `;
       });
     } else {
       const isLoggedIn = localStorage.getItem("mu_logged_in") === "true";
-      const actionText = isLoggedIn ? "Dodaj respawn" : "Zaloguj się powyżej";
-      const icon = isLoggedIn ? "🔓" : "🔒";
-      const clickAttr = isLoggedIn ? `cursor: pointer; border-style: dashed;" onclick="switchTab('bossView')` : `cursor: default; border-style: dashed;"`;
-      const arrow = isLoggedIn ? " &rarr;" : "";
-
       htmlContent += `
-        <div class="event-card" style="margin: 0; width: 100%; justify-content: center; text-align: center; ${clickAttr}">
+        <div class="event-card" style="margin: 0; width: 100%; justify-content: center; text-align: center; cursor: ${isLoggedIn ? 'pointer' : 'default'};" ${isLoggedIn ? "onclick=\"switchTab('bossView')\"" : ""}>
           <div style="color: #8a8d93; font-size: 0.9rem;">
-            ${icon} Brak aktywnych respów. <span style="color: #00b37e; font-weight: bold;">${actionText}${arrow}</span>
+            ${isLoggedIn ? "🔓" : "🔒"} Brak aktywnych respów. <span style="color: #00b37e; font-weight: bold;">${isLoggedIn ? "Dodaj respawn &rarr;" : "Zaloguj się powyżej"}</span>
           </div>
         </div>
       `;
-    }
-
-    if (top2Events.length === 0 && top2Bosses.length === 0) {
-      htmlContent = `<div style="color: #aaa; text-align: center; padding: 10px;">Brak nadchodzących aktywności</div>`;
     }
 
     gridContainer.innerHTML = htmlContent;
@@ -1203,125 +1147,91 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHomeQuickWidgets();
 
   // ==========================================
-  // GOOGLE AUTHENTICATION (METODA PRZEKIEROWANIA)
+  // 9. GOOGLE AUTHENTICATION
   // ==========================================
   const GOOGLE_CLIENT_ID = "848462196396-frjjusbappmjq6r7a8st9mscp3jbngoo.apps.googleusercontent.com";
-  
-  // Wpisz tutaj dokładnie taki adres URL, jaki masz w konfiguracji Google Cloud Console (np. adres Twojego GitHub Pages)
-  // Jeśli testujesz lokalnie, możesz wykrywać automatycznie lub wpisać swój URL produkcyjny:
   const REDIRECT_URI = window.location.origin + window.location.pathname; 
 
   function initGoogleAuth() {
-      // Sprawdź, czy wróciliśmy z Google z tokenem w URL (hash lub parametry)
-      handleAuthRedirect();
-      checkAuthUI();
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const accessToken = params.get("access_token");
 
-      // Podłącz akcję pod własny przycisk logowania w HTML
-      const loginBtn = document.getElementById("google-login-btn") || document.getElementById("google-login-button");
-      if (loginBtn) {
-          loginBtn.onclick = redirectToGoogleAuth;
-      }
-  }
+    if (accessToken) {
+      fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.email) {
+            localStorage.setItem("mu_logged_in", "true");
+            localStorage.setItem("mu_user_email", data.email);
+            localStorage.setItem("mu_user_name", data.name || data.email);
+            window.history.replaceState({}, document.title, window.location.pathname);
+            checkAuthUI();
+          }
+        })
+        .catch(err => console.error("Błąd pobierania profilu:", err));
+    }
+    checkAuthUI();
 
-  function redirectToGoogleAuth() {
-      // Budujemy link przekierowujący do Google OAuth 2.0
-      const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
-      const options = {
+    const loginBtn = document.getElementById("google-login-btn") || document.getElementById("google-login-button");
+    if (loginBtn) {
+      loginBtn.onclick = () => {
+        const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+        const options = {
           client_id: GOOGLE_CLIENT_ID,
           redirect_uri: REDIRECT_URI,
-          response_type: "token", // Używamy tokena w fragmencie URL (Implicit Flow) dla prostoty SPA
+          response_type: "token",
           scope: "email profile",
           include_granted_scopes: "true",
           state: "security_token_" + Math.random()
+        };
+        window.location.href = `${rootUrl}?${new URLSearchParams(options).toString()}`;
       };
-
-      const qs = new URLSearchParams(options);
-      window.location.href = `${rootUrl}?${qs.toString()}`;
-  }
-
-  function handleAuthRedirect() {
-      // Sprawdzamy czy w adresie URL (hash) są parametry zwrócone przez Google
-      const hash = window.location.hash.substring(1);
-      const params = new URLSearchParams(hash);
-      const accessToken = params.get("access_token");
-
-      if (accessToken) {
-          // Pobieramy dane użytkownika za pomocą otrzymanego access_token
-          fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`)
-              .then(response => response.json())
-              .then(data => {
-                  if (data.email) {
-                      localStorage.setItem("mu_logged_in", "true");
-                      localStorage.setItem("mu_user_email", data.email);
-                      localStorage.setItem("mu_user_name", data.name || data.email);
-
-                      // Wyczyszczenie tokena z adresu URL, żeby estetycznie wyglądał
-                      window.history.replaceState({}, document.title, window.location.pathname);
-                      
-                      checkAuthUI();
-                  }
-              })
-              .catch(err => console.error("Błąd pobierania profilu użytkownika:", err));
-      }
+    }
   }
 
   function checkAuthUI() {
-      const isLoggedIn = localStorage.getItem("mu_logged_in") === "true";
-      const loginBtnContainer = document.getElementById("google-login-button");
-      const profileContainer = document.getElementById("user-profile-info");
-      const userNameSpan = document.getElementById("user-display-name");
+    const isLoggedIn = localStorage.getItem("mu_logged_in") === "true";
+    const loginBtnContainer = document.getElementById("google-login-button");
+    const profileContainer = document.getElementById("user-profile-info");
+    const userNameSpan = document.getElementById("user-display-name");
 
-      if (isLoggedIn) {
-          if(loginBtnContainer) loginBtnContainer.style.display = "none";
-          if(profileContainer) profileContainer.style.display = "flex";
-          if(userNameSpan) userNameSpan.textContent = `Witaj, ${localStorage.getItem("mu_user_name") || "Użytkowniku"}!`;
-
-          setAccessRestrictions(true);
-      } else {
-          if(loginBtnContainer) {
-              loginBtnContainer.style.display = "block";
-              // Jeśli przycisk to zwykły div, nadaj mu wygląd i funkcję przekierowania
-              if (!loginBtnContainer.onclick) {
-                  loginBtnContainer.innerHTML = `<button id="google-login-btn" class="btn-primary" style="width: 100%; padding: 10px; cursor: pointer;">Zaloguj przez Google</button>`;
-                  document.getElementById("google-login-btn").onclick = redirectToGoogleAuth;
-              }
-          }
-          if(profileContainer) profileContainer.style.display = "none";
-
-          setAccessRestrictions(false);
+    if (isLoggedIn) {
+      if (loginBtnContainer) loginBtnContainer.style.display = "none";
+      if (profileContainer) profileContainer.style.display = "flex";
+      if (userNameSpan) userNameSpan.textContent = `Witaj, ${localStorage.getItem("mu_user_name") || "Użytkowniku"}!`;
+      setAccessRestrictions(true);
+    } else {
+      if (loginBtnContainer) {
+        loginBtnContainer.style.display = "block";
+        if (!loginBtnContainer.onclick) {
+          loginBtnContainer.innerHTML = `<button id="google-login-btn" class="btn-primary" style="width: 100%; padding: 10px; cursor: pointer;">Zaloguj przez Google</button>`;
+        }
       }
+      if (profileContainer) profileContainer.style.display = "none";
+      setAccessRestrictions(false);
+    }
   }
 
-  const logoutBtn = document.getElementById("logout-btn");
-  if(logoutBtn) {
-      logoutBtn.onclick = () => {
-          localStorage.removeItem("mu_logged_in");
-          localStorage.removeItem("mu_user_email");
-          localStorage.removeItem("mu_user_name");
-          
-          checkAuthUI();
-      };
-  }
+  document.getElementById("logout-btn")?.addEventListener('click', () => {
+    localStorage.removeItem("mu_logged_in");
+    localStorage.removeItem("mu_user_email");
+    localStorage.removeItem("mu_user_name");
+    checkAuthUI();
+  });
 
   function setAccessRestrictions(fullAccess) {
-      const bossBtn = document.getElementById("tabBossBtn");
-      const eventsBtn = document.getElementById("tabEventsBtn");
+    const bossBtn = document.getElementById("tabBossBtn");
+    const eventsBtn = document.getElementById("tabEventsBtn");
 
-      [bossBtn, eventsBtn].forEach(btn => {
-          if(btn) {
-              if (!fullAccess) {
-                  btn.style.opacity = "0.3";
-                  btn.style.pointerEvents = "none";
-              } else {
-                  btn.style.opacity = "1";
-                  btn.style.pointerEvents = "auto";
-              }
-          }
-      });
+    [bossBtn, eventsBtn].forEach(btn => {
+      if (btn) {
+        btn.style.opacity = fullAccess ? "1" : "0.3";
+        btn.style.pointerEvents = fullAccess ? "auto" : "none";
+      }
+    });
   }
 
-  // Inicjalizacja autoryzacji przy starcie
-  checkAuthUI();
   initGoogleAuth();
-
-}); // <-- Prawidłowe domknięcie głównego event listenera DOMContentLoaded
+  updateSpeedGaps();
+});

@@ -1229,16 +1229,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function initGoogleAuth() {
       if (typeof google === 'undefined') return;
+      
+      // Jeśli użytkownik jest zalogowany, nie renderuj przycisku logowania
+      if (localStorage.getItem("mu_logged_in") === "true") return;
 
       google.accounts.id.initialize({
           client_id: GOOGLE_CLIENT_ID,
           callback: handleCredentialResponse
       });
 
-      google.accounts.id.renderButton(
-          document.getElementById("google-login-button"),
-          { theme: "outline", size: "large", width: "100%", text: "signin_with", locale: "pl" }
-      );
+      const loginButtonEl = document.getElementById("google-login-button");
+      if (loginButtonEl) {
+          loginButtonEl.innerHTML = ""; // Czyści stary przycisk, jeśli został po wylogowaniu
+          google.accounts.id.renderButton(
+              loginButtonEl,
+              { theme: "outline", size: "large", width: "100%", text: "signin_with", locale: "pl" }
+          );
+      }
   }
 
   function handleCredentialResponse(response) {
@@ -1273,18 +1280,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
           setAccessRestrictions(true);
       } else {
-          if(loginBtnContainer) loginBtnContainer.style.display = "block";
+          // TUTAJ: Zanim przycisk zostanie wyrenderowany lub pokazany, musi mieć block
+          if(loginBtnContainer) {
+              loginBtnContainer.style.display = "block";
+          }
           if(profileContainer) profileContainer.style.display = "none";
 
           setAccessRestrictions(false);
+          
+          // Jeśli użytkownik jest wylogowany, wywołaj ponowne renderowanie przycisku Google,
+          // żeby biblioteka wiedziała, że ma go na powrót wyświetlić!
+          if (typeof google !== 'undefined' && loginBtnContainer && loginBtnContainer.innerHTML === "") {
+              initGoogleAuth();
+          }
       }
 
       const logoutBtn = document.getElementById("logout-btn");
       if(logoutBtn) {
+          // Użyj addEventListener zamiast .onclick, żeby nie nadpisywać ewentualnych innych akcji
           logoutBtn.onclick = () => {
               localStorage.removeItem("mu_logged_in");
               localStorage.removeItem("mu_user_email");
               localStorage.removeItem("mu_user_name");
+              
+              // Zamiast pełnego reloadu (lub przed nim) wyczyść stan UI:
+              checkAuthUI();
               window.location.reload();
           };
       }

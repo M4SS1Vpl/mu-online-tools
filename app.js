@@ -1006,7 +1006,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const gridContainer = document.querySelector('.upcoming-events-grid');
+    const gridContainer = document.getElementById('upcomingEventsList');
     if (gridContainer) {
       gridContainer.innerHTML = '';
 
@@ -1070,17 +1070,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   // ==========================================
-  // 5. WIDŻETY SZYBKIEGO PODGLĄDU NA STRONIE GŁÓWNEJ
+  // 5. WIDŻETY SZYBKIEGO PODGLĄDU NA STRONIE GŁÓWNEJ (4 KAFELKI)
   // ==========================================
   function updateHomeQuickWidgets() {
+    const gridContainer = document.getElementById('homeQuickGrid');
+    if (!gridContainer) return;
+
     const now = new Date();
     const nowMs = now.getTime();
 
-    // --- Obsługa Eventów (pobieramy identycznie jak w updateEventsSystem) ---
-    const homeEventsListEl = document.getElementById('homeEventsList');
-    if (homeEventsListEl && typeof eventsData !== 'undefined') {
-      let allUpcoming = [];
-
+    // 1. Pobieramy 2 najbliższe eventy
+    let allUpcomingEvents = [];
+    if (typeof eventsData !== 'undefined') {
       Object.keys(eventsData).forEach(key => {
         const ev = eventsData[key];
         ev.times.forEach(utcTime => {
@@ -1088,86 +1089,116 @@ document.addEventListener('DOMContentLoaded', () => {
           const isOpen = now >= entryDate && now < startDate;
           const diffMs = isOpen ? (startDate - now) : (entryDate - now);
 
-          allUpcoming.push({
-            typeKey: key,
+          allUpcomingEvents.push({
             name: ev.name,
             utcTime: utcTime,
-            entryDate: entryDate,
-            startDate: startDate,
             isOpen: isOpen,
             diffMs: diffMs,
             sortKey: isOpen ? (startDate - now) : (entryDate - now + 10000000)
           });
         });
       });
-
-      // Sortujemy dokładnie tak samo jak w tabeli eventów
-      allUpcoming.sort((a, b) => a.sortKey - b.sortKey);
-      const topEvents = allUpcoming.slice(0, 3); // Bierzemy najbliższe
-
-      if (topEvents.length > 0) {
-        const shortestDiff = topEvents[0].sortKey;
-        const simultaneousEvents = topEvents.filter(ev => Math.abs(ev.sortKey - shortestDiff) < 3000);
-
-        let htmlContent = '';
-        simultaneousEvents.forEach(nearest => {
-          const totalSec = Math.floor(nearest.diffMs / 1000);
-          const hrs = Math.floor(totalSec / 3600);
-          const m = Math.floor((totalSec % 3600) / 60);
-          const s = totalSec % 60;
-          
-          const mStr = String(m).padStart(2, '0');
-          const sStr = String(s).padStart(2, '0');
-          const timeStr = hrs > 0 ? `${hrs}h ${mStr}m ${sStr}s` : `${mStr}m ${sStr}s`;
-
-          if (nearest.isOpen) {
-            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #eb776a; font-weight: bold; animation: pulse 1s infinite;">OTWARTE! (${nearest.name}) - ${timeStr}</span></div>`;
-          } else {
-            htmlContent += `<div style="margin-bottom: 5px;"><strong>${nearest.name}</strong> za: <span style="color: #fbc531;">${timeStr}</span></div>`;
-          }
-        });
-        homeEventsListEl.innerHTML = htmlContent;
-      } else {
-        homeEventsListEl.innerHTML = `<span style="opacity: 0.6;">Brak nadchodzących eventów</span>`;
-      }
+      allUpcomingEvents.sort((a, b) => a.sortKey - b.sortKey);
     }
+    const top2Events = allUpcomingEvents.slice(0, 2);
 
-    // --- Obsługa Bossów ---
-    const homeBossesListEl = document.getElementById('homeBossesList');
-    if (homeBossesListEl && typeof bossData !== 'undefined' && bossData.length > 0) {
-      let activeBosses = bossData.map(b => {
+    // 2. Pobieramy 2 najbliższych bossów
+    let activeBosses = [];
+    if (typeof bossData !== 'undefined') {
+      activeBosses = bossData.map(b => {
         const targetTime = new Date(b.targetTime).getTime();
         return { ...b, diff: targetTime - nowMs };
       }).filter(b => b.diff > -60000);
-
       activeBosses.sort((a, b) => a.diff - b.diff);
-
-      if (activeBosses.length > 0) {
-        const shortestDiff = activeBosses[0].diff;
-        const simultaneousBosses = activeBosses.filter(b => b.diff <= 120000 || Math.abs(b.diff - shortestDiff) < 3000);
-
-        let htmlContent = '';
-        simultaneousBosses.slice(0, 4).forEach(nearestBoss => {
-          const totalSec = Math.floor(nearestBoss.diff / 1000);
-          const hrs = Math.floor(totalSec / 3600);
-          const m = Math.floor((totalSec % 3600) / 60);
-          const s = totalSec % 60;
-          const timeStr = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${String(s).padStart(2, '0')}s`;
-
-          if (totalSec <= 120 && totalSec > 0) {
-            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #e79d3c; font-weight: bold;">GOTOWY WKRÓTCE! (${nearestBoss.boss} - CH ${nearestBoss.ch}) - ${timeStr}</span></div>`;
-          } else if (totalSec <= 0) {
-            htmlContent += `<div style="margin-bottom: 5px;"><span style="color: #eb776a; font-weight: bold; animation: pulse 1s infinite;">RESP SZUKAJ! (${nearestBoss.boss} - CH ${nearestBoss.ch})</span></div>`;
-          } else {
-            htmlContent += `<div style="margin-bottom: 5px;"><strong>${nearestBoss.boss}</strong> (CH ${nearestBoss.ch}): <span style="color: #fbc531;">${timeStr}</span></div>`;
-          }
-        });
-
-        homeBossesListEl.innerHTML = htmlContent;
-      } else {
-        homeBossesListEl.innerHTML = `<span style="opacity: 0.6;">Brak aktywnych bossów</span>`;
-      }
     }
+    const top2Bosses = activeBosses.slice(0, 2);
+
+    // Generujemy HTML dla 4 kafelków (2 eventy + 2 bossy)
+    let htmlContent = '';
+if (top2Events.length > 0) {
+      htmlContent += `
+        <div style="text-align: center; color: #c9c9c9; margin: 1px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
+          Incoming Events
+        </div>
+      `;
+    }
+    // Renderowanie Eventów
+    top2Events.forEach(item => {
+      const totalSec = Math.floor(item.diffMs / 1000);
+      const hrs = Math.floor(totalSec / 3600);
+      const m = Math.floor((totalSec % 3600) / 60);
+      const s = Math.floor(totalSec % 60);
+      const localEntryStr = getLocalEntryTimeStr(item.utcTime);
+
+      const mStr = String(m).padStart(2, '0');
+      const sStr = String(s).padStart(2, '0');
+      const timerFormatted = hrs > 0 ? `${hrs}h ${mStr}m ${sStr}s` : `${mStr}m ${sStr}s`;
+
+      let timerHTML = `<div class="event-card-timer">${timerFormatted}</div>`;
+      let cardClass = "event-card";
+
+      if (item.isOpen) {
+        cardClass += " open-now";
+        timerHTML = `
+          <div class="event-card-timer-box">
+            <span class="open-label">OTWARTE!</span>
+            <span class="event-card-timer">${mStr}m ${sStr}s</span>
+          </div>
+        `;
+      }
+
+      htmlContent += `
+        <div class="${cardClass}" style="margin: 0; width: 100%;">
+          <div class="event-card-name"> ${item.name}</div>
+          ${timerHTML}
+          <div class="event-card-localtime">Wejście: <strong>${localEntryStr}</strong></div>
+        </div>
+      `;
+    });
+if (top2Events.length > 0 && top2Bosses.length > 0) {
+      htmlContent += `
+        <div style="text-align: center; color: #c9c9c9; margin: 1px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
+          Incoming Boss
+        </div>
+      `;
+    }
+    // 2. Renderowanie Bossów
+    top2Bosses.forEach(boss => {
+      const totalSec = Math.floor(boss.diff / 1000);
+      const hrs = Math.floor(totalSec / 3600);
+      const m = Math.floor((totalSec % 3600) / 60);
+      const s = Math.floor(totalSec % 60);
+      const timeStr = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${String(s).padStart(2, '0')}s`;
+
+      let statusClass = "event-card"; // bazowa klasa kafelka
+      let timerDisplay = timeStr;
+
+      // Sprawdzamy czy zostało 2 minuty lub mniej
+      if (totalSec <= 120 && totalSec > 0) {
+        statusClass += " open-now"; // to dodaje czerwoną ramkę/efekt migania taki jak w eventach
+        timerDisplay = `${totalSec} sek!`;
+      } else if (totalSec <= 0) {
+        statusClass += " open-now";
+        timerDisplay = "!!! READY !!!";
+      }
+
+      const tObj = new Date(boss.targetTime);
+      const timeHM = formatHM(tObj);
+
+      htmlContent += `
+        <div class="${statusClass}" style="margin: 0; width: 100%;">
+          <div class="event-card-name" style="color: #ffffff;"> ${boss.boss} (CH ${boss.ch})</div>
+          <div class="event-card-timer" style="font-size: 1.0rem;">${timerDisplay}</div>
+          <div class="event-card-localtime">Resp: <strong>${timeHM}</strong></div>
+        </div>
+      `;
+    });
+
+    if (top2Events.length === 0 && top2Bosses.length === 0) {
+      htmlContent = `<div style="color: #aaa; text-align: center; padding: 10px;">Brak nadchodzących aktywności</div>`;
+    }
+
+    gridContainer.innerHTML = htmlContent;
   }
 
   setInterval(updateHomeQuickWidgets, 1000);

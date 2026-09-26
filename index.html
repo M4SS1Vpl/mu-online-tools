@@ -40,14 +40,25 @@
       <button id="tabCalcBtn" class="tab-btn" onclick="switchTab('calcView')">Kalkulator EXP</button>
       <button id="tabBossBtn" class="tab-btn" onclick="switchTab('bossView')">Boss Timer</button>
       <button id="tabEventsBtn" class="tab-btn" onclick="switchTab('eventsView')">Events</button>
-      
     </div>
   </div>
 
-  <!-- ========================================== -->
   <!-- KARTA HOME (STRONA GŁÓWNA) -->
-  <!-- ========================================== -->
   <div id="homeView" class="calculator-card">
+    
+    <!-- Szybki Podgląd Aktywności - rozciągnięty na całą szerokość -->
+    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px;">
+      <span>Mu Online Global</span>
+      <span class="live-badge" style="background-color: #d63031; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; display: inline-flex; align-items: center; gap: 4px;">
+        <span style="width: 6px; height: 6px; background-color: white; border-radius: 50%; display: inline-block;"></span> LIVE
+      </span>
+    </div>
+
+    <div id="homeQuickGrid" class="upcoming-events-grid" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
+        <div style="color: #aaa; text-align: center; padding: 10px;">Ładowanie podglądu...</div>
+    </div>
+
+    <!-- POWITANIE I OPISY -->
     <div class="home-hero">
       <h2>Witaj w M4SS1V Tools!</h2>
       <p>Zestaw pomocniczych narzędzi dla graczy MU Online, stworzony z myślą o precyzji i wygodzie podczas rozgrywki.</p>
@@ -90,22 +101,6 @@
       <div class="home-footer-note">
         <small>💡 Wszystkie dane (np. zapamiętane czasy bossów) są bezpiecznie zapisywane w pamięci Twojej przeglądarki.</small>
       </div>
-    <!-- SEKCJA SZYBKIEGO PODGLĄDU - wklej wewnątrz głównego boksu strony -->
-<div class="home-widgets-container" style="margin-top: 25px; display: flex; flex-direction: column; gap: 12px; width: 100%; box-sizing: border-box;">
-  
-  <!-- Najbliższy Event -->
-<div class="home-quick-card" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(0,179,126,0.2); padding: 12px; border-radius: 8px;">
-  <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Najbliższy Event</div>
-  <div id="homeEventsList" style="font-size: 0.95rem; color: #fff;">Ładowanie...</div>
-</div>
-
-<!-- Najbliższy Boss -->
-<div class="home-quick-card" style="background: rgba(0,0,0,0.25); border: 1px solid rgba(0,179,126,0.2); padding: 12px; border-radius: 8px; margin-top: 10px;">
-  <div style="font-size: 0.8rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">Najbliższy Boss</div>
-  <div id="homeBossesList" style="font-size: 0.95rem; color: #fff;">Brak aktywnych bossów</div>
-</div>
-
-</div>
   </div>
 
   <!-- ========================================== -->
@@ -113,9 +108,6 @@
   <!-- ========================================== -->
   <div id="timerView" class="calculator-card hidden">
     <h2>Wielokrotny Timer</h2>
-
-    
-    <!-- Panel dodawania nowego timera -->
     <div class="timer-add-panel">
       <div class="field-group">
         <label for="customTimerLabel">Opis timera:</label>
@@ -127,42 +119,31 @@
       </div>
       <button id="addCustomTimerBtn" class="btn-primary">Dodaj Timer</button>
     </div>
-
-    <!-- Kontener na aktywne timery -->
-    <div id="activeTimersContainer" class="timers-grid">
-      <!-- Timery będą generowane dynamicznie w JS -->
-    </div>
+    <div id="activeTimersContainer" class="timers-grid"></div>
   </div>
 
   <!-- ========================================== -->
-  <!-- WIDOK: EVENTS (BLOOD CASTLE, DEVIL SQUARE, CHAOS CASTLE) -->
+  <!-- WIDOK: EVENTS -->
   <!-- ========================================== -->
   <div id="eventsView" class="calculator-card hidden">
     <h2>Harmonogram Eventów</h2>
-    <!-- Przełącznik powiadomień dźwiękowych dla Eventów -->
     <div class="event-sound-toggle" style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #aaa;">
       <input type="checkbox" id="eventSoundToggle" checked style="cursor: pointer; accent-color: #f39c12;">
       <label for="eventSoundToggle" style="cursor: pointer;">Dźwięk ostrzegawczy 5 min przed eventem</label>
     </div>
 
-    <!-- Górny panel: Najbliższe Eventy (Rozkład jazdy) -->
     <div class="upcoming-events-section">
       <div style="display: flex; align-items: center; gap: 10px;">
-  <h3 style="margin: 0;">Eventy Global Mu Online</h3>
-  <span class="live-badge" style="position: relative; top: 6px;">
-    <span class="live-dot"></span> LIVE
-  </span>
-</div>
-      <div id="upcomingEventsList" class="upcoming-events-grid">
-        <!-- JS generuje karty -->
+        <h3 style="margin: 0;">Eventy Global Mu Online</h3>
+        <span class="live-badge" style="position: relative; top: 6px;">
+          <span class="live-dot"></span> LIVE
+        </span>
       </div>
+      <div id="upcomingEventsList" class="upcoming-events-grid"></div>
     </div>
 
-    <!-- Dolny panel: Przyciski przełączania + czytelna tabela -->
     <div class="events-tables-section">
       <h3 class="section-subtitle-main">Pełna Lista Godzin & Wymagany Level</h3>
-
-      <!-- Przyciski wyboru eventu -->
       <div class="event-tabs-nav">
         <button class="event-tab-btn active" data-tab="bc">🏰 Blood Castle</button>
         <button class="event-tab-btn" data-tab="ds">😈 Devil Square</button>
@@ -254,7 +235,6 @@
   <!-- ========================================== -->
   <div id="calcView" class="calculator-card hidden">
     <h2>MU Online - Kalkulator EXP</h2>
-
     <div class="row">
       <div class="field-group">
         <label for="currentLvl">Aktualny Lvl:</label>
@@ -265,19 +245,15 @@
         <input type="number" id="targetLvl" value="400" min="1">
       </div>
     </div>
-
     <div class="field-group">
       <label for="expPerSec">EXP na sekundę (EXP/s):</label>
       <input type="number" id="expPerSec" placeholder="np. 2500" min="1">
     </div>
-
     <div class="field-group">
       <label for="expBar">Bar (0 - 10):</label>
       <input type="number" id="expBar" value="0" min="0" max="10" step="0.1" placeholder="np. 4.5">
     </div>
-
     <button id="calcBtn" class="btn-primary">Oblicz czas</button>
-
     <div id="results" class="results-panel">
       <p><strong>Brakujący EXP na obecnym poziomie:</strong> <span id="currentLevelRemainingExp">-</span></p>
       <p><strong>Łączny brakujący EXP do celu:</strong> <span id="expNeeded">-</span></p>
@@ -286,93 +262,77 @@
   </div>
 
   <!-- WIDOK: BOSS TIMER -->
-    <div id="bossView" class="calculator-card hidden">
-      <h2>MU ONLINE - BOSS TIMER</h2>
-  <!-- Przełącznik powiadomień dźwiękowych dla Bossów -->
-      <div class="boss-sound-toggle" style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #aaa;">
-        <input type="checkbox" id="bossSoundToggle" checked style="cursor: pointer; accent-color: #f39c12;">
-        <label for="bossSoundToggle" style="cursor: pointer;">Dźwięki ostrzegawcze i gotowości dla bossów</label>
-      </div>
-      <!-- Zegar systemowy w nowoczesnej ramce -->
-      <div class="boss-clock-box">
-        <span class="clock-label">CZAS LOKALNY</span>
-        <div id="systemClock" class="clock-value">--:--:--</div>
-      </div>
+  <div id="bossView" class="calculator-card hidden">
+    <h2>MU ONLINE - BOSS TIMER</h2>
+    <div class="boss-sound-toggle" style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #aaa;">
+      <input type="checkbox" id="bossSoundToggle" checked style="cursor: pointer; accent-color: #f39c12;">
+      <label for="bossSoundToggle" style="cursor: pointer;">Dźwięki ostrzegawcze i gotowości dla bossów</label>
+    </div>
+    <div class="boss-clock-box">
+      <span class="clock-label">CZAS LOKALNY</span>
+      <div id="systemClock" class="clock-value">--:--:--</div>
+    </div>
 
-      <!-- Panel dodawania bossa -->
-      <div class="boss-control-panel">
-        <div class="boss-form-grid">
-          <div class="field-group">
-            <label for="bossSelect">Boss:</label>
-            <select id="bossSelect" class="modern-select">
-              <option value="Kundun">Kundun</option>
-              <option value="Medusa">Medusa</option>
-              <option value="Nightmare">Nightmare</option>
-              <option value="Selupan">Selupan</option>
-              <option value="Lord Silvester">Lord Silvester</option>
-              <option value="Core Magripi">Core Magripi</option>
-              <option value="Ferea Lord">Ferea Lord</option>
-              <option value="Nyx">Nyx</option>
-              <option value="GOD">GOD</option>
-            </select>
-          </div>
-
-          <div class="field-group">
-            <label for="bossCh">Channel:</label>
-            <select id="bossCh" class="modern-select">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-          </div>
+    <div class="boss-control-panel">
+      <div class="boss-form-grid">
+        <div class="field-group">
+          <label for="bossSelect">Boss:</label>
+          <select id="bossSelect" class="modern-select">
+            <option value="Kundun">Kundun</option>
+            <option value="Medusa">Medusa</option>
+            <option value="Nightmare">Nightmare</option>
+            <option value="Selupan">Selupan</option>
+            <option value="Lord Silvester">Lord Silvester</option>
+            <option value="Core Magripi">Core Magripi</option>
+            <option value="Ferea Lord">Ferea Lord</option>
+            <option value="Nyx">Nyx</option>
+            <option value="GOD">GOD</option>
+          </select>
         </div>
-
-        <div class="boss-form-row-bottom">
-          <div class="field-group" style="flex: 1; margin-bottom: 0;">
-            <label for="bossTimeInput">Za ile (H:M):</label>
-            <input type="text" id="bossTimeInput" placeholder="np. 0:10, 5:30, 10:5" class="modern-input">
-          </div>
-          <button id="addBossBtn" class="btn-primary">DODAJ DO LISTY</button>
+        <div class="field-group">
+          <label for="bossCh">Channel:</label>
+          <select id="bossCh" class="modern-select">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+            <option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+          </select>
         </div>
       </div>
-
-      <!-- Tabela bossów -->
-      <div class="table-container" style="margin-top: 20px;">
-        <table class="boss-table">
-          <thead>
-            <tr>
-              <th style="width: 40px; text-align: center;"><input type="checkbox" id="selectAllBosses" style="cursor: pointer;"></th>
-              <th>Lp.</th>
-              <th>Godzina</th>
-              <th>Nazwa Bossa</th>
-              <th>CH</th>
-              <th>Zostało</th>
-            </tr>
-          </thead>
-          <tbody id="bossTableBody">
-          </tbody>
-        </table>
-      </div>
-
-      <div class="button-row" style="margin-top: 20px;">
-        <button id="removeSelectedBtn" class="btn-secondary">USUŃ ZAZNACZONE</button>
-        <button id="clearAllBossesBtn" class="btn-danger">WYCZYŚĆ CAŁĄ LISTĘ</button>
+      <div class="boss-form-row-bottom">
+        <div class="field-group" style="flex: 1; margin-bottom: 0;">
+          <label for="bossTimeInput">Za ile (H:M):</label>
+          <input type="text" id="bossTimeInput" placeholder="np. 0:10, 5:30, 10:5" class="modern-input">
+        </div>
+        <button id="addBossBtn" class="btn-primary">DODAJ DO LISTY</button>
       </div>
     </div>
+
+    <div class="table-container" style="margin-top: 20px;">
+      <table class="boss-table">
+        <thead>
+          <tr>
+            <th style="width: 40px; text-align: center;"><input type="checkbox" id="selectAllBosses" style="cursor: pointer;"></th>
+            <th>Lp.</th>
+            <th>Godzina</th>
+            <th>Nazwa Bossa</th>
+            <th>CH</th>
+            <th>Zostało</th>
+          </tr>
+        </thead>
+        <tbody id="bossTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="button-row" style="margin-top: 20px;">
+      <button id="removeSelectedBtn" class="btn-secondary">USUŃ ZAZNACZONE</button>
+      <button id="clearAllBossesBtn" class="btn-danger">WYCZYŚĆ CAŁĄ LISTĘ</button>
+    </div>
+  </div>
 
   <!-- ========================================== -->
   <!-- WIDOK: SPEED GAPS -->
   <!-- ========================================== -->
   <div id="speedView" class="calculator-card hidden">
     <h2>MU ONLINE - SPEED GAPS (ATTACK SPEED)</h2>
-    
     <div class="class-selector">
       <label for="hero-class">Wybierz klasę postaci:</label>
       <select id="hero-class" onchange="updateSpeedGaps()">
@@ -401,13 +361,9 @@
           <img id="hero-img" src="img/sm.png" alt="Hero Preview">
           <h3 id="hero-name">Dark Wizard / SM</h3>
         </div>
-        
-        <div id="agi-ratio-container" class="agi-ratio-box-center">
-        </div>
+        <div id="agi-ratio-container" class="agi-ratio-box-center"></div>
       </div>
-      
-      <div id="gap-info-content" class="skills-tables-wrapper">
-      </div>
+      <div id="gap-info-content" class="skills-tables-wrapper"></div>
     </div>
   </div>
 

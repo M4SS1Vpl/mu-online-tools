@@ -1285,6 +1285,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           checkAuthUI();
 
+          // Natychmiastowe ponowne wyrenderowanie przycisku Google po wylogowaniu
           setTimeout(() => {
               if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
                   const loginBtnContainer = document.getElementById("google-login-button");
@@ -1296,7 +1297,7 @@ document.addEventListener('DOMContentLoaded', () => {
                       );
                   }
               }
-          }, 100);
+          }, 50);
       };
   }
 

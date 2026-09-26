@@ -1010,3 +1010,13 @@ input:focus, select:focus {
   color: #ffb142 !important;
   font-weight: bold;
 }
+/* Efekt najechana myszką (hover) dla wierszy w stanie Ready oraz Warning */
+.boss-table tr.boss-ready:hover {
+  background-color: rgba(255, 0, 0, 0.5) !important;
+  cursor: pointer;
+}
+
+.boss-table tr.boss-warning:hover {
+  background-color: rgba(255, 145, 0, 0.35) !important;
+  cursor: pointer;
+}

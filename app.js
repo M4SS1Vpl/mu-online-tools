@@ -1113,15 +1113,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const top2Bosses = activeBosses.slice(0, 2);
 
-    // Generujemy HTML dla 4 kafelków (2 eventy + 2 bossy)
+    // Generujemy HTML dla szybkich widgetów
     let htmlContent = '';
-if (top2Events.length > 0) {
+    
+    if (top2Events.length > 0) {
       htmlContent += `
         <div style="text-align: center; color: #c9c9c9; margin: 1px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
           Incoming Events
         </div>
       `;
     }
+    
     // Renderowanie Eventów
     top2Events.forEach(item => {
       const totalSec = Math.floor(item.diffMs / 1000);
@@ -1155,20 +1157,15 @@ if (top2Events.length > 0) {
         </div>
       `;
     });
-if (top2Events.length > 0 && top2Bosses.length > 0) {
-      htmlContent += `
-        <div style="text-align: center; color: #c9c9c9; margin: 1px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
-          Incoming Boss
-        </div>
-      `;
-    }
-    // 2. Renderowanie Bossów (z obsługą stanu, gdy brak aktywnych respów)
+
+    // POJEDYNCZY NAGŁÓWEK DLA BOSSÓW
     htmlContent += `
       <div style="text-align: center; color: #c9c9c9; margin: 15px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
         Incoming Boss
       </div>
     `;
 
+    // Renderowanie Bossów lub Teasera
     if (top2Bosses.length > 0) {
       top2Bosses.forEach(boss => {
         const totalSec = Math.floor(boss.diff / 1000);
@@ -1200,7 +1197,6 @@ if (top2Events.length > 0 && top2Bosses.length > 0) {
         `;
       });
     } else {
-      // Stan, gdy nie ma bossów -> Wyświetlamy "teaser" zachęcający do dodania / zalogowania
       htmlContent += `
         <div class="event-card" style="margin: 0; width: 100%; justify-content: center; text-align: center; cursor: pointer; border-style: dashed;" onclick="switchTab('bossView')">
           <div style="color: #8a8d93; font-size: 0.9rem;">

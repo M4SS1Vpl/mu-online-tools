@@ -1,1 +1,1314 @@
-const _0x1561cf=_0x1e50;(function(_0x4a1a37,_0x5624ca){const _0x7b2050={_0x4f2312:0x157,_0x1f2f9a:0x10e},_0x21f70c=_0x1e50,_0x392910=_0x4a1a37();while(!![]){try{const _0x49626f=-parseInt(_0x21f70c(0x1cd))/0x1*(-parseInt(_0x21f70c(_0x7b2050._0x4f2312))/0x2)+-parseInt(_0x21f70c(0x150))/0x3+-parseInt(_0x21f70c(0xfb))/0x4+-parseInt(_0x21f70c(0x15b))/0x5+parseInt(_0x21f70c(0x263))/0x6+-parseInt(_0x21f70c(0x1c7))/0x7+-parseInt(_0x21f70c(_0x7b2050._0x1f2f9a))/0x8*(-parseInt(_0x21f70c(0x1f1))/0x9);if(_0x49626f===_0x5624ca)break;else _0x392910['push'](_0x392910['shift']());}catch(_0x4d39b4){_0x392910['push'](_0x392910['shift']());}}}(_0x17c8,0x5011e));function _0x1e50(_0x3560b1,_0x12c8df){_0x3560b1=_0x3560b1-0xf8;const _0x17c8cf=_0x17c8();let _0x1e507f=_0x17c8cf[_0x3560b1];return _0x1e507f;}function switchTab(_0x2ac665){const _0x3ed3b6={_0x378131:0x131,_0x4ca0e8:0x1ee,_0x49245b:0x1ba,_0x401a34:0x131,_0x450425:0x27f,_0x129948:0x1eb,_0x49a7f9:0x197,_0x980224:0x11b,_0x55f848:0x27f,_0x44c561:0x261,_0x7e795f:0x115,_0x266ba7:0x1a0},_0x129046=_0x1e50,_0x31b41c=document['querySelectorAll'](_0x129046(0x271));_0x31b41c['forEach'](_0x24082a=>_0x24082a['classList'][_0x129046(0x197)](_0x129046(0x27a)));const _0x56f665=document[_0x129046(_0x3ed3b6._0x378131)](_0x2ac665);_0x56f665&&_0x56f665[_0x129046(0x27f)][_0x129046(0xf9)](_0x129046(0x27a));const _0x335b85=document[_0x129046(0x243)](_0x129046(_0x3ed3b6._0x4ca0e8));_0x335b85['forEach'](_0xaf3213=>_0xaf3213[_0x129046(0x27f)][_0x129046(0xf9)](_0x129046(0x261)));if(_0x2ac665===_0x129046(_0x3ed3b6._0x49245b))document[_0x129046(_0x3ed3b6._0x401a34)](_0x129046(0x10d))?.[_0x129046(_0x3ed3b6._0x450425)][_0x129046(0x197)]('active');if(_0x2ac665===_0x129046(_0x3ed3b6._0x129948))document[_0x129046(0x131)]('tabCalcBtn')?.[_0x129046(0x27f)][_0x129046(_0x3ed3b6._0x49a7f9)]('active');if(_0x2ac665===_0x129046(_0x3ed3b6._0x980224))document[_0x129046(0x131)](_0x129046(0x104))?.[_0x129046(_0x3ed3b6._0x55f848)][_0x129046(0x197)](_0x129046(_0x3ed3b6._0x44c561));if(_0x2ac665==='timerView')document[_0x129046(0x131)](_0x129046(_0x3ed3b6._0x7e795f))?.[_0x129046(_0x3ed3b6._0x55f848)][_0x129046(0x197)]('active');if(_0x2ac665==='eventsView')document[_0x129046(_0x3ed3b6._0x378131)](_0x129046(0x160))?.[_0x129046(0x27f)][_0x129046(0x197)](_0x129046(_0x3ed3b6._0x44c561));_0x2ac665==='speedView'&&(document[_0x129046(_0x3ed3b6._0x378131)](_0x129046(_0x3ed3b6._0x266ba7))?.[_0x129046(0x27f)][_0x129046(0x197)](_0x129046(0x261)),updateSpeedGaps());}window[_0x1561cf(0x254)]=switchTab;const speedGapsData={'dw':{'name':'Dark\x20Wizard\x20/\x20SM\x20/\x20Grand\x20Master','img':'img/sm.png','agiRatio':_0x1561cf(0x1f0),'skills':[{'skillName':_0x1561cf(0x135),'gaps':[{'lvlGap':'Lvl\x201','speed':_0x1561cf(0x133)},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0x23a)},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x14a)},{'lvlGap':'Lvl\x204','speed':_0x1561cf(0x1b6)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x13f)},{'lvlGap':_0x1561cf(0x215),'speed':'284\x20-\x20288'}]}]},'dk':{'name':_0x1561cf(0x1d0),'img':_0x1561cf(0x1ab),'agiRatio':'15\x20Agility\x20=\x201\x20Speed','skills':[{'skillName':_0x1561cf(0xf8),'gaps':[{'lvlGap':'Lvl\x201','speed':_0x1561cf(0x126)},{'lvlGap':_0x1561cf(0x244),'speed':'132\x20-\x20156'},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x27d)},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x125)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x19a)},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x171)}]}]},'elf':{'name':_0x1561cf(0x27e),'img':_0x1561cf(0x1ab),'agiRatio':_0x1561cf(0x1c4),'skills':[{'skillName':'Raining\x20Arrow','gaps':[{'lvlGap':'Lvl\x201','speed':_0x1561cf(0x22d)},{'lvlGap':_0x1561cf(0x244),'speed':'152\x20-\x20187'},{'lvlGap':'Lvl\x203','speed':_0x1561cf(0x1a8)},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x11c)}]},{'skillName':_0x1561cf(0x100),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x10a)},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0x247)},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x178)},{'lvlGap':_0x1561cf(0x1f8),'speed':'275\x20-\x20FULL'}]},{'skillName':_0x1561cf(0x179),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':'1\x20-\x20119'},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0x20d)},{'lvlGap':'Lvl\x203','speed':_0x1561cf(0x16c)},{'lvlGap':_0x1561cf(0x1f8),'speed':'168\x20-\x20199'},{'lvlGap':'Lvl\x205','speed':_0x1561cf(0x151)},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x204)}]}]},'mg':{'name':_0x1561cf(0x1fd),'img':'img/party.png','agiRatio':_0x1561cf(0x1f0),'skills':[{'skillName':_0x1561cf(0x19d),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x169)},{'lvlGap':'Lvl\x202','speed':_0x1561cf(0x159)},{'lvlGap':_0x1561cf(0x194),'speed':'211\x20-\x20236'},{'lvlGap':'Lvl\x204','speed':_0x1561cf(0x1d1)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x1ff)},{'lvlGap':_0x1561cf(0x215),'speed':'313\x20-\x20351'}]},{'skillName':'Gigantic\x20Storm,\x20Havok\x20Spear,\x20Dark\x20Blast','gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':'1\x20-\x20186'},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0x190)},{'lvlGap':_0x1561cf(0x194),'speed':'209\x20-\x20239'},{'lvlGap':'Lvl\x204','speed':_0x1561cf(0x136)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x117)},{'lvlGap':_0x1561cf(0x215),'speed':'340\x20-\x20351'}]}]},'dl':{'name':_0x1561cf(0x1e9),'img':_0x1561cf(0x1ab),'agiRatio':_0x1561cf(0x1f0),'skills':[{'skillName':_0x1561cf(0x101),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x188)},{'lvlGap':_0x1561cf(0x244),'speed':'141\x20-\x20162'},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x182)},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x118)},{'lvlGap':_0x1561cf(0x10c),'speed':'226\x20-\x20273'},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x206)}]}]},'sum':{'name':_0x1561cf(0x1f6),'img':_0x1561cf(0x1ab),'agiRatio':_0x1561cf(0x1be),'skills':[{'skillName':'Fire\x20Beast','gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x1aa)},{'lvlGap':_0x1561cf(0x244),'speed':'103\x20-\x20124'},{'lvlGap':'Lvl\x203','speed':_0x1561cf(0x191)},{'lvlGap':'Lvl\x204','speed':_0x1561cf(0x16e)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x123)}]},{'skillName':_0x1561cf(0x20b),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x20e)},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0x1a1)},{'lvlGap':'Lvl\x203','speed':_0x1561cf(0x25a)},{'lvlGap':_0x1561cf(0x1f8),'speed':'152\x20-\x20170'},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x12d)}]}]},'rf':{'name':'Rage\x20Fighter\x20/\x20Fist\x20Master','img':_0x1561cf(0x1ab),'agiRatio':'8\x20Agility\x20=\x201\x20Speed','skills':[{'skillName':_0x1561cf(0x22a),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x155)},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0xfa)},{'lvlGap':'Lvl\x203','speed':_0x1561cf(0x17f)},{'lvlGap':_0x1561cf(0x1f8),'speed':'350\x20-\x20391'},{'lvlGap':'Lvl\x205','speed':_0x1561cf(0x27b)},{'lvlGap':'Lvl\x206','speed':'441\x20-\x20FULL'}]},{'skillName':_0x1561cf(0x253),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x1b1)},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0x1f2)},{'lvlGap':'Lvl\x203','speed':_0x1561cf(0x21a)},{'lvlGap':_0x1561cf(0x1f8),'speed':'246\x20-\x20298'},{'lvlGap':_0x1561cf(0x10c),'speed':'299\x20-\x20366'},{'lvlGap':_0x1561cf(0x215),'speed':'367\x20-\x20FULL'}]}]},'gl':{'name':_0x1561cf(0x1b9),'img':'img/party.png','agiRatio':_0x1561cf(0x1be),'skills':[{'skillName':_0x1561cf(0x18d),'gaps':[{'lvlGap':'Lvl\x201','speed':'1\x20-\x20149'},{'lvlGap':'Lvl\x202','speed':_0x1561cf(0x210)},{'lvlGap':'Lvl\x203','speed':'170\x20-\x20191'},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x148)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x12e)},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x23d)}]},{'skillName':_0x1561cf(0x1b4),'gaps':[{'lvlGap':'Lvl\x201','speed':_0x1561cf(0x20e)},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0x20d)},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x242)},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x1de)},{'lvlGap':'Lvl\x205','speed':_0x1561cf(0x151)},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x204)}]}]},'rw':{'name':_0x1561cf(0x1ed),'img':'img/party.png','agiRatio':_0x1561cf(0x241),'skills':[{'skillName':'Lightning\x20Storm','gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x1f9)},{'lvlGap':'Lvl\x202','speed':_0x1561cf(0x10f)},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x199)},{'lvlGap':'Lvl\x204','speed':_0x1561cf(0x21e)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x233)},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x1b7)}]},{'skillName':_0x1561cf(0x208),'gaps':[{'lvlGap':'Lvl\x201','speed':_0x1561cf(0x269)},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0x134)},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x249)},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x279)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x202)},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x206)}]}]},'sl':{'name':'Slayer\x20/\x20Royal\x20Slayer','img':_0x1561cf(0x1ab),'agiRatio':_0x1561cf(0x1f0),'skills':[{'skillName':'Pierce\x20Attack','gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':'1\x20-\x20237'},{'lvlGap':'Lvl\x202','speed':'238\x20-\x20299'},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x267)},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x26f)}]},{'skillName':_0x1561cf(0x139),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x165)},{'lvlGap':'Lvl\x202','speed':_0x1561cf(0x24f)},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x162)},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x20c)}]}]},'gc':{'name':'Gun\x20Crusher\x20/\x20Master\x20Gunner','img':'img/party.png','agiRatio':'15\x20Agility\x20=\x201\x20Speed','skills':[{'skillName':_0x1561cf(0x1b2),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x177)},{'lvlGap':'Lvl\x202','speed':'123\x20-\x20141'},{'lvlGap':_0x1561cf(0x194),'speed':'142\x20-\x20166'},{'lvlGap':_0x1561cf(0x1f8),'speed':'167\x20-\x20198'},{'lvlGap':_0x1561cf(0x10c),'speed':'199\x20-\x20245'},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x1c2)}]}]},'ww':{'name':_0x1561cf(0x180),'img':_0x1561cf(0x1ab),'agiRatio':'10\x20Agility\x20=\x201\x20Speed','skills':[{'skillName':_0x1561cf(0x1da),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x133)},{'lvlGap':_0x1561cf(0x244),'speed':_0x1561cf(0x23a)},{'lvlGap':'Lvl\x203','speed':'156\x20-\x20188'},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x1b6)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x13f)},{'lvlGap':'Lvl\x206','speed':_0x1561cf(0x13c)}]}]},'lem':{'name':'Lemuria\x20/\x20Mage','img':'img/party.png','agiRatio':_0x1561cf(0x1f0),'skills':[{'skillName':_0x1561cf(0x13b),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x145)},{'lvlGap':'Lvl\x202','speed':_0x1561cf(0x141)},{'lvlGap':_0x1561cf(0x194),'speed':_0x1561cf(0x1c0)},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x23f)},{'lvlGap':_0x1561cf(0x10c),'speed':'212\x20-\x20247'},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x23d)}]}]},'ik':{'name':'Illusion\x20Knight\x20/\x20Mystic\x20Knight','img':_0x1561cf(0x1ab),'agiRatio':'10\x20Agility\x20=\x201\x20Speed','skills':[{'skillName':_0x1561cf(0x17e),'gaps':[{'lvlGap':'Lvl\x201','speed':_0x1561cf(0x1af)},{'lvlGap':'Lvl\x202','speed':_0x1561cf(0x282)},{'lvlGap':'Lvl\x203','speed':_0x1561cf(0x272)},{'lvlGap':'Lvl\x204','speed':_0x1561cf(0x26b)},{'lvlGap':'Lvl\x205','speed':'300\x20-\x20341'},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x12f)}]}]},'al':{'name':'Alchemist\x20/\x20Alchemic\x20Master','img':_0x1561cf(0x1ab),'agiRatio':'11\x20Agility\x20=\x201\x20Speed','skills':[{'skillName':_0x1561cf(0x172),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x145)},{'lvlGap':_0x1561cf(0x244),'speed':'148\x20-\x20175'},{'lvlGap':_0x1561cf(0x194),'speed':'176\x20-\x20208'},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x258)},{'lvlGap':_0x1561cf(0x10c),'speed':_0x1561cf(0x1cc)},{'lvlGap':_0x1561cf(0x215),'speed':'304\x20-\x20329'}]}]},'cru':{'name':_0x1561cf(0x200),'img':_0x1561cf(0x1ab),'agiRatio':_0x1561cf(0x241),'skills':[{'skillName':_0x1561cf(0x220),'gaps':[{'lvlGap':_0x1561cf(0x1bd),'speed':_0x1561cf(0x1dd)},{'lvlGap':_0x1561cf(0x244),'speed':'110\x20-\x20124'},{'lvlGap':'Lvl\x203','speed':_0x1561cf(0x24d)},{'lvlGap':_0x1561cf(0x1f8),'speed':_0x1561cf(0x214)},{'lvlGap':_0x1561cf(0x10c),'speed':'160\x20-\x20182'},{'lvlGap':_0x1561cf(0x215),'speed':_0x1561cf(0x166)},{'lvlGap':_0x1561cf(0x175),'speed':_0x1561cf(0x25e)},{'lvlGap':_0x1561cf(0x277),'speed':_0x1561cf(0x103)},{'lvlGap':_0x1561cf(0x1ae),'speed':_0x1561cf(0x153)}]}]}};function updateSpeedGaps(){const _0x37167e={_0x355323:0x239,_0x5712d7:0x131,_0xc2a6ed:0x266,_0x353d80:0x219,_0x400699:0x12a,_0x4b0c1e:0x25f,_0x36b0e0:0x1d4},_0x1da842={_0x446252:0x24b,_0x29f8c1:0x15f,_0x12d65d:0x222},_0x4d84db={_0xddf0fa:0x25c,_0x593577:0x21b},_0x14ab73={_0x44e883:0x1ab},_0x4368db=_0x1561cf,_0x2553dd=document[_0x4368db(0x131)]('hero-class');if(!_0x2553dd)return;const _0x38c207=_0x2553dd['value'],_0x3b4c0f=speedGapsData[_0x38c207];if(!_0x3b4c0f)return;const _0x2726b5=document[_0x4368db(0x131)](_0x4368db(_0x37167e._0x355323)),_0x5824be=document[_0x4368db(_0x37167e._0x5712d7)]('hero-img');if(_0x2726b5)_0x2726b5[_0x4368db(_0x37167e._0xc2a6ed)]=_0x3b4c0f[_0x4368db(_0x37167e._0x353d80)];_0x5824be&&(_0x5824be[_0x4368db(0x16a)]=_0x3b4c0f[_0x4368db(0x20a)],_0x5824be['onerror']=function(){const _0x1aad79=_0x4368db;this[_0x1aad79(0x16a)]=_0x1aad79(_0x14ab73._0x44e883);});const _0x218ff0=document[_0x4368db(0x131)](_0x4368db(_0x37167e._0x400699));_0x218ff0&&(_0x218ff0['innerHTML']=_0x4368db(_0x37167e._0x4b0c1e)+_0x3b4c0f['agiRatio']+_0x4368db(_0x37167e._0x36b0e0));const _0x568089=document[_0x4368db(_0x37167e._0x5712d7)]('gap-info-content');if(!_0x568089)return;let _0x20a7b9='';_0x3b4c0f['skills'][_0x4368db(0x1dc)](_0x372bed=>{const _0x18a55b=_0x4368db;_0x20a7b9+='\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22skill-section\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<h4\x20class=\x22skill-title\x22>Czar\x20/\x20Skill:\x20<span>'+_0x372bed[_0x18a55b(_0x1da842._0x446252)]+_0x18a55b(_0x1da842._0x29f8c1),_0x372bed[_0x18a55b(0x223)]['forEach'](_0x51fc1c=>{const _0x19f86a=_0x18a55b;_0x20a7b9+=_0x19f86a(0x163)+_0x51fc1c[_0x19f86a(0x15a)]+_0x19f86a(0x19f)+_0x51fc1c[_0x19f86a(_0x4d84db._0xddf0fa)]+_0x19f86a(_0x4d84db._0x593577);}),_0x20a7b9+=_0x18a55b(_0x1da842._0x12d65d);}),_0x568089['innerHTML']=_0x20a7b9;}document[_0x1561cf(0x1c1)](_0x1561cf(0x1e8),()=>{const _0x241e53={_0x225891:0x243,_0x23bf1a:0x251,_0x3a5ad3:0x131,_0x24e32c:0x1c1,_0xe7e519:0x104,_0xc6683a:0x115,_0x29289f:0x160,_0x265350:0x137,_0x50c078:0x275,_0x19f5a8:0x1c5,_0x153c3a:0x156,_0x10ac7c:0x1c1,_0x448b1f:0x138,_0x3b7a55:0x251,_0x26033c:0x217,_0x34114a:0x1ce,_0x1203c9:0x265,_0x9279cd:0x1a5,_0x5350a7:0x13a,_0x35bd28:0x273,_0x2a106e:0x262,_0x13adbc:0x158,_0x57ba68:0x1f5,_0x191785:0x164,_0xe4bf8f:0x1d9,_0x35d93f:0x128,_0x2e6810:0x10b,_0x4e04a9:0x1df,_0x2740f2:0x264,_0x10d839:0x17c,_0x38bd6e:0x181,_0x5645b9:0x19c},_0x21e1df={_0x49a1bd:0x132,_0x213e77:0x1dc,_0x436693:0x1d8,_0x50068b:0x207,_0x10043c:0x260,_0x33c9d9:0x196,_0x42be1c:0x281},_0x591f8b={_0x29b7c8:0x255,_0x4b5ea2:0x1a9,_0x850558:0x1dc,_0x12a0bf:0x243,_0xaabf78:0x1ec,_0x34e939:0x186,_0x5dc34e:0x11a,_0x303875:0x27f},_0xeb7314={_0x110cbf:0x1dc,_0x1e2f24:0x1e7,_0x32cf50:0x25b,_0x5259ef:0x240,_0x47876a:0x1b0},_0x2b6fd3={_0x54b1b3:0x1fe,_0x63a47c:0x1fe,_0x262de5:0x17b,_0x378325:0x252,_0x58d88d:0x14b,_0x276ee2:0x14f,_0x3383b6:0x14f,_0x40200f:0x110,_0x27599d:0x219,_0x353199:0x161},_0x23305f={_0x53ae84:0x1dc},_0x503e36={_0x15f55c:0x26a,_0x3bdc48:0x11e,_0x34a0b9:0x106,_0x50c4f7:0x1b3,_0x5a5cbb:0x17b},_0x20c564={_0x171582:0x26a,_0x2b9153:0x1d8,_0x201771:0x132},_0x3720c3={_0x159ef9:0x1dc},_0x1dc317={_0x2c0f59:0x131,_0x5c995a:0x1e0},_0x4d8393={_0x2a3225:0x129,_0x3b757e:0x1b8,_0x216ac2:0x185,_0x9a8d0:0x1bc,_0x2d030e:0xff,_0x2c63f1:0x12b,_0x5595b3:0x142,_0x214ed2:0x154,_0xe99b64:0x251,_0x4263bc:0x211},_0x3335ff={_0x27b147:0x108,_0x4dc109:0x120,_0xfb172a:0x1e4,_0x199ef1:0x209,_0x5143bd:0x120,_0x1ebf2b:0x251},_0x15ea67={_0x10e138:0x1dc,_0x14d396:0x193},_0x2bfd80={_0x44b5d1:0x216},_0x3ad998={_0x80490c:0x1dc},_0x1c09d3={_0x227960:0x18c},_0x14bf01={_0x1ef74c:0x212,_0x1e12f1:0x224,_0x15da6a:0x140,_0x5d2194:0x240,_0x13352d:0x197,_0x12a44b:0x121,_0x393405:0x18c,_0x3c5dce:0x1e0,_0x1afea2:0x1e5,_0x316b9a:0x257,_0x4b4437:0x259,_0x57bfc9:0x250},_0x21d640={_0x531071:0x237,_0x38488f:0x1e4,_0x3a7cbc:0x1a4,_0x10f19a:0x23b,_0x2b6a6a:0x1e6,_0x3df8dd:0x278,_0x374736:0x228,_0x2c304b:0x15c,_0x5bed16:0x120},_0x4d08ee={_0x41dfe4:0x268},_0x38aed5={_0x201cf7:0x1b3,_0x3e1d0b:0x225},_0x30267a={_0x5bf75e:0x266},_0x1248d1={_0x300815:0x120,_0x1775f3:0x131,_0x35037f:0x131,_0x28dab6:0x146,_0x19e314:0x15e,_0x162c42:0x266,_0x41cb13:0x144,_0x335bb1:0x248,_0x46aaad:0xfd,_0x5e4f86:0x144,_0x1653e3:0x248,_0x6a7ede:0x245,_0x58ce70:0x131,_0x4ccbe6:0x1d6,_0x515044:0x1cb,_0x4dc0b1:0x1f3,_0x6a358a:0x205,_0x237b35:0x24e},_0x24eb28={_0xf1b7e7:0x14d,_0x233b7d:0x213,_0x3494c0:0x1fe},_0x3fcc33={_0x20b94f:0x1b0,_0x46d871:0x183},_0x54a4f2={_0x1f8a76:0x21c,_0xfa4af3:0x251},_0x43f00e={_0x2f755e:0x246,_0x20d64f:0x183},_0x14a9dc={_0x485074:0x1c1},_0x236b9c=_0x1561cf;document[_0x236b9c(_0x241e53._0x225891)](_0x236b9c(0x11d))['forEach'](_0x27c01d=>{const _0x17aee6=_0x236b9c;_0x27c01d[_0x17aee6(_0x14a9dc._0x485074)](_0x17aee6(0x17a),function(){const _0x6afa9c=_0x17aee6;this[_0x6afa9c(0x112)]();});}),document['getElementById']('tabHomeBtn')?.[_0x236b9c(0x1c1)](_0x236b9c(_0x241e53._0x23bf1a),()=>switchTab(_0x236b9c(0x1ba))),document[_0x236b9c(_0x241e53._0x3a5ad3)]('tabCalcBtn')?.[_0x236b9c(_0x241e53._0x24e32c)](_0x236b9c(_0x241e53._0x23bf1a),()=>switchTab(_0x236b9c(0x1eb))),document['getElementById'](_0x236b9c(_0x241e53._0xe7e519))?.['addEventListener']('click',()=>switchTab(_0x236b9c(0x11b))),document[_0x236b9c(_0x241e53._0x3a5ad3)](_0x236b9c(_0x241e53._0xc6683a))?.['addEventListener'](_0x236b9c(0x251),()=>switchTab(_0x236b9c(0x283))),document[_0x236b9c(0x131)](_0x236b9c(_0x241e53._0x29289f))?.['addEventListener'](_0x236b9c(0x251),()=>switchTab(_0x236b9c(0x19e))),document['getElementById']('tabSpeedBtn')?.['addEventListener'](_0x236b9c(0x251),()=>switchTab(_0x236b9c(0x1d3)));const _0x2e36b4={'click':new Audio(_0x236b9c(0x274)),'warning':new Audio(_0x236b9c(_0x241e53._0x265350)),'ready':new Audio(_0x236b9c(_0x241e53._0x50c078))};let _0x47c74e=![];function _0x3a6feb(){const _0x5e3b69={_0x25f1ef:0x1b0},_0x454b47=_0x236b9c;if(_0x47c74e)return;Object[_0x454b47(0x1d2)](_0x2e36b4)['forEach'](_0x133b6b=>{const _0x5b6a7f=_0x454b47;_0x133b6b[_0x5b6a7f(_0x43f00e._0x2f755e)]()[_0x5b6a7f(0x1ea)](()=>{const _0x173574=_0x5b6a7f;_0x133b6b[_0x173574(0x1fc)](),_0x133b6b[_0x173574(_0x5e3b69._0x25f1ef)]=0x0;})[_0x5b6a7f(_0x43f00e._0x20d64f)](()=>{});}),_0x47c74e=!![],document[_0x454b47(_0x54a4f2._0x1f8a76)](_0x454b47(_0x54a4f2._0xfa4af3),_0x3a6feb);}document[_0x236b9c(0x1c1)](_0x236b9c(_0x241e53._0x23bf1a),_0x3a6feb);function _0x2ddfef(_0x6d2ec){const _0x3410df=_0x236b9c;_0x2e36b4[_0x6d2ec]&&(_0x2e36b4[_0x6d2ec][_0x3410df(_0x3fcc33._0x20b94f)]=0x0,_0x2e36b4[_0x6d2ec]['play']()[_0x3410df(_0x3fcc33._0x46d871)](_0xfe119=>console[_0x3410df(0x21f)](_0x3410df(0x1e3),_0xfe119)));}const _0x5c3c8f=new Set(),_0x599a9a=new Set(),_0x12eed6=document['getElementById'](_0x236b9c(0x195));function _0x2cd03d(_0x130339,_0x39778e,_0xb6e2c2,_0x130c80,_0x2664b3){const _0x23897e=_0x236b9c;if(_0x39778e<=_0x130339)throw new Error('Docelowy\x20level\x20musi\x20być\x20większy\x20niż\x20aktualny.');if(_0xb6e2c2<=0x0)throw new Error(_0x23897e(_0x24eb28._0xf1b7e7));if(_0x130c80<0x0||_0x130c80>0xa)throw new Error(_0x23897e(_0x24eb28._0x233b7d));const _0x1b5bc4=_0x2664b3[_0x130339];if(_0x1b5bc4===undefined)throw new Error(_0x23897e(0x124)+_0x130339+'.');const _0x51d4f4=_0x130c80/0xa,_0x5cf0dd=_0x1b5bc4*(0x1-_0x51d4f4);let _0x194a2f=0x0;for(let _0x4e7b6a=_0x130339+0x1;_0x4e7b6a<_0x39778e;_0x4e7b6a++){if(_0x2664b3[_0x4e7b6a]!==undefined)_0x194a2f+=_0x2664b3[_0x4e7b6a];else throw new Error(_0x23897e(0x124)+_0x4e7b6a+'.');}const _0x477bd6=_0x5cf0dd+_0x194a2f;if(_0x477bd6<=0x0)return{'days':0x0,'hours':0x0,'minutes':0x0,'totalExp':0x0,'remainingInCurrent':0x0};const _0x2042dc=_0x477bd6/_0xb6e2c2,_0x356d09=Math['round'](_0x2042dc/0x3c),_0x56a6e9=Math[_0x23897e(_0x24eb28._0x3494c0)](_0x356d09/(0x18*0x3c)),_0x4d0379=_0x356d09%(0x18*0x3c),_0x1634b8=Math[_0x23897e(0x1fe)](_0x4d0379/0x3c),_0x594f6f=_0x4d0379%0x3c;return{'days':_0x56a6e9,'hours':_0x1634b8,'minutes':_0x594f6f,'totalExp':_0x477bd6,'remainingInCurrent':_0x5cf0dd};}_0x12eed6?.['addEventListener']('click',()=>{const _0x230621=_0x236b9c;try{const _0x52711c=parseInt(document[_0x230621(0x131)]('currentLvl')['value']),_0x2135be=parseInt(document[_0x230621(0x131)](_0x230621(0x26c))[_0x230621(_0x1248d1._0x300815)]),_0x36268b=parseFloat(document[_0x230621(_0x1248d1._0x1775f3)]('expPerSec')[_0x230621(0x120)]),_0x1100eb=parseFloat(document[_0x230621(_0x1248d1._0x35037f)]('expBar')[_0x230621(0x120)])||0x0,_0x5f46cc=typeof exp_data!==_0x230621(_0x1248d1._0x28dab6)?exp_data:typeof EXP_TO_NEXT!==_0x230621(0x146)?EXP_TO_NEXT:null;if(!_0x5f46cc){alert(_0x230621(_0x1248d1._0x19e314));return;}const _0x2b6607=_0x2cd03d(_0x52711c,_0x2135be,_0x36268b,_0x1100eb,_0x5f46cc);document['getElementById']('currentLevelRemainingExp')[_0x230621(_0x1248d1._0x162c42)]=Math[_0x230621(_0x1248d1._0x41cb13)](_0x2b6607[_0x230621(0x15d)])[_0x230621(_0x1248d1._0x335bb1)]('pl-PL'),document[_0x230621(_0x1248d1._0x35037f)](_0x230621(_0x1248d1._0x46aaad))['innerText']=Math[_0x230621(_0x1248d1._0x5e4f86)](_0x2b6607[_0x230621(0x256)])[_0x230621(_0x1248d1._0x1653e3)](_0x230621(_0x1248d1._0x6a7ede)),document[_0x230621(_0x1248d1._0x58ce70)](_0x230621(_0x1248d1._0x4ccbe6))['innerText']=_0x2b6607['days']+'\x20dni,\x20'+_0x2b6607[_0x230621(_0x1248d1._0x515044)]+_0x230621(_0x1248d1._0x4dc0b1)+_0x2b6607[_0x230621(_0x1248d1._0x6a358a)]+_0x230621(_0x1248d1._0x237b35);}catch(_0x582fe9){alert(_0x582fe9[_0x230621(0x147)]);}});let _0x35be95=JSON[_0x236b9c(0x23e)](localStorage[_0x236b9c(_0x241e53._0x19f5a8)](_0x236b9c(_0x241e53._0x153c3a))||'[]'),_0x4268a9=new Set();function _0x19f78c(){const _0x18e169=_0x236b9c,_0x53509a=document[_0x18e169(0x131)](_0x18e169(0x1a3));if(_0x53509a)_0x53509a[_0x18e169(_0x30267a._0x5bf75e)]=new Date()['toTimeString']()['split']('\x20')[0x0];}setInterval(_0x19f78c,0x3e8),_0x19f78c();function _0x258afe(_0x18d1c6){const _0x2a4bcc=_0x236b9c,_0xa60ad3=_0x18d1c6[_0x2a4bcc(_0x38aed5._0x201cf7)]()[_0x2a4bcc(0x225)]()[_0x2a4bcc(0x17b)](0x2,'0'),_0xc0906b=_0x18d1c6['getMinutes']()[_0x2a4bcc(_0x38aed5._0x3e1d0b)]()['padStart'](0x2,'0');return _0xa60ad3+':'+_0xc0906b;}function _0x575d96(){const _0x380cf6=_0x236b9c;localStorage[_0x380cf6(_0x4d08ee._0x41dfe4)](_0x380cf6(0x156),JSON[_0x380cf6(0x187)](_0x35be95));}document[_0x236b9c(0x131)](_0x236b9c(0x21d))?.[_0x236b9c(_0x241e53._0x10ac7c)](_0x236b9c(0x251),()=>{const _0x5dcc8b=_0x236b9c,_0x403d87=document[_0x5dcc8b(0x131)](_0x5dcc8b(_0x21d640._0x531071)),_0x4c7cba=document['getElementById'](_0x5dcc8b(0x236)),_0x15d746=document['getElementById'](_0x5dcc8b(0x19b));if(!_0x403d87||!_0x4c7cba||!_0x15d746)return;const _0x3c16d5=_0x403d87[_0x5dcc8b(0x120)],_0x331ee9=_0x4c7cba['value'][_0x5dcc8b(_0x21d640._0x38488f)](),_0x4416c5=_0x15d746['value']['trim']();if(!_0x331ee9){alert(_0x5dcc8b(_0x21d640._0x3a7cbc));return;}const _0x4f9fa7=_0x4416c5['split'](':');if(_0x4f9fa7[_0x5dcc8b(0x18c)]!==0x2){alert(_0x5dcc8b(_0x21d640._0x10f19a));return;}const _0xc6858f=parseInt(_0x4f9fa7[0x0]),_0x2389ec=parseInt(_0x4f9fa7[0x1]);if(isNaN(_0xc6858f)||isNaN(_0x2389ec)||_0xc6858f<0x0||_0x2389ec<0x0||_0x2389ec>0x3b||_0xc6858f===0x0&&_0x2389ec===0x0){alert(_0x5dcc8b(_0x21d640._0x2b6a6a));return;}const _0x33502f=_0x35be95['some'](_0x2a80d9=>_0x2a80d9[_0x5dcc8b(0x22c)]===_0x3c16d5&&String(_0x2a80d9['ch'])===_0x331ee9);if(_0x33502f){alert('\x22'+_0x3c16d5+_0x5dcc8b(0x111)+_0x331ee9+_0x5dcc8b(0x276));return;}const _0x2f332a=new Date(Date['now']()+(_0xc6858f*0xe10+_0x2389ec*0x3c)*0x3e8),_0x595851=_0x5dcc8b(0x192)+Date[_0x5dcc8b(_0x21d640._0x3df8dd)]()+'_'+Math[_0x5dcc8b(_0x21d640._0x374736)]()[_0x5dcc8b(0x225)](0x24)[_0x5dcc8b(0x234)](0x2,0x4);_0x35be95[_0x5dcc8b(0x16f)]({'id':_0x595851,'boss':_0x3c16d5,'ch':_0x331ee9,'targetTime':_0x2f332a[_0x5dcc8b(_0x21d640._0x2c304b)]()}),_0x2ddfef('click'),_0x575d96(),_0x34d04d(),_0x15d746[_0x5dcc8b(_0x21d640._0x5bed16)]='';});function _0x34d04d(){const _0x2e031f={_0x3b54bc:0x176},_0x3f3c27=_0x236b9c;_0x35be95[_0x3f3c27(0x207)]((_0xf4e7f9,_0x2cd866)=>new Date(_0xf4e7f9[_0x3f3c27(0x212)])-new Date(_0x2cd866[_0x3f3c27(0x212)]));const _0x3e94d4=document['getElementById']('bossTableBody');if(!_0x3e94d4)return;_0x3e94d4['innerHTML']='';const _0x349181=new Date();_0x35be95['forEach']((_0x3b4617,_0x18c103)=>{const _0x3ab7a5={_0xe40fa2:0x189,_0xe20183:0x197,_0x609d23:0x121,_0x3e75be:0x27f},_0x3b49b4=_0x3f3c27,_0x5561ab=new Date(_0x3b4617[_0x3b49b4(_0x14bf01._0x1ef74c)]),_0x3b03a3=(_0x5561ab-_0x349181)/0x3e8;let _0x4053cf='',_0x392e8a='',_0x28e00e='';const _0x639b7f=document['getElementById']('bossSoundToggle'),_0x1db235=!_0x639b7f||_0x639b7f['checked'];if(_0x3b03a3>0x78){const _0x5a8b69=Math['ceil'](_0x3b03a3/0x3c);_0x4053cf=_0x5a8b69>=0x3c?Math['floor'](_0x5a8b69/0x3c)+'h\x20'+_0x5a8b69%0x3c+'m':_0x5a8b69+'\x20min';}else _0x3b03a3>0x0?(_0x4053cf=Math[_0x3b49b4(0x1fe)](_0x3b03a3)+'\x20sek!',_0x392e8a=_0x3b49b4(_0x14bf01._0x1e12f1),_0x28e00e=_0x3b49b4(_0x14bf01._0x15da6a),!_0x5c3c8f[_0x3b49b4(_0x14bf01._0x5d2194)](_0x3b4617['id'])&&(_0x1db235&&_0x2ddfef('warning'),_0x5c3c8f[_0x3b49b4(_0x14bf01._0x13352d)](_0x3b4617['id']))):(_0x4053cf=_0x3b49b4(0x22b),_0x392e8a=_0x3b49b4(0x1c6),_0x28e00e=_0x3b49b4(0x203),!_0x599a9a[_0x3b49b4(_0x14bf01._0x5d2194)](_0x3b4617['id'])&&(_0x1db235&&_0x2ddfef(_0x3b49b4(0x16b)),_0x599a9a['add'](_0x3b4617['id'])));const _0x50855e=document[_0x3b49b4(0x107)]('tr');let _0x56f04f=[];if(_0x28e00e)_0x56f04f[_0x3b49b4(0x16f)](_0x28e00e);if(_0x4268a9['has'](_0x3b4617['id']))_0x56f04f['push'](_0x3b49b4(_0x14bf01._0x12a44b));_0x56f04f[_0x3b49b4(_0x14bf01._0x393405)]>0x0&&(_0x50855e[_0x3b49b4(0x1b8)]=_0x56f04f[_0x3b49b4(0x122)]('\x20'));_0x50855e[_0x3b49b4(_0x14bf01._0x3c5dce)]=_0x3b49b4(0x1fb)+_0x3b4617['id']+'\x22\x20'+(_0x4268a9['has'](_0x3b4617['id'])?'checked':'')+_0x3b49b4(0xfc)+(_0x18c103+0x1)+'</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<td>'+_0x258afe(_0x5561ab)+_0x3b49b4(0x1e5)+_0x392e8a+'\x22>'+_0x3b4617[_0x3b49b4(0x22c)]+_0x3b49b4(_0x14bf01._0x1afea2)+_0x392e8a+'\x22>'+_0x3b4617['ch']+_0x3b49b4(_0x14bf01._0x1afea2)+_0x392e8a+'\x22>'+_0x4053cf+_0x3b49b4(_0x14bf01._0x316b9a);const _0x2893e2=_0x50855e[_0x3b49b4(_0x14bf01._0x4b4437)](_0x3b49b4(_0x14bf01._0x57bfc9));_0x2893e2['addEventListener'](_0x3b49b4(0x251),_0x5d7251=>{const _0x380a4a=_0x3b49b4;_0x5d7251[_0x380a4a(_0x2e031f._0x3b54bc)](),_0x2893e2['checked']?(_0x4268a9['add'](_0x3b4617['id']),_0x50855e['classList'][_0x380a4a(0x197)](_0x380a4a(0x121))):(_0x4268a9[_0x380a4a(0x216)](_0x3b4617['id']),_0x50855e[_0x380a4a(0x27f)][_0x380a4a(0xf9)](_0x380a4a(0x121))),_0x2ae40e();}),_0x50855e[_0x3b49b4(0x1c1)](_0x3b49b4(0x251),()=>{const _0x3b754b=_0x3b49b4;_0x2893e2[_0x3b754b(_0x3ab7a5._0xe40fa2)]=!_0x2893e2[_0x3b754b(_0x3ab7a5._0xe40fa2)],_0x2893e2['checked']?(_0x4268a9[_0x3b754b(_0x3ab7a5._0xe20183)](_0x3b4617['id']),_0x50855e[_0x3b754b(0x27f)][_0x3b754b(_0x3ab7a5._0xe20183)](_0x3b754b(_0x3ab7a5._0x609d23))):(_0x4268a9[_0x3b754b(0x216)](_0x3b4617['id']),_0x50855e[_0x3b754b(_0x3ab7a5._0x3e75be)]['remove']('selected')),_0x2ae40e();}),_0x3e94d4['appendChild'](_0x50855e);}),_0x2ae40e();}function _0x2ae40e(){const _0xbe07b7=_0x236b9c,_0x3add13=document['getElementById'](_0xbe07b7(0x229));if(!_0x3add13||_0x35be95[_0xbe07b7(_0x1c09d3._0x227960)]===0x0){if(_0x3add13)_0x3add13['checked']=![];return;}const _0x39b200=_0x35be95['every'](_0x368b69=>_0x4268a9[_0xbe07b7(0x240)](_0x368b69['id']));_0x3add13[_0xbe07b7(0x189)]=_0x39b200;}document[_0x236b9c(0x131)](_0x236b9c(0x229))?.[_0x236b9c(0x1c1)](_0x236b9c(0x26d),function(){const _0x556b26=_0x236b9c;this[_0x556b26(0x189)]?_0x35be95[_0x556b26(_0x3ad998._0x80490c)](_0x439264=>_0x4268a9[_0x556b26(0x197)](_0x439264['id'])):_0x4268a9['clear'](),_0x34d04d();}),setInterval(_0x34d04d,0x3e8),_0x34d04d(),document[_0x236b9c(_0x241e53._0x3a5ad3)](_0x236b9c(0x14c))?.[_0x236b9c(0x1c1)]('click',()=>{const _0x4be6a4=_0x236b9c;if(_0x4268a9[_0x4be6a4(0x1f7)]===0x0){alert('Nie\x20zaznaczono\x20żadnych\x20bossów\x20do\x20usunięcia.');return;}_0x4268a9[_0x4be6a4(_0x15ea67._0x10e138)](_0x10d47c=>{const _0x24d805=_0x4be6a4;_0x5c3c8f[_0x24d805(_0x2bfd80._0x44b5d1)](_0x10d47c),_0x599a9a['delete'](_0x10d47c);}),_0x35be95=_0x35be95[_0x4be6a4(_0x15ea67._0x14d396)](_0x3bc082=>!_0x4268a9[_0x4be6a4(0x240)](_0x3bc082['id'])),_0x4268a9['clear'](),_0x575d96(),_0x34d04d();}),document[_0x236b9c(0x131)](_0x236b9c(_0x241e53._0x448b1f))?.[_0x236b9c(0x1c1)](_0x236b9c(_0x241e53._0x3b7a55),()=>{const _0x5bb407=_0x236b9c;confirm('Wyczyścić\x20całą\x20listę\x20bossów?')&&(_0x35be95=[],_0x5c3c8f['clear'](),_0x599a9a[_0x5bb407(0x1db)](),_0x4268a9[_0x5bb407(0x1db)](),_0x575d96(),_0x34d04d());}),updateSpeedGaps();let _0x2344f9=[];document['getElementById'](_0x236b9c(_0x241e53._0x26033c))?.['addEventListener'](_0x236b9c(0x251),()=>{const _0x3fa476=_0x236b9c,_0x4c4255=document[_0x3fa476(0x131)](_0x3fa476(_0x3335ff._0x27b147)),_0x149d5a=document['getElementById']('customTimerMinutes'),_0x430d9b=_0x4c4255?_0x4c4255[_0x3fa476(_0x3335ff._0x4dc109)][_0x3fa476(_0x3335ff._0xfb172a)]()||'Timer':_0x3fa476(_0x3335ff._0x199ef1),_0x45a1c1=_0x149d5a?parseInt(_0x149d5a[_0x3fa476(_0x3335ff._0x5143bd)])||0xa:0xa,_0x29080d={'id':Date[_0x3fa476(0x278)](),'label':_0x430d9b,'remainingSeconds':_0x45a1c1*0x3c,'isRunning':!![]};_0x2344f9['push'](_0x29080d);if(_0x4c4255)_0x4c4255[_0x3fa476(0x120)]='';_0x2ddfef(_0x3fa476(_0x3335ff._0x1ebf2b)),_0x18c9c4();});function _0x18c9c4(){const _0x3005e6=_0x236b9c,_0x8188d8=document[_0x3005e6(_0x1dc317._0x2c0f59)](_0x3005e6(0x284));if(!_0x8188d8)return;_0x8188d8[_0x3005e6(_0x1dc317._0x5c995a)]='',_0x2344f9['forEach'](_0x388340=>{const _0x115e70={_0x14e780:0x12c},_0x3cce39=_0x3005e6,_0x4dfdae=document[_0x3cce39(0x107)](_0x3cce39(_0x4d8393._0x2a3225));_0x4dfdae[_0x3cce39(_0x4d8393._0x3b757e)]=_0x3cce39(0x227)+(_0x388340['remainingSeconds']<=0x0?_0x3cce39(_0x4d8393._0x216ac2):'');const _0x54afeb=String(Math['floor'](_0x388340[_0x3cce39(_0x4d8393._0x9a8d0)]/0x3c))['padStart'](0x2,'0'),_0xa030af=String(_0x388340[_0x3cce39(0x1bc)]%0x3c)['padStart'](0x2,'0');_0x4dfdae[_0x3cce39(0x1e0)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22timer-card-title\x22>'+_0x388340[_0x3cce39(0x18a)]+_0x3cce39(_0x4d8393._0x2d030e)+_0x54afeb+':'+_0xa030af+_0x3cce39(0x1bb)+(_0x388340[_0x3cce39(0x12c)]?_0x3cce39(_0x4d8393._0x2c63f1):_0x3cce39(_0x4d8393._0x5595b3))+_0x3cce39(0x1ca),_0x4dfdae['querySelector'](_0x3cce39(_0x4d8393._0x214ed2))['addEventListener'](_0x3cce39(_0x4d8393._0xe99b64),()=>{const _0x1adea3=_0x3cce39;_0x388340[_0x1adea3(0x12c)]=!_0x388340[_0x1adea3(_0x115e70._0x14e780)],_0x18c9c4();}),_0x4dfdae[_0x3cce39(0x259)](_0x3cce39(0x1b5))[_0x3cce39(0x1c1)]('click',()=>{_0x2344f9=_0x2344f9['filter'](_0x20296c=>_0x20296c['id']!==_0x388340['id']),_0x18c9c4();}),_0x8188d8[_0x3cce39(_0x4d8393._0x4263bc)](_0x4dfdae);});}setInterval(()=>{const _0xa37b2f={_0x170a81:0x1bc,_0x507601:0x1bc,_0x5914f3:0x16b},_0x2ba722=_0x236b9c;let _0x1c0bb0=![];_0x2344f9[_0x2ba722(_0x3720c3._0x159ef9)](_0x59ae81=>{const _0x5a87a5=_0x2ba722;_0x59ae81['isRunning']&&_0x59ae81[_0x5a87a5(0x1bc)]>0x0&&(_0x59ae81[_0x5a87a5(_0xa37b2f._0x170a81)]--,_0x1c0bb0=!![],_0x59ae81[_0x5a87a5(_0xa37b2f._0x507601)]===0x0&&_0x2ddfef(_0x5a87a5(_0xa37b2f._0x5914f3)));});if(_0x1c0bb0)_0x18c9c4();},0x3e8);const _0x150f2f={'bc':{'name':'Blood\x20Castle','tbodyId':_0x236b9c(0x232),'times':[_0x236b9c(0x1d7),_0x236b9c(0x116),'01:10',_0x236b9c(_0x241e53._0x34114a),'02:10',_0x236b9c(0x18e),'03:10',_0x236b9c(_0x241e53._0x1203c9),_0x236b9c(_0x241e53._0x9279cd),_0x236b9c(0x173),_0x236b9c(_0x241e53._0x5350a7),'11:10',_0x236b9c(_0x241e53._0x35bd28),_0x236b9c(0x174),_0x236b9c(0x26e),_0x236b9c(0x1c8),'21:10',_0x236b9c(0x1a7),'22:10',_0x236b9c(0x25d),_0x236b9c(0x114)]},'ds':{'name':_0x236b9c(0x23c),'tbodyId':_0x236b9c(0x22e),'times':[_0x236b9c(0x22f),_0x236b9c(0x235),_0x236b9c(0x17d),_0x236b9c(0x27c),'02:20','02:50','03:20',_0x236b9c(_0x241e53._0x2a106e),'05:20',_0x236b9c(_0x241e53._0x13adbc),_0x236b9c(0x168),'11:20',_0x236b9c(_0x241e53._0x57ba68),_0x236b9c(_0x241e53._0x191785),_0x236b9c(_0x241e53._0xe4bf8f),_0x236b9c(0x18f),_0x236b9c(_0x241e53._0x35d93f),_0x236b9c(0x1ac),_0x236b9c(0x198),_0x236b9c(_0x241e53._0x2e6810),'23:20']},'cc':{'name':'Chaos\x20Castle','tbodyId':_0x236b9c(0x113),'times':['01:00','03:00',_0x236b9c(0x1e1),_0x236b9c(0x170),_0x236b9c(0x18b),_0x236b9c(_0x241e53._0x4e04a9),_0x236b9c(_0x241e53._0x2740f2),_0x236b9c(0x1cf),_0x236b9c(_0x241e53._0x10d839),_0x236b9c(0x127),_0x236b9c(_0x241e53._0x38bd6e),_0x236b9c(0x270)]}};function _0x209fa1(_0x3a19cb){const _0x26859f=_0x236b9c,[_0x1bfff9,_0x417f96]=_0x3a19cb[_0x26859f(_0x20c564._0x171582)](':')[_0x26859f(_0x20c564._0x2b9153)](Number),_0x30c1de=new Date();let _0x32fb75=Date['UTC'](_0x30c1de[_0x26859f(0x11e)](),_0x30c1de['getUTCMonth'](),_0x30c1de[_0x26859f(0x167)](),_0x1bfff9,_0x417f96,0x0),_0x2c59f8=new Date(_0x32fb75),_0x1dad4d=new Date(_0x2c59f8[_0x26859f(_0x20c564._0x201771)]()-0x5*0x3c*0x3e8);return _0x2c59f8<_0x30c1de&&(_0x2c59f8=new Date(_0x2c59f8[_0x26859f(0x132)]()+0x18*0x3c*0x3c*0x3e8),_0x1dad4d=new Date(_0x1dad4d[_0x26859f(0x132)]()+0x18*0x3c*0x3c*0x3e8)),{'entryDate':_0x1dad4d,'startDate':_0x2c59f8};}function _0x2abc91(_0x589edc){const _0x1edc2b=_0x236b9c,[_0x3d09ca,_0x54d6c5]=_0x589edc[_0x1edc2b(_0x503e36._0x15f55c)](':')['map'](Number),_0x1f2584=new Date();let _0x3e9945=Date[_0x1edc2b(0x1ad)](_0x1f2584[_0x1edc2b(_0x503e36._0x3bdc48)](),_0x1f2584['getUTCMonth'](),_0x1f2584[_0x1edc2b(0x167)](),_0x3d09ca,_0x54d6c5,0x0),_0x5e6d07=new Date(_0x3e9945);_0x5e6d07[_0x1edc2b(_0x503e36._0x34a0b9)](_0x5e6d07['getMinutes']()-0x5);const _0x4be9f4=String(_0x5e6d07[_0x1edc2b(_0x503e36._0x50c4f7)]())[_0x1edc2b(_0x503e36._0x5a5cbb)](0x2,'0'),_0x5dbace=String(_0x5e6d07[_0x1edc2b(0x16d)]())['padStart'](0x2,'0');return _0x4be9f4+':'+_0x5dbace;}function _0x45c045(_0x7f7e3d){const _0x5e6ba6={_0x3f43ec:0x131,_0x47d301:0x152},_0xdeaa3a=_0x236b9c;Object['keys'](_0x150f2f)[_0xdeaa3a(_0x23305f._0x53ae84)](_0x387008=>{const _0x3e1fd4={_0x460a4c:0x107,_0x129f2b:0x14f,_0x5bdba4:0x1d5,_0x58f5a6:0x149,_0x555706:0x143},_0x1303de=_0xdeaa3a,_0x1cb85b=_0x150f2f[_0x387008],_0x3ecb71=document[_0x1303de(_0x5e6ba6._0x3f43ec)](_0x1cb85b[_0x1303de(_0x5e6ba6._0x47d301)]);if(!_0x3ecb71)return;const _0x331fac=_0x7f7e3d['find'](_0x4a5f4f=>_0x4a5f4f[_0x1303de(0x218)]===_0x387008);_0x3ecb71[_0x1303de(0x1e0)]='',_0x1cb85b[_0x1303de(0x1a2)]['forEach']((_0x1667ee,_0x6ae9b9)=>{const _0x54b8bb=_0x1303de,_0x11894d=_0x331fac&&_0x331fac['utcTime']===_0x1667ee,_0x286312=document[_0x54b8bb(_0x3e1fd4._0x460a4c)]('tr');_0x11894d&&(_0x286312[_0x54b8bb(0x1b8)]=_0x54b8bb(0x24a));let _0x3d788c=_0x54b8bb(0x1fa);_0x11894d&&(_0x3d788c=_0x331fac[_0x54b8bb(_0x3e1fd4._0x129f2b)]?'<span\x20class=\x22status-badge-next\x22\x20style=\x22background:\x20#e74c3c;\x20box-shadow:\x200\x200\x2010px\x20rgba(231,76,60,0.8);\x22>OTWARTY!</span>':_0x54b8bb(_0x3e1fd4._0x5bdba4)),_0x286312['innerHTML']=_0x54b8bb(_0x3e1fd4._0x58f5a6)+(_0x6ae9b9+0x1)+'</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td><strong\x20class=\x22time-text\x22>'+_0x2abc91(_0x1667ee)+'</strong></td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>'+_0x3d788c+_0x54b8bb(_0x3e1fd4._0x555706),_0x3ecb71[_0x54b8bb(0x211)](_0x286312);});});}const _0x2125b7=new Audio(_0x236b9c(_0x241e53._0x5645b9)),_0x504540=new Set();function _0x43df48(){const _0x54bc27={_0x1142a6:0x16f},_0x51e3b9=_0x236b9c,_0x3b0265=new Date();let _0x12c569=[];Object['keys'](_0x150f2f)[_0x51e3b9(_0xeb7314._0x110cbf)](_0xf60c79=>{const _0x362b6d=_0x51e3b9,_0x294119=_0x150f2f[_0xf60c79];_0x294119[_0x362b6d(0x1a2)][_0x362b6d(0x1dc)](_0x39bb44=>{const _0x5afc61=_0x362b6d,{entryDate:_0x2cd8bc,startDate:_0x19ffca}=_0x209fa1(_0x39bb44),_0x17e64a=_0x3b0265>=_0x2cd8bc&&_0x3b0265<_0x19ffca,_0x59f05c=_0x17e64a?_0x19ffca-_0x3b0265:_0x2cd8bc-_0x3b0265;_0x12c569[_0x5afc61(_0x54bc27._0x1142a6)]({'typeKey':_0xf60c79,'name':_0x294119['name'],'utcTime':_0x39bb44,'entryDate':_0x2cd8bc,'startDate':_0x19ffca,'isOpen':_0x17e64a,'diffMs':_0x59f05c,'sortKey':_0x17e64a?_0x19ffca-_0x3b0265:_0x2cd8bc-_0x3b0265+0x989680});});}),_0x12c569['sort']((_0x2f362f,_0x321b63)=>_0x2f362f[_0x51e3b9(0x11f)]-_0x321b63[_0x51e3b9(0x11f)]);const _0x4c3b1a=_0x12c569[_0x51e3b9(_0xeb7314._0x1e2f24)](0x0,0x5),_0x391e83=document[_0x51e3b9(0x131)](_0x51e3b9(0x1bf));if(_0x4c3b1a[_0x51e3b9(0x18c)]>0x0&&_0x391e83&&_0x391e83[_0x51e3b9(0x189)]){const _0x310435=_0x4c3b1a[0x0],_0x579dd8=_0x310435[_0x51e3b9(0x218)]+'_'+_0x310435[_0x51e3b9(_0xeb7314._0x32cf50)];_0x310435['isOpen']?!_0x504540[_0x51e3b9(_0xeb7314._0x5259ef)](_0x579dd8)&&(_0x2125b7[_0x51e3b9(_0xeb7314._0x47876a)]=0x0,_0x2125b7[_0x51e3b9(0x246)]()[_0x51e3b9(0x183)](_0x4e66e4=>console[_0x51e3b9(0x21f)](_0x51e3b9(0x231),_0x4e66e4)),_0x504540[_0x51e3b9(0x197)](_0x579dd8)):_0x504540[_0x51e3b9(0x216)](_0x579dd8);}const _0x403db5=document[_0x51e3b9(0x131)](_0x51e3b9(0x14e));_0x403db5&&(_0x403db5[_0x51e3b9(0x1e0)]='',_0x4c3b1a[_0x51e3b9(0x1dc)](_0x522696=>{const _0x1f36f8=_0x51e3b9,_0x248437=Math[_0x1f36f8(_0x2b6fd3._0x54b1b3)](_0x522696[_0x1f36f8(0xfe)]/0x3e8),_0x2b9d58=Math[_0x1f36f8(0x1fe)](_0x248437/0xe10),_0x2fe93e=Math[_0x1f36f8(_0x2b6fd3._0x63a47c)](_0x248437%0xe10/0x3c),_0x3123e8=Math[_0x1f36f8(0x1fe)](_0x248437%0x3c),_0xfba33f=_0x2abc91(_0x522696[_0x1f36f8(0x25b)]),_0xcc0046=String(_0x2fe93e)['padStart'](0x2,'0'),_0x6aff8=String(_0x3123e8)[_0x1f36f8(_0x2b6fd3._0x262de5)](0x2,'0');let _0x34c734=_0x2b9d58>0x0?_0x2b9d58+'h\x20'+_0xcc0046+'m\x20'+_0x6aff8+'s':_0xcc0046+'m\x20'+_0x6aff8+'s',_0x3a8c09=_0x1f36f8(_0x2b6fd3._0x378325)+_0x34c734+_0x1f36f8(_0x2b6fd3._0x58d88d);_0x522696[_0x1f36f8(_0x2b6fd3._0x276ee2)]&&(_0x3a8c09=_0x1f36f8(0x119)+_0xcc0046+'m\x20'+_0x6aff8+'s</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20');const _0x1bf051=document[_0x1f36f8(0x107)](_0x1f36f8(0x129));_0x1bf051['className']='event-card\x20'+(_0x522696[_0x1f36f8(_0x2b6fd3._0x3383b6)]?_0x1f36f8(_0x2b6fd3._0x40200f):''),_0x1bf051['innerHTML']=_0x1f36f8(0x1f4)+_0x522696[_0x1f36f8(_0x2b6fd3._0x27599d)]+_0x1f36f8(_0x2b6fd3._0x353199)+_0x3a8c09+_0x1f36f8(0x20f)+_0xfba33f+'</strong></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20',_0x403db5[_0x1f36f8(0x211)](_0x1bf051);})),_0x45c045(_0x12c569);}setInterval(_0x43df48,0x3e8),_0x43df48(),document['addEventListener'](_0x236b9c(0x251),function(_0x516b38){const _0x53b292=_0x236b9c,_0x4ce445=_0x516b38[_0x53b292(_0x591f8b._0x29b7c8)][_0x53b292(0x109)](_0x53b292(_0x591f8b._0x4b5ea2));if(_0x4ce445){document[_0x53b292(0x243)](_0x53b292(_0x591f8b._0x4b5ea2))[_0x53b292(_0x591f8b._0x850558)](_0xae1224=>_0xae1224[_0x53b292(0x27f)][_0x53b292(0xf9)](_0x53b292(0x261))),_0x4ce445[_0x53b292(0x27f)][_0x53b292(0x197)](_0x53b292(0x261)),document[_0x53b292(_0x591f8b._0x12a0bf)](_0x53b292(0x1c3))[_0x53b292(_0x591f8b._0x850558)](_0x501285=>{const _0x55477d=_0x53b292;_0x501285[_0x55477d(0x130)][_0x55477d(0x226)]='none',_0x501285['classList']['remove'](_0x55477d(0x261));});const _0x3ece2=_0x4ce445[_0x53b292(0x1a6)](_0x53b292(_0x591f8b._0xaabf78)),_0x290147=document[_0x53b292(0x131)](_0x53b292(_0x591f8b._0x34e939)+_0x3ece2);_0x290147&&(_0x290147['style']['display']=_0x53b292(_0x591f8b._0x5dc34e),_0x290147[_0x53b292(_0x591f8b._0x303875)]['add']('active'));}});function _0x3dc5d1(){const _0x3742c2={_0x31b9a5:0x1fe,_0x5cc8bb:0x102,_0x5eed5e:0x184,_0x433e6b:0x22b,_0xdca4a1:0x24c},_0x769793={_0x28b7c0:0x1fe,_0x2b012a:0xfe,_0x39f5e3:0x17b,_0x5b88ae:0x252,_0x35434c:0x14f,_0x113f00:0x219,_0x39a928:0x161,_0x2dbeeb:0x1e2},_0x4a9a09={_0x182a52:0x1a2},_0x307959={_0x30fdee:0x16f,_0x174450:0x219},_0x1eb709=_0x236b9c,_0x50102d=document[_0x1eb709(0x131)](_0x1eb709(0x13d));if(!_0x50102d)return;const _0x2bbc2c=new Date(),_0x5aee9f=_0x2bbc2c[_0x1eb709(_0x21e1df._0x49a1bd)]();let _0x24c54d=[];typeof _0x150f2f!==_0x1eb709(0x146)&&(Object[_0x1eb709(0x221)](_0x150f2f)[_0x1eb709(_0x21e1df._0x213e77)](_0x1d4e8c=>{const _0x4c5f04=_0x1eb709,_0x1bc70f=_0x150f2f[_0x1d4e8c];_0x1bc70f[_0x4c5f04(_0x4a9a09._0x182a52)][_0x4c5f04(0x1dc)](_0x16dd32=>{const _0x4f2348=_0x4c5f04,{entryDate:_0x1f3462,startDate:_0x4f6bce}=_0x209fa1(_0x16dd32),_0x351aae=_0x2bbc2c>=_0x1f3462&&_0x2bbc2c<_0x4f6bce,_0xe738af=_0x351aae?_0x4f6bce-_0x2bbc2c:_0x1f3462-_0x2bbc2c;_0x24c54d[_0x4f2348(_0x307959._0x30fdee)]({'name':_0x1bc70f[_0x4f2348(_0x307959._0x174450)],'utcTime':_0x16dd32,'isOpen':_0x351aae,'diffMs':_0xe738af,'sortKey':_0x351aae?_0x4f6bce-_0x2bbc2c:_0x1f3462-_0x2bbc2c+0x989680});});}),_0x24c54d[_0x1eb709(0x207)]((_0x694830,_0x47e854)=>_0x694830['sortKey']-_0x47e854['sortKey']));const _0x23292c=_0x24c54d['slice'](0x0,0x2);let _0x3ac8f2=[];typeof _0x35be95!==_0x1eb709(0x146)&&(_0x3ac8f2=_0x35be95[_0x1eb709(_0x21e1df._0x436693)](_0x5a262d=>{const _0x3e9800=_0x1eb709,_0x16822b=new Date(_0x5a262d['targetTime'])[_0x3e9800(0x132)]();return{..._0x5a262d,'diff':_0x16822b-_0x5aee9f};})['filter'](_0x4a3d8f=>_0x4a3d8f[_0x1eb709(0x1ef)]>-0xea60),_0x3ac8f2[_0x1eb709(_0x21e1df._0x50068b)]((_0x14c8fb,_0xdd3ad4)=>_0x14c8fb[_0x1eb709(0x1ef)]-_0xdd3ad4['diff']));const _0xd5806=_0x3ac8f2[_0x1eb709(0x1e7)](0x0,0x2);let _0xe8451b='';_0x23292c[_0x1eb709(0x18c)]>0x0&&(_0xe8451b+=_0x1eb709(0x201)),_0x23292c[_0x1eb709(0x1dc)](_0x409822=>{const _0x243d54=_0x1eb709,_0x5d2f41=Math[_0x243d54(_0x769793._0x28b7c0)](_0x409822[_0x243d54(_0x769793._0x2b012a)]/0x3e8),_0x734c47=Math[_0x243d54(0x1fe)](_0x5d2f41/0xe10),_0x245448=Math['floor'](_0x5d2f41%0xe10/0x3c),_0x5a59b8=Math[_0x243d54(0x1fe)](_0x5d2f41%0x3c),_0x24fcd5=_0x2abc91(_0x409822[_0x243d54(0x25b)]),_0x19c94f=String(_0x245448)[_0x243d54(_0x769793._0x39f5e3)](0x2,'0'),_0x2f5ada=String(_0x5a59b8)['padStart'](0x2,'0'),_0x4922c4=_0x734c47>0x0?_0x734c47+'h\x20'+_0x19c94f+'m\x20'+_0x2f5ada+'s':_0x19c94f+'m\x20'+_0x2f5ada+'s';let _0x13d068=_0x243d54(_0x769793._0x5b88ae)+_0x4922c4+_0x243d54(0x14b),_0x54f040=_0x243d54(0x102);_0x409822[_0x243d54(_0x769793._0x35434c)]&&(_0x54f040+=_0x243d54(0x184),_0x13d068='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22event-card-timer-box\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22open-label\x22>OTWARTE!</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22event-card-timer\x22>'+_0x19c94f+'m\x20'+_0x2f5ada+_0x243d54(0x238)),_0xe8451b+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22'+_0x54f040+_0x243d54(0x105)+_0x409822[_0x243d54(_0x769793._0x113f00)]+_0x243d54(_0x769793._0x39a928)+_0x13d068+_0x243d54(0x20f)+_0x24fcd5+_0x243d54(_0x769793._0x2dbeeb);}),_0xe8451b+=_0x1eb709(_0x21e1df._0x10043c),_0xd5806['length']>0x0?_0xd5806[_0x1eb709(0x1dc)](_0x1ad7e3=>{const _0x5f95dd=_0x1eb709,_0x25014a=Math[_0x5f95dd(_0x3742c2._0x31b9a5)](_0x1ad7e3[_0x5f95dd(0x1ef)]/0x3e8),_0x2db998=Math['floor'](_0x25014a/0xe10),_0xb59b22=Math['floor'](_0x25014a%0xe10/0x3c),_0x47ea59=Math['floor'](_0x25014a%0x3c),_0x3332c0=_0x2db998>0x0?_0x2db998+'h\x20'+_0xb59b22+'m\x20'+_0x47ea59+'s':_0xb59b22+'m\x20'+String(_0x47ea59)[_0x5f95dd(0x17b)](0x2,'0')+'s';let _0x10497a=_0x5f95dd(_0x3742c2._0x5cc8bb),_0x17eecc=_0x3332c0;if(_0x25014a<=0x78&&_0x25014a>0x0)_0x10497a+=_0x5f95dd(_0x3742c2._0x5eed5e),_0x17eecc=_0x25014a+_0x5f95dd(0x1c9);else _0x25014a<=0x0&&(_0x10497a+=_0x5f95dd(0x184),_0x17eecc=_0x5f95dd(_0x3742c2._0x433e6b));const _0x1510c2=new Date(_0x1ad7e3[_0x5f95dd(0x212)]),_0x2ef316=_0x258afe(_0x1510c2);_0xe8451b+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22'+_0x10497a+'\x22\x20style=\x22margin:\x200;\x20width:\x20100%;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22event-card-name\x22\x20style=\x22color:\x20#ffffff;\x22>\x20'+_0x1ad7e3['boss']+_0x5f95dd(0x230)+_0x1ad7e3['ch']+_0x5f95dd(0x280)+_0x17eecc+_0x5f95dd(0x13e)+_0x2ef316+_0x5f95dd(_0x3742c2._0xdca4a1);}):_0xe8451b+=_0x1eb709(_0x21e1df._0x33c9d9),_0x23292c['length']===0x0&&_0xd5806[_0x1eb709(0x18c)]===0x0&&(_0xe8451b=_0x1eb709(_0x21e1df._0x42be1c)),_0x50102d['innerHTML']=_0xe8451b;}setInterval(_0x3dc5d1,0x3e8),_0x3dc5d1();});function _0x17c8(){const _0x1f2cd8=['customTimerLabel','closest','1\x20-\x20174','22:50','Lvl\x205','tabHomeBtn','1424wYmfpB','166\x20-\x20183','open-now','\x22\x20na\x20CH\x20','select','ccTableBody','23:10','tabTimerBtn','00:40','282\x20-\x20339','190\x20-\x20225','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22event-card-timer-box\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22open-label\x22>OTWARTE!</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22event-card-timer\x22>','block','bossView','238\x20-\x20275','input','getUTCFullYear','sortKey','value','selected','join','188\x20-\x20FULL','Brak\x20danych\x20EXP\x20dla\x20poziomu\x20','188\x20-\x20229','1\x20-\x20131','19:00','21:20','div','agi-ratio-container','Pauza','isRunning','171\x20-\x20FULL','218\x20-\x20247','342\x20-\x20350','style','getElementById','getTime','1\x20-\x20127','174\x20-\x20193','Meteor\x20Storm','240\x20-\x20281','sound/eMedal.wav','clearAllBossesBtn','Inertia\x20Sword','09:10','Ultimate\x20Force','284\x20-\x20304','homeQuickGrid','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22event-card-localtime\x22>Resp:\x20<strong>','230\x20-\x20283','boss-warning','148\x20-\x20164','Start','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','round','1\x20-\x20147','undefined','message','192\x20-\x20217','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>','156\x20-\x20188','</div>','removeSelectedBtn','EXP\x20na\x20sekundę\x20musi\x20być\x20większy\x20od\x20zera.','upcomingEventsList','isOpen','658608tlLodB','200\x20-\x20238','tbodyId','285','.toggle-btn','1\x20-\x20283','mu_boss_data','146bHLzFc','07:20','189\x20-\x20210','lvlGap','2532545MFPogm','toISOString','remainingInCurrent','Błąd:\x20Nie\x20załadowano\x20bazy\x20exp_data.js!','</span></h4>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22table-container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<table\x20class=\x22boss-table\x20gap-table\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<thead>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<th\x20style=\x22width:\x2035%;\x22>GAP\x20(Lvl)</th>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<th>SPEED</th>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</thead>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tbody>\x0a\x20\x20\x20\x20','tabEventsBtn','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','285\x20-\x20340','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20style=\x22font-weight:\x20bold;\x20color:\x20#00b37e;\x22>','15:20','1\x20-\x20239','183\x20-\x20210','getUTCDate','09:20','1\x20-\x20188','src','ready','142\x20-\x20167','getMinutes','152\x20-\x20187','push','07:00','288','Countless\x20Weapon','07:10','15:10','Lvl\x207','stopPropagation','1\x20-\x20122','217\x20-\x20274','Holy\x20Bolt,\x20Buffs','dblclick','padStart','17:00','01:20','Blade\x20Storm','315\x20-\x20349','White\x20Wizard\x20/\x20Glory\x20Wizard','21:00','163\x20-\x20189','catch','\x20open-now','finished','tab-','stringify','1\x20-\x20140','checked','label','09:00','length','Oversting','02:40','19:20','187\x20-\x20208','125\x20-\x20151','boss_','filter','Lvl\x203','calcBtn','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22event-card\x22\x20style=\x22margin:\x200;\x20width:\x20100%;\x20justify-content:\x20center;\x20text-align:\x20center;\x20cursor:\x20pointer;\x20border-style:\x20dashed;\x22\x20onclick=\x22switchTab(\x27bossView\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22color:\x20#8a8d93;\x20font-size:\x200.9rem;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20🔒\x20Brak\x20aktywnych\x20respów.\x20<span\x20style=\x22color:\x20#00b37e;\x20font-weight:\x20bold;\x22>Zaloguj\x20się\x20/\x20Dodaj\x20respawn\x20&rarr;</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20','add','22:20','184\x20-\x20202','230\x20-\x20287','bossTimeInput','sound/iEventStart.wav','Chaos\x20Blade,\x20Fire\x20Blood','eventsView','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>','tabSpeedBtn','120\x20-\x20134','times','systemClock','Podaj\x20numer\x20CH!','05:10','getAttribute','21:40','188\x20-\x20237','.event-tab-btn','1\x20-\x20102','img/party.png','21:50','UTC','Lvl\x209','1\x20-\x20216','currentTime','1\x20-\x20161','Busting\x20Flare','getHours','Wild\x20Breath','.delete-btn','189\x20-\x20229','250\x20-\x20FULL','className','Grow\x20Lancer\x20/\x20Mirage\x20Lancer','homeView','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22timer-card-controls\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn-secondary\x20toggle-btn\x22>','remainingSeconds','Lvl\x201','20\x20Agility\x20=\x201\x20Speed','eventSoundToggle','165\x20-\x20184','addEventListener','246\x20-\x20FULL','.event-tab-content','22\x20Agility\x20=\x201\x20Speed','getItem','status-ready','1770202UEZeAe','19:10','\x20sek!','</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn-danger\x20delete-btn\x22>Usuń</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20','hours','250\x20-\x20303','7927RXVMRG','01:40','15:00','Dark\x20Knight\x20/\x20BK\x20/\x20BM','237\x20-\x20269','values','speedView','</div>\x0a\x20\x20\x20\x20','<span\x20class=\x22status-badge-next\x22>NAJBLIŻSZY</span>','timeToTarget','00:10','map','17:20','Spear\x20Storm','clear','forEach','1\x20-\x20109','169\x20-\x20199','11:00','innerHTML','05:00','</strong></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20','Przeglądarka\x20zablokowała\x20dźwięk:','trim','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22','Wpisz\x20poprawny\x20czas\x20w\x20formacie\x20H:M!','slice','DOMContentLoaded','Dark\x20Lord\x20/\x20Lord\x20Emperor','then','calcView','data-tab','Rune\x20Wizard\x20/\x20Rune\x20Master','.tab-btn','diff','10\x20Agility\x20=\x201\x20Speed','31707GCAKoU','162\x20-\x20199','\x20godzin,\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22event-card-name\x22>','13:20','Summoner\x20/\x20Dimension\x20Master','size','Lvl\x204','1\x20-\x20165','<span\x20style=\x22opacity:\x200.6;\x22>Planowany</span>','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<td\x20style=\x22text-align:\x20center;\x22><input\x20type=\x22checkbox\x22\x20class=\x22boss-row-checkbox\x22\x20data-id=\x22','pause','Magic\x20Gladiator\x20/\x20Duel\x20Master','floor','270\x20-\x20312','Crusader','\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22text-align:\x20center;\x20color:\x20#c9c9c9;\x20margin:\x201px\x200\x201px\x200;\x20font-size:\x201.0rem;\x20font-weight:\x20bold;\x20letter-spacing:\x201px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Incoming\x20Events\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20','243\x20-\x20273','boss-ready','239\x20-\x20FULL','minutes','274\x20-\x20FULL','sort','Magic\x20Arrow','Timer','img','Death\x20Scythe','341\x20-\x20FULL','120\x20-\x20141','1\x20-\x20119','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22event-card-localtime\x22>Wejście:\x20<strong>','150\x20-\x20169','appendChild','targetTime','Bar\x20musi\x20być\x20w\x20zakresie\x200–10.','141\x20-\x20159','Lvl\x206','delete','addCustomTimerBtn','typeKey','name','200\x20-\x20245','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</tr>\x0a\x20\x20\x20\x20\x20\x20','removeEventListener','addBossBtn','203\x20-\x20224','log','Sacred\x20Impact','keys','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tbody>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</table>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','gaps','status-warning','toString','display','timer-card\x20','random','selectAllBosses','Dark\x20Side','!!!\x20READY\x20!!!','boss','1\x20-\x20151','dsTableBody','00:20','\x20(CH\x20','Odtwarzanie\x20dźwięku\x20zablokowane\x20przez\x20przeglądarkę:','bcTableBody','225\x20-\x20249','substr','00:50','bossCh','bossSelect','s</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','hero-name','128\x20-\x20155','Format\x20czasu\x20to\x20H:M\x20(np.\x200:30\x20lub\x201:15)!','Devil\x20Square','248\x20-\x20FULL','parse','185\x20-\x20211','has','12\x20Agility\x20=\x201\x20Speed','142\x20-\x20168','querySelectorAll','Lvl\x202','pl-PL','play','175\x20-\x20216','toLocaleString','194\x20-\x20216','row-next-event','skillName','</strong></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','125\x20-\x20140','\x20minut','240\x20-\x20284','.boss-row-checkbox','click','<div\x20class=\x22event-card-timer\x22>','Spirit\x20Hook','switchTab','target','totalExp','</td>\x0a\x20\x20\x20\x20\x20\x20','209\x20-\x20249','querySelector','135\x20-\x20151','utcTime','speed','22:40','211\x20-\x20243','\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22agi-title\x22>Przelicznik\x20Agility:</div>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22agi-value\x22>','\x0a\x20\x20\x20\x20\x20\x20<div\x20style=\x22text-align:\x20center;\x20color:\x20#c9c9c9;\x20margin:\x2015px\x200\x201px\x200;\x20font-size:\x201.0rem;\x20font-weight:\x20bold;\x20letter-spacing:\x201px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20Incoming\x20Boss\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','active','03:50','935646UUSNUB','13:00','03:40','innerText','300\x20-\x20371','setItem','1\x20-\x20173','split','267\x20-\x20299','targetLvl','change','17:10','372\x20-\x20FULL','23:00','.calculator-card','240\x20-\x20266','13:10','sound/eMeleeHit5.wav','sound/eGem.wav','\x20jest\x20już\x20na\x20liście!','Lvl\x208','now','217\x20-\x20242','hidden','392\x20-\x20440','01:50','157\x20-\x20187','Fairy\x20Elf\x20/\x20Muse\x20Elf\x20/\x20High\x20Elf','classList',')</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22event-card-timer\x22\x20style=\x22font-size:\x201.0rem;\x22>','<div\x20style=\x22color:\x20#aaa;\x20text-align:\x20center;\x20padding:\x2010px;\x22>Brak\x20nadchodzących\x20aktywności</div>','217\x20-\x20239','timerView','activeTimersContainer','Blow','remove','284\x20-\x20314','219236fyHXKd','\x20style=\x22cursor:\x20pointer;\x22></td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<td>','expNeeded','diffMs','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22timer-card-time\x22>','Triple\x20Shot,\x20Ice\x20Arrow,\x20Focus\x20Shot','All\x20Skills','event-card','244\x20-\x20284','tabBossBtn','\x22\x20style=\x22margin:\x200;\x20width:\x20100%;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22event-card-name\x22>\x20','setMinutes','createElement'];_0x17c8=function(){return _0x1f2cd8;};return _0x17c8();}
+// ==========================================
+// FUNKCJA PRZEŁĄCZANIA ZAKŁADOK (GLOBALNA)
+// ==========================================
+function switchTab(viewId) {
+  const cards = document.querySelectorAll('.calculator-card');
+  cards.forEach(card => card.classList.add('hidden'));
+
+  const activeCard = document.getElementById(viewId);
+  if (activeCard) {
+    activeCard.classList.remove('hidden');
+  }
+
+  const buttons = document.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => btn.classList.remove('active'));
+
+  if (viewId === 'homeView') document.getElementById('tabHomeBtn')?.classList.add('active');
+  if (viewId === 'calcView') document.getElementById('tabCalcBtn')?.classList.add('active');
+  if (viewId === 'bossView') document.getElementById('tabBossBtn')?.classList.add('active');
+  if (viewId === 'timerView') document.getElementById('tabTimerBtn')?.classList.add('active');
+  if (viewId === 'eventsView') document.getElementById('tabEventsBtn')?.classList.add('active');
+  if (viewId === 'speedView') {
+    document.getElementById('tabSpeedBtn')?.classList.add('active');
+    updateSpeedGaps();
+  }
+}
+window.switchTab = switchTab;
+
+// BAZA DANYCH SPEED GAPS I PRZELICZNIKÓW AGI
+const speedGapsData = {
+  dw: {
+    name: "Dark Wizard / SM / Grand Master",
+    img: "img/sm.png",
+    agiRatio: "10 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Meteor Storm",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 127" },
+          { lvlGap: "Lvl 2", speed: "128 - 155" },
+          { lvlGap: "Lvl 3", speed: "156 - 188" },
+          { lvlGap: "Lvl 4", speed: "189 - 229" },
+          { lvlGap: "Lvl 5", speed: "230 - 283" },
+          { lvlGap: "Lvl 6", speed: "284 - 288" }
+        ]
+      }
+    ]
+  },
+  dk: {
+    name: "Dark Knight / BK / BM",
+    img: "img/party.png",
+    agiRatio: "15 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Blow",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 131" },
+          { lvlGap: "Lvl 2", speed: "132 - 156" },
+          { lvlGap: "Lvl 3", speed: "157 - 187" },
+          { lvlGap: "Lvl 4", speed: "188 - 229" },
+          { lvlGap: "Lvl 5", speed: "230 - 287" },
+          { lvlGap: "Lvl 6", speed: "288" }
+        ]
+      }
+    ]
+  },
+  elf: {
+    name: "Fairy Elf / Muse Elf / High Elf",
+    img: "img/party.png",
+    agiRatio: "22 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Raining Arrow",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 151" },
+          { lvlGap: "Lvl 2", speed: "152 - 187" },
+          { lvlGap: "Lvl 3", speed: "188 - 237" },
+          { lvlGap: "Lvl 4", speed: "238 - 275" }
+        ]
+      },
+      {
+        skillName: "Triple Shot, Ice Arrow, Focus Shot",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 174" },
+          { lvlGap: "Lvl 2", speed: "175 - 216" },
+          { lvlGap: "Lvl 3", speed: "217 - 274" },
+          { lvlGap: "Lvl 4", speed: "275 - FULL" }
+        ]
+      },
+      {
+        skillName: "Holy Bolt, Buffs",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 119" },
+          { lvlGap: "Lvl 2", speed: "120 - 141" },
+          { lvlGap: "Lvl 3", speed: "142 - 167" },
+          { lvlGap: "Lvl 4", speed: "168 - 199" },
+          { lvlGap: "Lvl 5", speed: "200 - 238" },
+          { lvlGap: "Lvl 6", speed: "239 - FULL" }
+        ]
+      }
+    ]
+  },
+  mg: {
+    name: "Magic Gladiator / Duel Master",
+    img: "img/party.png",
+    agiRatio: "10 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Chaos Blade, Fire Blood",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 188" },
+          { lvlGap: "Lvl 2", speed: "189 - 210" },
+          { lvlGap: "Lvl 3", speed: "211 - 236" },
+          { lvlGap: "Lvl 4", speed: "237 - 269" },
+          { lvlGap: "Lvl 5", speed: "270 - 312" },
+          { lvlGap: "Lvl 6", speed: "313 - 351" }
+        ]
+      },
+      {
+        skillName: "Gigantic Storm, Havok Spear, Dark Blast",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 186" },
+          { lvlGap: "Lvl 2", speed: "187 - 208" },
+          { lvlGap: "Lvl 3", speed: "209 - 239" },
+          { lvlGap: "Lvl 4", speed: "240 - 281" },
+          { lvlGap: "Lvl 5", speed: "282 - 339" },
+          { lvlGap: "Lvl 6", speed: "340 - 351" }
+        ]
+      }
+    ]
+  },
+  dl: {
+    name: "Dark Lord / Lord Emperor",
+    img: "img/party.png",
+    agiRatio: "10 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "All Skills",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 140" },
+          { lvlGap: "Lvl 2", speed: "141 - 162" },
+          { lvlGap: "Lvl 3", speed: "163 - 189" },
+          { lvlGap: "Lvl 4", speed: "190 - 225" },
+          { lvlGap: "Lvl 5", speed: "226 - 273" },
+          { lvlGap: "Lvl 6", speed: "274 - FULL" }
+        ]
+      }
+    ]
+  },
+  sum: {
+    name: "Summoner / Dimension Master",
+    img: "img/party.png",
+    agiRatio: "20 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Fire Beast",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 102" },
+          { lvlGap: "Lvl 2", speed: "103 - 124" },
+          { lvlGap: "Lvl 3", speed: "125 - 151" },
+          { lvlGap: "Lvl 4", speed: "152 - 187" },
+          { lvlGap: "Lvl 5", speed: "188 - FULL" }
+        ]
+      },
+      {
+        skillName: "Death Scythe",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 119" },
+          { lvlGap: "Lvl 2", speed: "120 - 134" },
+          { lvlGap: "Lvl 3", speed: "135 - 151" },
+          { lvlGap: "Lvl 4", speed: "152 - 170" },
+          { lvlGap: "Lvl 5", speed: "171 - FULL" }
+        ]
+      }
+    ]
+  },
+  rf: {
+    name: "Rage Fighter / Fist Master",
+    img: "img/party.png",
+    agiRatio: "8 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Dark Side",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 283" },
+          { lvlGap: "Lvl 2", speed: "284 - 314" },
+          { lvlGap: "Lvl 3", speed: "315 - 349" },
+          { lvlGap: "Lvl 4", speed: "350 - 391" },
+          { lvlGap: "Lvl 5", speed: "392 - 440" },
+          { lvlGap: "Lvl 6", speed: "441 - FULL" }
+        ]
+      },
+      {
+        skillName: "Spirit Hook",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 161" },
+          { lvlGap: "Lvl 2", speed: "162 - 199" },
+          { lvlGap: "Lvl 3", speed: "200 - 245" },
+          { lvlGap: "Lvl 4", speed: "246 - 298" },
+          { lvlGap: "Lvl 5", speed: "299 - 366" },
+          { lvlGap: "Lvl 6", speed: "367 - FULL" }
+        ]
+      }
+    ]
+  },
+  gl: {
+    name: "Grow Lancer / Mirage Lancer",
+    img: "img/party.png",
+    agiRatio: "20 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Oversting",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 149" },
+          { lvlGap: "Lvl 2", speed: "150 - 169" },
+          { lvlGap: "Lvl 3", speed: "170 - 191" },
+          { lvlGap: "Lvl 4", speed: "192 - 217" },
+          { lvlGap: "Lvl 5", speed: "218 - 247" },
+          { lvlGap: "Lvl 6", speed: "248 - FULL" }
+        ]
+      },
+      {
+        skillName: "Wild Breath",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 119" },
+          { lvlGap: "Lvl 2", speed: "120 - 141" },
+          { lvlGap: "Lvl 3", speed: "142 - 168" },
+          { lvlGap: "Lvl 4", speed: "169 - 199" },
+          { lvlGap: "Lvl 5", speed: "200 - 238" },
+          { lvlGap: "Lvl 6", speed: "239 - FULL" }
+        ]
+      }
+    ]
+  },
+  rw: {
+    name: "Rune Wizard / Rune Master",
+    img: "img/party.png",
+    agiRatio: "12 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Lightning Storm",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 165" },
+          { lvlGap: "Lvl 2", speed: "166 - 183" },
+          { lvlGap: "Lvl 3", speed: "184 - 202" },
+          { lvlGap: "Lvl 4", speed: "203 - 224" },
+          { lvlGap: "Lvl 5", speed: "225 - 249" },
+          { lvlGap: "Lvl 6", speed: "250 - FULL" }
+        ]
+      },
+      {
+        skillName: "Magic Arrow",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 173" },
+          { lvlGap: "Lvl 2", speed: "174 - 193" },
+          { lvlGap: "Lvl 3", speed: "194 - 216" },
+          { lvlGap: "Lvl 4", speed: "217 - 242" },
+          { lvlGap: "Lvl 5", speed: "243 - 273" },
+          { lvlGap: "Lvl 6", speed: "274 - FULL" }
+        ]
+      }
+    ]
+  },
+  sl: {
+    name: "Slayer / Royal Slayer",
+    img: "img/party.png",
+    agiRatio: "10 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Pierce Attack",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 237" },
+          { lvlGap: "Lvl 2", speed: "238 - 299" },
+          { lvlGap: "Lvl 3", speed: "300 - 371" },
+          { lvlGap: "Lvl 4", speed: "372 - FULL" }
+        ]
+      },
+      {
+        skillName: "Inertia Sword",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 239" },
+          { lvlGap: "Lvl 2", speed: "240 - 284" },
+          { lvlGap: "Lvl 3", speed: "285 - 340" },
+          { lvlGap: "Lvl 4", speed: "341 - FULL" }
+        ]
+      }
+    ]
+  },
+  gc: {
+    name: "Gun Crusher / Master Gunner",
+    img: "img/party.png",
+    agiRatio: "15 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Busting Flare",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 122" },
+          { lvlGap: "Lvl 2", speed: "123 - 141" },
+          { lvlGap: "Lvl 3", speed: "142 - 166" },
+          { lvlGap: "Lvl 4", speed: "167 - 198" },
+          { lvlGap: "Lvl 5", speed: "199 - 245" },
+          { lvlGap: "Lvl 6", speed: "246 - FULL" }
+        ]
+      }
+    ]
+  },
+  ww: {
+    name: "White Wizard / Glory Wizard",
+    img: "img/party.png",
+    agiRatio: "10 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Spear Storm",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 127" },
+          { lvlGap: "Lvl 2", speed: "128 - 155" },
+          { lvlGap: "Lvl 3", speed: "156 - 188" },
+          { lvlGap: "Lvl 4", speed: "189 - 229" },
+          { lvlGap: "Lvl 5", speed: "230 - 283" },
+          { lvlGap: "Lvl 6", speed: "284 - 304" }
+        ]
+      }
+    ]
+  },
+  lem: {
+    name: "Lemuria / Mage",
+    img: "img/party.png",
+    agiRatio: "10 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Ultimate Force",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 147" },
+          { lvlGap: "Lvl 2", speed: "148 - 164" },
+          { lvlGap: "Lvl 3", speed: "165 - 184" },
+          { lvlGap: "Lvl 4", speed: "185 - 211" },
+          { lvlGap: "Lvl 5", speed: "212 - 247" },
+          { lvlGap: "Lvl 6", speed: "248 - FULL" }
+        ]
+      }
+    ]
+  },
+  ik: {
+    name: "Illusion Knight / Mystic Knight",
+    img: "img/party.png",
+    agiRatio: "10 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Blade Storm",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 216" },
+          { lvlGap: "Lvl 2", speed: "217 - 239" },
+          { lvlGap: "Lvl 3", speed: "240 - 266" },
+          { lvlGap: "Lvl 4", speed: "267 - 299" },
+          { lvlGap: "Lvl 5", speed: "300 - 341" },
+          { lvlGap: "Lvl 6", speed: "342 - 350" }
+        ]
+      }
+    ]
+  },
+  al: {
+    name: "Alchemist / Alchemic Master",
+    img: "img/party.png",
+    agiRatio: "11 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Countless Weapon",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 147" },
+          { lvlGap: "Lvl 2", speed: "148 - 175" },
+          { lvlGap: "Lvl 3", speed: "176 - 208" },
+          { lvlGap: "Lvl 4", speed: "209 - 249" },
+          { lvlGap: "Lvl 5", speed: "250 - 303" },
+          { lvlGap: "Lvl 6", speed: "304 - 329" }
+        ]
+      }
+    ]
+  },
+  cru: {
+    name: "Crusader",
+    img: "img/party.png",
+    agiRatio: "12 Agility = 1 Speed",
+    skills: [
+      {
+        skillName: "Sacred Impact",
+        gaps: [
+          { lvlGap: "Lvl 1", speed: "1 - 109" },
+          { lvlGap: "Lvl 2", speed: "110 - 124" },
+          { lvlGap: "Lvl 3", speed: "125 - 140" },
+          { lvlGap: "Lvl 4", speed: "141 - 159" },
+          { lvlGap: "Lvl 5", speed: "160 - 182" },
+          { lvlGap: "Lvl 6", speed: "183 - 210" },
+          { lvlGap: "Lvl 7", speed: "211 - 243" },
+          { lvlGap: "Lvl 8", speed: "244 - 284" },
+          { lvlGap: "Lvl 9", speed: "285" }
+        ]
+      }
+    ]
+  }
+};
+
+// FUNKCJA DYNAMICZNIE RENDERUJĄCA PIONOWY UKŁAD SPEED GAPS
+function updateSpeedGaps() {
+  const heroSelect = document.getElementById('hero-class');
+  if (!heroSelect) return;
+
+  const selectedClass = heroSelect.value;
+  const data = speedGapsData[selectedClass];
+  if (!data) return;
+
+  const heroNameEl = document.getElementById('hero-name');
+  const heroImgEl = document.getElementById('hero-img');
+  
+  if (heroNameEl) heroNameEl.innerText = data.name;
+  if (heroImgEl) {
+    heroImgEl.src = data.img;
+    heroImgEl.onerror = function() { this.src = 'img/party.png'; };
+  }
+
+  const agiContainer = document.getElementById('agi-ratio-container');
+  if (agiContainer) {
+    agiContainer.innerHTML = `
+      <div class="agi-title">Przelicznik Agility:</div>
+      <div class="agi-value">${data.agiRatio}</div>
+    `;
+  }
+
+  const container = document.getElementById('gap-info-content');
+  if (!container) return;
+
+  let html = '';
+  data.skills.forEach(sk => {
+    html += `
+      <div class="skill-section">
+        <h4 class="skill-title">Czar / Skill: <span>${sk.skillName}</span></h4>
+        <div class="table-container">
+          <table class="boss-table gap-table">
+            <thead>
+              <tr>
+                <th style="width: 35%;">GAP (Lvl)</th>
+                <th>SPEED</th>
+              </tr>
+            </thead>
+            <tbody>
+    `;
+
+    sk.gaps.forEach(item => {
+      html += `
+        <tr>
+          <td style="font-weight: bold; color: #00b37e;">${item.lvlGap}</td>
+          <td>${item.speed}</td>
+        </tr>
+      `;
+    });
+
+    html += `
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Zaznaczanie tekstu po podwójnym kliknięciu w inputy
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('dblclick', function () {
+      this.select();
+    });
+  });
+
+  // Nawigacja zakładkami
+  document.getElementById('tabHomeBtn')?.addEventListener('click', () => switchTab('homeView'));
+  document.getElementById('tabCalcBtn')?.addEventListener('click', () => switchTab('calcView'));
+  document.getElementById('tabBossBtn')?.addEventListener('click', () => switchTab('bossView'));
+  document.getElementById('tabTimerBtn')?.addEventListener('click', () => switchTab('timerView'));
+  document.getElementById('tabEventsBtn')?.addEventListener('click', () => switchTab('eventsView'));
+  document.getElementById('tabSpeedBtn')?.addEventListener('click', () => switchTab('speedView'));
+
+  // SYSTEM DŹWIĘKÓW
+  const sounds = {
+    click: new Audio('sound/eMeleeHit5.wav'),
+    warning: new Audio('sound/eMedal.wav'),
+    ready: new Audio('sound/eGem.wav')
+  };
+
+  let audioUnlocked = false;
+  function unlockAudio() {
+    if (audioUnlocked) return;
+    Object.values(sounds).forEach(snd => {
+      snd.play().then(() => {
+        snd.pause();
+        snd.currentTime = 0;
+      }).catch(() => {});
+    });
+    audioUnlocked = true;
+    document.removeEventListener('click', unlockAudio);
+  }
+  document.addEventListener('click', unlockAudio);
+
+  function playSound(type) {
+    if (sounds[type]) {
+      sounds[type].currentTime = 0;
+      sounds[type].play().catch(err => console.log("Przeglądarka zablokowała dźwięk:", err));
+    }
+  }
+
+  const playedWarning = new Set();
+  const playedReady = new Set();
+
+  // 1. KALKULATOR EXP
+  const calcBtn = document.getElementById('calcBtn');
+
+  function calculateTime(currentLevel, desiredLevel, expPerSecond, barValue, expDatabase) {
+    if (desiredLevel <= currentLevel) throw new Error("Docelowy level musi być większy niż aktualny.");
+    if (expPerSecond <= 0) throw new Error("EXP na sekundę musi być większy od zera.");
+    if (barValue < 0 || barValue > 10) throw new Error("Bar musi być w zakresie 0–10.");
+
+    const expThisLevel = expDatabase[currentLevel];
+    if (expThisLevel === undefined) throw new Error(`Brak danych EXP dla poziomu ${currentLevel}.`);
+
+    const progressRatio = barValue / 10.0;
+    const remainingInCurrent = expThisLevel * (1.0 - progressRatio);
+
+    let remainingFullLevels = 0;
+    for (let lvl = currentLevel + 1; lvl < desiredLevel; lvl++) {
+      if (expDatabase[lvl] !== undefined) {
+        remainingFullLevels += expDatabase[lvl];
+      } else {
+        throw new Error(`Brak danych EXP dla poziomu ${lvl}.`);
+      }
+    }
+
+    const remainingExp = remainingInCurrent + remainingFullLevels;
+    if (remainingExp <= 0) return { days: 0, hours: 0, minutes: 0, totalExp: 0, remainingInCurrent: 0 };
+
+    const totalSeconds = remainingExp / expPerSecond;
+    const totalMinutes = Math.round(totalSeconds / 60);
+
+    const days = Math.floor(totalMinutes / (24 * 60));
+    const minutesLeft = totalMinutes % (24 * 60);
+    const hours = Math.floor(minutesLeft / 60);
+    const minutes = minutesLeft % 60;
+
+    return { days, hours, minutes, totalExp: remainingExp, remainingInCurrent };
+  }
+
+  calcBtn?.addEventListener('click', () => {
+    try {
+      const currentLvl = parseInt(document.getElementById('currentLvl').value);
+      const targetLvl = parseInt(document.getElementById('targetLvl').value);
+      const expPerSec = parseFloat(document.getElementById('expPerSec').value);
+      const expBar = parseFloat(document.getElementById('expBar').value) || 0;
+
+      const expDatabase = typeof exp_data !== 'undefined' ? exp_data : (typeof EXP_TO_NEXT !== 'undefined' ? EXP_TO_NEXT : null);
+      if (!expDatabase) {
+        alert("Błąd: Nie załadowano bazy exp_data.js!");
+        return;
+      }
+
+      const res = calculateTime(currentLvl, targetLvl, expPerSec, expBar, expDatabase);
+
+      document.getElementById('currentLevelRemainingExp').innerText = Math.round(res.remainingInCurrent).toLocaleString('pl-PL');
+      document.getElementById('expNeeded').innerText = Math.round(res.totalExp).toLocaleString('pl-PL');
+      document.getElementById('timeToTarget').innerText = `${res.days} dni, ${res.hours} godzin, ${res.minutes} minut`;
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+
+  // 2. BOSS TIMER LOGIKA
+  let bossData = JSON.parse(localStorage.getItem('mu_boss_data') || '[]');
+  let selectedBossIds = new Set(); // Przechowuje ID zaznaczonych checkboxami bossów
+
+  function updateSystemClock() {
+    const clockEl = document.getElementById('systemClock');
+    if (clockEl) clockEl.innerText = new Date().toTimeString().split(' ')[0];
+  }
+  setInterval(updateSystemClock, 1000);
+  updateSystemClock();
+
+  function formatHM(dateObj) {
+    const h = dateObj.getHours().toString().padStart(2, '0');
+    const m = dateObj.getMinutes().toString().padStart(2, '0');
+    return `${h}:${m}`;
+  }
+
+  function saveBosses() {
+    localStorage.setItem('mu_boss_data', JSON.stringify(bossData));
+  }
+
+  document.getElementById('addBossBtn')?.addEventListener('click', () => {
+    const bossSelect = document.getElementById('bossSelect');
+    const bossChEl = document.getElementById('bossCh');
+    const bossTimeEl = document.getElementById('bossTimeInput');
+
+    if (!bossSelect || !bossChEl || !bossTimeEl) return;
+
+    const boss = bossSelect.value;
+    const ch = bossChEl.value.trim();
+    const timeVal = bossTimeEl.value.trim();
+
+    if (!ch) {
+      alert("Podaj numer CH!");
+      return;
+    }
+
+    const parts = timeVal.split(':');
+    if (parts.length !== 2) {
+      alert("Format czasu to H:M (np. 0:30 lub 1:15)!");
+      return;
+    }
+
+    const h = parseInt(parts[0]);
+    const m = parseInt(parts[1]);
+
+    if (isNaN(h) || isNaN(m) || h < 0 || m < 0 || m > 59 || (h === 0 && m === 0)) {
+      alert("Wpisz poprawny czas w formacie H:M!");
+      return;
+    }
+
+    const duplicate = bossData.some(b => b.boss === boss && String(b.ch) === ch);
+    if (duplicate) {
+      alert(`"${boss}" na CH ${ch} jest już na liście!`);
+      return;
+    }
+
+    const targetDate = new Date(Date.now() + (h * 3600 + m * 60) * 1000);
+    const internalId = 'boss_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+
+    bossData.push({
+      id: internalId,
+      boss,
+      ch,
+      targetTime: targetDate.toISOString()
+    });
+
+    playSound('click');
+    saveBosses();
+    renderBossTable();
+    bossTimeEl.value = '';
+  });
+
+  function renderBossTable() {
+    bossData.sort((a, b) => new Date(a.targetTime) - new Date(b.targetTime));
+
+    const tbody = document.getElementById('bossTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+
+    const now = new Date();
+
+    bossData.forEach((item, index) => {
+      const tObj = new Date(item.targetTime);
+      const secs = (tObj - now) / 1000;
+
+      let remainsText = '';
+      let statusClass = '';
+      let rowStatusClass = ''; // Nowa zmienna dla stylu wiersza
+
+      // Sprawdzamy stan przełącznika dźwięków
+      const soundToggle = document.getElementById('bossSoundToggle');
+      const isSoundEnabled = !soundToggle || soundToggle.checked;
+
+      if (secs > 120) {
+        const mins = Math.ceil(secs / 60);
+        remainsText = mins >= 60 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${mins} min`;
+      } else if (secs > 0) {
+        remainsText = `${Math.floor(secs)} sek!`;
+        statusClass = 'status-warning';
+        rowStatusClass = 'boss-warning';
+
+        if (!playedWarning.has(item.id)) {
+          if (isSoundEnabled) {
+            playSound('warning');
+          }
+          playedWarning.add(item.id);
+        }
+      } else {
+        remainsText = '!!! READY !!!';
+        statusClass = 'status-ready';
+        rowStatusClass = 'boss-ready';
+
+        if (!playedReady.has(item.id)) {
+          if (isSoundEnabled) {
+            playSound('ready');
+          }
+          playedReady.add(item.id);
+        }
+      }
+
+      const tr = document.createElement('tr');
+      
+      // Przypisanie klas CSS do wiersza
+      let classList = [];
+      if (rowStatusClass) classList.push(rowStatusClass);
+      if (selectedBossIds.has(item.id)) classList.push('selected');
+      if (classList.length > 0) {
+        tr.className = classList.join(' ');
+      }
+
+      tr.innerHTML = `
+        <td style="text-align: center;"><input type="checkbox" class="boss-row-checkbox" data-id="${item.id}" ${selectedBossIds.has(item.id) ? 'checked' : ''} style="cursor: pointer;"></td>
+        <td>${index + 1}</td>
+        <td>${formatHM(tObj)}</td>
+        <td class="${statusClass}">${item.boss}</td>
+        <td class="${statusClass}">${item.ch}</td>
+        <td class="${statusClass}">${remainsText}</td>
+      `;
+
+      // Obsługa kliknięcia w checkbox wiersza
+      const checkbox = tr.querySelector('.boss-row-checkbox');
+      checkbox.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (checkbox.checked) {
+          selectedBossIds.add(item.id);
+          tr.classList.add('selected');
+        } else {
+          selectedBossIds.delete(item.id);
+          tr.classList.remove('selected');
+        }
+        updateSelectAllMasterCheckbox();
+      });
+
+      // Kliknięcie w cały wiersz zaznacza checkbox
+      tr.addEventListener('click', () => {
+        checkbox.checked = !checkbox.checked;
+        if (checkbox.checked) {
+          selectedBossIds.add(item.id);
+          tr.classList.add('selected');
+        } else {
+          selectedBossIds.delete(item.id);
+          tr.classList.remove('selected');
+        }
+        updateSelectAllMasterCheckbox();
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    updateSelectAllMasterCheckbox();
+  }
+
+  // Funkcja synchronizująca główny checkbox w nagłówku
+  function updateSelectAllMasterCheckbox() {
+    const masterCheckbox = document.getElementById('selectAllBosses');
+    if (!masterCheckbox || bossData.length === 0) {
+      if (masterCheckbox) masterCheckbox.checked = false;
+      return;
+    }
+    const allChecked = bossData.every(b => selectedBossIds.has(b.id));
+    masterCheckbox.checked = allChecked;
+  }
+
+  // Obsługa głównego checkboxa "Zaznacz wszystkie" w nagłówku
+  document.getElementById('selectAllBosses')?.addEventListener('change', function() {
+    if (this.checked) {
+      bossData.forEach(b => selectedBossIds.add(b.id));
+    } else {
+      selectedBossIds.clear();
+    }
+    renderBossTable();
+  });
+
+  setInterval(renderBossTable, 1000);
+  renderBossTable();
+
+  // Przycisk usuwania zaznaczonych pozycji (bezpośrednie usunięcie bez pytania)
+  document.getElementById('removeSelectedBtn')?.addEventListener('click', () => {
+    if (selectedBossIds.size === 0) {
+      alert("Nie zaznaczono żadnych bossów do usunięcia.");
+      return;
+    }
+
+    selectedBossIds.forEach(id => {
+      playedWarning.delete(id);
+      playedReady.delete(id);
+    });
+
+    bossData = bossData.filter(b => !selectedBossIds.has(b.id));
+    selectedBossIds.clear();
+    saveBosses();
+    renderBossTable();
+  });
+
+  document.getElementById('clearAllBossesBtn')?.addEventListener('click', () => {
+    if (confirm("Wyczyścić całą listę bossów?")) {
+      bossData = [];
+      playedWarning.clear();
+      playedReady.clear();
+      selectedBossIds.clear();
+      saveBosses();
+      renderBossTable();
+    }
+  });
+
+  updateSpeedGaps();
+
+  // 3. WIELOKROTNE TIMERY
+  let customTimers = [];
+
+  document.getElementById('addCustomTimerBtn')?.addEventListener('click', () => {
+    const labelInput = document.getElementById('customTimerLabel');
+    const minInput = document.getElementById('customTimerMinutes');
+
+    const label = labelInput ? labelInput.value.trim() || 'Timer' : 'Timer';
+    const minutes = minInput ? parseInt(minInput.value) || 10 : 10;
+
+    const newTimer = {
+      id: Date.now(),
+      label: label,
+      remainingSeconds: minutes * 60,
+      isRunning: true
+    };
+
+    customTimers.push(newTimer);
+    if (labelInput) labelInput.value = '';
+    playSound('click');
+    renderCustomTimers();
+  });
+
+  function renderCustomTimers() {
+    const container = document.getElementById('activeTimersContainer');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    customTimers.forEach(timer => {
+      const card = document.createElement('div');
+      card.className = `timer-card ${timer.remainingSeconds <= 0 ? 'finished' : ''}`;
+
+      const m = String(Math.floor(timer.remainingSeconds / 60)).padStart(2, '0');
+      const s = String(timer.remainingSeconds % 60).padStart(2, '0');
+
+      card.innerHTML = `
+        <div class="timer-card-title">${timer.label}</div>
+        <div class="timer-card-time">${m}:${s}</div>
+        <div class="timer-card-controls">
+          <button class="btn-secondary toggle-btn">${timer.isRunning ? 'Pauza' : 'Start'}</button>
+          <button class="btn-danger delete-btn">Usuń</button>
+        </div>
+      `;
+
+      card.querySelector('.toggle-btn').addEventListener('click', () => {
+        timer.isRunning = !timer.isRunning;
+        renderCustomTimers();
+      });
+
+      card.querySelector('.delete-btn').addEventListener('click', () => {
+        customTimers = customTimers.filter(t => t.id !== timer.id);
+        renderCustomTimers();
+      });
+
+      container.appendChild(card);
+    });
+  }
+
+  setInterval(() => {
+    let changed = false;
+    customTimers.forEach(timer => {
+      if (timer.isRunning && timer.remainingSeconds > 0) {
+        timer.remainingSeconds--;
+        changed = true;
+        if (timer.remainingSeconds === 0) {
+          playSound('ready');
+        }
+      }
+    });
+    if (changed) renderCustomTimers();
+  }, 1000);
+
+  // 4. HARMONOGRAM EVENTÓW
+  const eventsData = {
+    bc: { 
+      name: "Blood Castle", 
+      tbodyId: "bcTableBody",
+      times: ["00:10", "00:40", "01:10", "01:40", "02:10", "02:40", "03:10", "03:40", "05:10", "07:10", "09:10", "11:10", "13:10", "15:10", "17:10", "19:10", "21:10", "21:40", "22:10", "22:40", "23:10"]
+    },
+    ds: { 
+      name: "Devil Square", 
+      tbodyId: "dsTableBody",
+      times: ["00:20", "00:50", "01:20", "01:50", "02:20", "02:50", "03:20", "03:50", "05:20", "07:20", "09:20", "11:20", "13:20", "15:20", "17:20", "19:20", "21:20", "21:50", "22:20", "22:50", "23:20"]
+    },
+    cc: { 
+      name: "Chaos Castle", 
+      tbodyId: "ccTableBody",
+      times: ["01:00", "03:00", "05:00", "07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00", "23:00"]
+    }
+  };
+
+  function getEventTimes(timeStr) {
+    const [h, m] = timeStr.split(':').map(Number);
+    const now = new Date();
+    
+    // Tworzymy datę w UTC na podstawie godziny z tablicy i konwertujemy automatycznie na czas lokalny
+    let utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0);
+    let startDate = new Date(utcMs);
+    let entryDate = new Date(startDate.getTime() - 5 * 60 * 1000);
+
+    // Jeśli event w czasie lokalnym już dzisiaj minął, przesuwamy go na jutro
+    if (startDate < now) {
+      startDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000);
+      entryDate = new Date(entryDate.getTime() + 24 * 60 * 60 * 1000);
+    }
+
+    return { entryDate, startDate };
+  }
+
+  function getLocalEntryTimeStr(timeStr) {
+    const [h, m] = timeStr.split(':').map(Number);
+    const now = new Date();
+    
+    // Przeliczamy godzinę UTC z tablicy na lokalny czas w Polsce (np. 00:05 UTC -> 02:05 czasu lokalnego)
+    let utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), h, m, 0);
+    let eventDate = new Date(utcMs);
+    eventDate.setMinutes(eventDate.getMinutes() - 5);
+
+    const localH = String(eventDate.getHours()).padStart(2, '0');
+    const localM = String(eventDate.getMinutes()).padStart(2, '0');
+    return `${localH}:${localM}`;
+  }
+
+  function renderTables(allUpcoming) {
+    Object.keys(eventsData).forEach(key => {
+      const ev = eventsData[key];
+      const tbody = document.getElementById(ev.tbodyId);
+      if (!tbody) return;
+
+      const activeEventForType = allUpcoming.find(u => u.typeKey === key);
+
+      tbody.innerHTML = '';
+      ev.times.forEach((utcTime, idx) => {
+        const isCurrent = activeEventForType && activeEventForType.utcTime === utcTime;
+        const row = document.createElement('tr');
+        
+        if (isCurrent) {
+          row.className = 'row-next-event';
+        }
+
+        let statusBadge = '<span style="opacity: 0.6;">Planowany</span>';
+        if (isCurrent) {
+          statusBadge = activeEventForType.isOpen 
+            ? '<span class="status-badge-next" style="background: #e74c3c; box-shadow: 0 0 10px rgba(231,76,60,0.8);">OTWARTY!</span>' 
+            : '<span class="status-badge-next">NAJBLIŻSZY</span>';
+        }
+
+        row.innerHTML = `
+          <td>${idx + 1}</td>
+          <td><strong class="time-text">${getLocalEntryTimeStr(utcTime)}</strong></td>
+          <td>${statusBadge}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    });
+  }
+
+  // Obiekt globalny dźwięku dla eventów
+  const eventSound = new Audio('sound/iEventStart.wav');
+  const eventAlertPlayed = new Set(); // Zapobiega wielokrotnemu odtwarzaniu w tej samej sekundzie otwarcia
+
+  function updateEventsSystem() {
+    const now = new Date();
+    let allUpcoming = [];
+
+    Object.keys(eventsData).forEach(key => {
+      const ev = eventsData[key];
+      ev.times.forEach(utcTime => {
+        const { entryDate, startDate } = getEventTimes(utcTime);
+        const isOpen = now >= entryDate && now < startDate;
+        const diffMs = isOpen ? (startDate - now) : (entryDate - now);
+
+        allUpcoming.push({
+          typeKey: key,
+          name: ev.name,
+          utcTime: utcTime,
+          entryDate: entryDate,
+          startDate: startDate,
+          isOpen: isOpen,
+          diffMs: diffMs,
+          sortKey: isOpen ? (startDate - now) : (entryDate - now + 10000000)
+        });
+      });
+    });
+
+    allUpcoming.sort((a, b) => a.sortKey - b.sortKey);
+    const top5 = allUpcoming.slice(0, 5);
+
+    // SPRAWDZENIE DŹWIĘKU DLA NAJBLIŻSZEGO EVENTU (Gdy włącza się czerwona animacja "OTWARTE!")
+    const soundToggle = document.getElementById('eventSoundToggle');
+    if (top5.length > 0 && soundToggle && soundToggle.checked) {
+      const nearest = top5[0];
+      const eventUniqueKey = nearest.typeKey + "_" + nearest.utcTime;
+
+      // Jeśli event właśnie wszedł w stan otwarcia (isOpen) i jeszcze nie zagrał dźwięk
+      if (nearest.isOpen) {
+        if (!eventAlertPlayed.has(eventUniqueKey)) {
+          eventSound.currentTime = 0;
+          eventSound.play().catch(e => console.log("Odtwarzanie dźwięku zablokowane przez przeglądarkę:", e));
+          eventAlertPlayed.add(eventUniqueKey);
+        }
+      } else {
+        // Resetujemy stan, gdy event minie lub jeszcze nie nadszedł
+        eventAlertPlayed.delete(eventUniqueKey);
+      }
+    }
+
+    const gridContainer = document.getElementById('upcomingEventsList');
+    if (gridContainer) {
+      gridContainer.innerHTML = '';
+
+      top5.forEach((item) => {
+        const totalSec = Math.floor(item.diffMs / 1000);
+        const hrs = Math.floor(totalSec / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = Math.floor(totalSec % 60);
+        const localEntryStr = getLocalEntryTimeStr(item.utcTime);
+
+        const mStr = String(m).padStart(2, '0');
+        const sStr = String(s).padStart(2, '0');
+
+        let timerFormatted = hrs > 0 ? `${hrs}h ${mStr}m ${sStr}s` : `${mStr}m ${sStr}s`;
+        let timerHTML = `<div class="event-card-timer">${timerFormatted}</div>`;
+
+        if (item.isOpen) {
+          timerHTML = `
+            <div class="event-card-timer-box">
+              <span class="open-label">OTWARTE!</span>
+              <span class="event-card-timer">${mStr}m ${sStr}s</span>
+            </div>
+          `;
+        }
+
+        const card = document.createElement('div');
+        card.className = `event-card ${item.isOpen ? 'open-now' : ''}`;
+        card.innerHTML = `
+          <div class="event-card-name">${item.name}</div>
+          ${timerHTML}
+          <div class="event-card-localtime">Wejście: <strong>${localEntryStr}</strong></div>
+        `;
+        gridContainer.appendChild(card);
+      });
+    }
+
+    renderTables(allUpcoming);
+  }
+
+  setInterval(updateEventsSystem, 1000);
+  updateEventsSystem();
+
+  // Obsługa przełączania zakładek wewnątrz Eventów
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.event-tab-btn');
+    if (btn) {
+      document.querySelectorAll('.event-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.event-tab-content').forEach(box => {
+        box.style.display = 'none';
+        box.classList.remove('active');
+      });
+
+      const targetTab = btn.getAttribute('data-tab');
+      const activeBox = document.getElementById('tab-' + targetTab);
+      if (activeBox) {
+        activeBox.style.display = 'block';
+        activeBox.classList.add('active');
+      }
+    }
+  });
+  // ==========================================
+  // 5. WIDŻETY SZYBKIEGO PODGLĄDU NA STRONIE GŁÓWNEJ (4 KAFELKI)
+  // ==========================================
+  function updateHomeQuickWidgets() {
+    const gridContainer = document.getElementById('homeQuickGrid');
+    if (!gridContainer) return;
+
+    const now = new Date();
+    const nowMs = now.getTime();
+
+    // 1. Pobieramy 2 najbliższe eventy
+    let allUpcomingEvents = [];
+    if (typeof eventsData !== 'undefined') {
+      Object.keys(eventsData).forEach(key => {
+        const ev = eventsData[key];
+        ev.times.forEach(utcTime => {
+          const { entryDate, startDate } = getEventTimes(utcTime);
+          const isOpen = now >= entryDate && now < startDate;
+          const diffMs = isOpen ? (startDate - now) : (entryDate - now);
+
+          allUpcomingEvents.push({
+            name: ev.name,
+            utcTime: utcTime,
+            isOpen: isOpen,
+            diffMs: diffMs,
+            sortKey: isOpen ? (startDate - now) : (entryDate - now + 10000000)
+          });
+        });
+      });
+      allUpcomingEvents.sort((a, b) => a.sortKey - b.sortKey);
+    }
+    const top2Events = allUpcomingEvents.slice(0, 2);
+
+    // 2. Pobieramy 2 najbliższych bossów
+    let activeBosses = [];
+    if (typeof bossData !== 'undefined') {
+      activeBosses = bossData.map(b => {
+        const targetTime = new Date(b.targetTime).getTime();
+        return { ...b, diff: targetTime - nowMs };
+      }).filter(b => b.diff > -60000);
+      activeBosses.sort((a, b) => a.diff - b.diff);
+    }
+    const top2Bosses = activeBosses.slice(0, 2);
+
+    // Generujemy HTML dla szybkich widgetów
+    let htmlContent = '';
+    
+    if (top2Events.length > 0) {
+      htmlContent += `
+        <div style="text-align: center; color: #c9c9c9; margin: 1px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
+          Incoming Events
+        </div>
+      `;
+    }
+    
+    // Renderowanie Eventów
+    top2Events.forEach(item => {
+      const totalSec = Math.floor(item.diffMs / 1000);
+      const hrs = Math.floor(totalSec / 3600);
+      const m = Math.floor((totalSec % 3600) / 60);
+      const s = Math.floor(totalSec % 60);
+      const localEntryStr = getLocalEntryTimeStr(item.utcTime);
+
+      const mStr = String(m).padStart(2, '0');
+      const sStr = String(s).padStart(2, '0');
+      const timerFormatted = hrs > 0 ? `${hrs}h ${mStr}m ${sStr}s` : `${mStr}m ${sStr}s`;
+
+      let timerHTML = `<div class="event-card-timer">${timerFormatted}</div>`;
+      let cardClass = "event-card";
+
+      if (item.isOpen) {
+        cardClass += " open-now";
+        timerHTML = `
+          <div class="event-card-timer-box">
+            <span class="open-label">OTWARTE!</span>
+            <span class="event-card-timer">${mStr}m ${sStr}s</span>
+          </div>
+        `;
+      }
+
+      htmlContent += `
+        <div class="${cardClass}" style="margin: 0; width: 100%;">
+          <div class="event-card-name"> ${item.name}</div>
+          ${timerHTML}
+          <div class="event-card-localtime">Wejście: <strong>${localEntryStr}</strong></div>
+        </div>
+      `;
+    });
+
+    // POJEDYNCZY NAGŁÓWEK DLA BOSSÓW
+    htmlContent += `
+      <div style="text-align: center; color: #c9c9c9; margin: 15px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
+        Incoming Boss
+      </div>
+    `;
+
+    // Renderowanie Bossów lub Teasera
+    if (top2Bosses.length > 0) {
+      top2Bosses.forEach(boss => {
+        const totalSec = Math.floor(boss.diff / 1000);
+        const hrs = Math.floor(totalSec / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = Math.floor(totalSec % 60);
+        const timeStr = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${String(s).padStart(2, '0')}s`;
+
+        let statusClass = "event-card";
+        let timerDisplay = timeStr;
+
+        if (totalSec <= 120 && totalSec > 0) {
+          statusClass += " open-now";
+          timerDisplay = `${totalSec} sek!`;
+        } else if (totalSec <= 0) {
+          statusClass += " open-now";
+          timerDisplay = "!!! READY !!!";
+        }
+
+        const tObj = new Date(boss.targetTime);
+        const timeHM = formatHM(tObj);
+
+        htmlContent += `
+          <div class="${statusClass}" style="margin: 0; width: 100%;">
+            <div class="event-card-name" style="color: #ffffff;"> ${boss.boss} (CH ${boss.ch})</div>
+            <div class="event-card-timer" style="font-size: 1.0rem;">${timerDisplay}</div>
+            <div class="event-card-localtime">Resp: <strong>${timeHM}</strong></div>
+          </div>
+        `;
+      });
+    } else {
+      const isLoggedIn = localStorage.getItem("mu_logged_in") === "true";
+      const actionText = isLoggedIn ? "Dodaj respawn" : "Zaloguj się powyżej";
+      const icon = isLoggedIn ? "🔓" : "🔒";
+      // Jeśli użytkownik jest zalogowany, kliknięcie otwiera bossView. Jeśli niezalogowany, nie robi nic (brak kursora pointer i onclick).
+      const clickAttr = isLoggedIn ? `cursor: pointer; border-style: dashed;" onclick="switchTab('bossView')` : `cursor: default; border-style: dashed;"`;
+      const arrow = isLoggedIn ? " &rarr;" : "";
+
+      htmlContent += `
+        <div class="event-card" style="margin: 0; width: 100%; justify-content: center; text-align: center; ${clickAttr}">
+          <div style="color: #8a8d93; font-size: 0.9rem;">
+            ${icon} Brak aktywnych respów. <span style="color: #00b37e; font-weight: bold;">${actionText}${arrow}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    if (top2Events.length === 0 && top2Bosses.length === 0) {
+      htmlContent = `<div style="color: #aaa; text-align: center; padding: 10px;">Brak nadchodzących aktywności</div>`;
+    }
+
+    gridContainer.innerHTML = htmlContent;
+  }
+
+  setInterval(updateHomeQuickWidgets, 1000);
+  updateHomeQuickWidgets();
+  // ==========================================
+  // GOOGLE AUTHENTICATION (LOGOWANIE)
+  // ==========================================
+  const GOOGLE_CLIENT_ID = "848462196396-frjjusbappmjq6r7a8st9mscp3jbngoo.apps.googleusercontent.com";
+
+  function initGoogleAuth() {
+      if (typeof google === 'undefined') return;
+
+      google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: handleCredentialResponse
+      });
+
+      google.accounts.id.renderButton(
+          document.getElementById("google-login-button"),
+          { theme: "outline", size: "large", width: "100%", text: "signin_with", locale: "pl" }
+      );
+  }
+
+  function handleCredentialResponse(response) {
+      const responsePayload = parseJwt(response.credential);
+      
+      localStorage.setItem("mu_logged_in", "true");
+      localStorage.setItem("mu_user_email", responsePayload.email);
+      localStorage.setItem("mu_user_name", responsePayload.name);
+
+      checkAuthUI();
+  }
+
+  function parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
+  function checkAuthUI() {
+      const isLoggedIn = localStorage.getItem("mu_logged_in") === "true";
+      const loginBtnContainer = document.getElementById("google-login-button");
+      const profileContainer = document.getElementById("user-profile-info");
+      const userNameSpan = document.getElementById("user-display-name");
+
+      if (isLoggedIn) {
+          if(loginBtnContainer) loginBtnContainer.style.display = "none";
+          if(profileContainer) profileContainer.style.display = "flex";
+          if(userNameSpan) userNameSpan.textContent = `Witaj, ${localStorage.getItem("mu_user_name") || "Użytkowniku"}!`;
+
+          setAccessRestrictions(true);
+      } else {
+          if(loginBtnContainer) loginBtnContainer.style.display = "block";
+          if(profileContainer) profileContainer.style.display = "none";
+
+          setAccessRestrictions(false);
+      }
+
+      const logoutBtn = document.getElementById("logout-btn");
+      if(logoutBtn) {
+          logoutBtn.onclick = () => {
+              localStorage.removeItem("mu_logged_in");
+              localStorage.removeItem("mu_user_email");
+              localStorage.removeItem("mu_user_name");
+              window.location.reload();
+          };
+      }
+  }
+
+  function setAccessRestrictions(fullAccess) {
+      const bossBtn = document.getElementById("tabBossBtn");
+      const eventsBtn = document.getElementById("tabEventsBtn");
+
+      [bossBtn, eventsBtn].forEach(btn => {
+          if(btn) {
+              if (!fullAccess) {
+                  btn.style.opacity = "0.3";
+                  btn.style.pointerEvents = "none";
+              } else {
+                  btn.style.opacity = "1";
+                  btn.style.pointerEvents = "auto";
+              }
+          }
+      });
+  }
+
+  // Inicjalizacja autoryzacji przy starcie wewnątrz głównego DOMContentLoaded
+  initGoogleAuth();
+  checkAuthUI();
+
+}); // <-- To jest domknięcie głównego document.addEventListener dla całej aplikacji

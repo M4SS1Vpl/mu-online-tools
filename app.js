@@ -1162,37 +1162,53 @@ if (top2Events.length > 0 && top2Bosses.length > 0) {
         </div>
       `;
     }
-    // 2. Renderowanie Bossów
-    top2Bosses.forEach(boss => {
-      const totalSec = Math.floor(boss.diff / 1000);
-      const hrs = Math.floor(totalSec / 3600);
-      const m = Math.floor((totalSec % 3600) / 60);
-      const s = Math.floor(totalSec % 60);
-      const timeStr = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${String(s).padStart(2, '0')}s`;
+    // 2. Renderowanie Bossów (z obsługą stanu, gdy brak aktywnych respów)
+    htmlContent += `
+      <div style="text-align: center; color: #c9c9c9; margin: 15px 0 1px 0; font-size: 1.0rem; font-weight: bold; letter-spacing: 1px;">
+        Incoming Boss
+      </div>
+    `;
 
-      let statusClass = "event-card"; // bazowa klasa kafelka
-      let timerDisplay = timeStr;
+    if (top2Bosses.length > 0) {
+      top2Bosses.forEach(boss => {
+        const totalSec = Math.floor(boss.diff / 1000);
+        const hrs = Math.floor(totalSec / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = Math.floor(totalSec % 60);
+        const timeStr = hrs > 0 ? `${hrs}h ${m}m ${s}s` : `${m}m ${String(s).padStart(2, '0')}s`;
 
-      // Sprawdzamy czy zostało 2 minuty lub mniej
-      if (totalSec <= 120 && totalSec > 0) {
-        statusClass += " open-now"; // to dodaje czerwoną ramkę/efekt migania taki jak w eventach
-        timerDisplay = `${totalSec} sek!`;
-      } else if (totalSec <= 0) {
-        statusClass += " open-now";
-        timerDisplay = "!!! READY !!!";
-      }
+        let statusClass = "event-card";
+        let timerDisplay = timeStr;
 
-      const tObj = new Date(boss.targetTime);
-      const timeHM = formatHM(tObj);
+        if (totalSec <= 120 && totalSec > 0) {
+          statusClass += " open-now";
+          timerDisplay = `${totalSec} sek!`;
+        } else if (totalSec <= 0) {
+          statusClass += " open-now";
+          timerDisplay = "!!! READY !!!";
+        }
 
+        const tObj = new Date(boss.targetTime);
+        const timeHM = formatHM(tObj);
+
+        htmlContent += `
+          <div class="${statusClass}" style="margin: 0; width: 100%;">
+            <div class="event-card-name" style="color: #ffffff;"> ${boss.boss} (CH ${boss.ch})</div>
+            <div class="event-card-timer" style="font-size: 1.0rem;">${timerDisplay}</div>
+            <div class="event-card-localtime">Resp: <strong>${timeHM}</strong></div>
+          </div>
+        `;
+      });
+    } else {
+      // Stan, gdy nie ma bossów -> Wyświetlamy "teaser" zachęcający do dodania / zalogowania
       htmlContent += `
-        <div class="${statusClass}" style="margin: 0; width: 100%;">
-          <div class="event-card-name" style="color: #ffffff;"> ${boss.boss} (CH ${boss.ch})</div>
-          <div class="event-card-timer" style="font-size: 1.0rem;">${timerDisplay}</div>
-          <div class="event-card-localtime">Resp: <strong>${timeHM}</strong></div>
+        <div class="event-card" style="margin: 0; width: 100%; justify-content: center; text-align: center; cursor: pointer; border-style: dashed;" onclick="switchTab('bossView')">
+          <div style="color: #8a8d93; font-size: 0.9rem;">
+            🔒 Brak aktywnych respów. <span style="color: #00b37e; font-weight: bold;">Zaloguj się / Dodaj respawn &rarr;</span>
+          </div>
         </div>
       `;
-    });
+    }
 
     if (top2Events.length === 0 && top2Bosses.length === 0) {
       htmlContent = `<div style="color: #aaa; text-align: center; padding: 10px;">Brak nadchodzących aktywności</div>`;

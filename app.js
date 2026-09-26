@@ -1203,47 +1203,66 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHomeQuickWidgets();
 
   // ==========================================
-  // GOOGLE AUTHENTICATION (LOGOWANIE)
+  // GOOGLE AUTHENTICATION (METODA PRZEKIEROWANIA)
   // ==========================================
   const GOOGLE_CLIENT_ID = "848462196396-frjjusbappmjq6r7a8st9mscp3jbngoo.apps.googleusercontent.com";
+  
+  // Wpisz tutaj dokładnie taki adres URL, jaki masz w konfiguracji Google Cloud Console (np. adres Twojego GitHub Pages)
+  // Jeśli testujesz lokalnie, możesz wykrywać automatycznie lub wpisać swój URL produkcyjny:
+  const REDIRECT_URI = window.location.origin + window.location.pathname; 
 
   function initGoogleAuth() {
-      if (typeof google === 'undefined') return;
-      
-      if (localStorage.getItem("mu_logged_in") === "true") return;
+      // Sprawdź, czy wróciliśmy z Google z tokenem w URL (hash lub parametry)
+      handleAuthRedirect();
+      checkAuthUI();
 
-      google.accounts.id.initialize({
-          client_id: GOOGLE_CLIENT_ID,
-          callback: handleCredentialResponse
-      });
-
-      const loginButtonEl = document.getElementById("google-login-button");
-      if (loginButtonEl) {
-          loginButtonEl.innerHTML = ""; 
-          google.accounts.id.renderButton(
-              loginButtonEl,
-              { theme: "outline", size: "large", width: "100%", text: "signin_with", locale: "pl" }
-          );
+      // Podłącz akcję pod własny przycisk logowania w HTML
+      const loginBtn = document.getElementById("google-login-btn") || document.getElementById("google-login-button");
+      if (loginBtn) {
+          loginBtn.onclick = redirectToGoogleAuth;
       }
   }
 
-  function handleCredentialResponse(response) {
-      const responsePayload = parseJwt(response.credential);
-      
-      localStorage.setItem("mu_logged_in", "true");
-      localStorage.setItem("mu_user_email", responsePayload.email);
-      localStorage.setItem("mu_user_name", responsePayload.name);
+  function redirectToGoogleAuth() {
+      // Budujemy link przekierowujący do Google OAuth 2.0
+      const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+      const options = {
+          client_id: GOOGLE_CLIENT_ID,
+          redirect_uri: REDIRECT_URI,
+          response_type: "token", // Używamy tokena w fragmencie URL (Implicit Flow) dla prostoty SPA
+          scope: "email profile",
+          include_granted_scopes: "true",
+          state: "security_token_" + Math.random()
+      };
 
-      checkAuthUI();
+      const qs = new URLSearchParams(options);
+      window.location.href = `${rootUrl}?${qs.toString()}`;
   }
 
-  function parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
+  function handleAuthRedirect() {
+      // Sprawdzamy czy w adresie URL (hash) są parametry zwrócone przez Google
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const accessToken = params.get("access_token");
+
+      if (accessToken) {
+          // Pobieramy dane użytkownika za pomocą otrzymanego access_token
+          fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`)
+              .then(response => response.json())
+              .then(data => {
+                  if (data.email) {
+                      localStorage.setItem("mu_logged_in", "true");
+                      localStorage.setItem("mu_user_email", data.email);
+                      localStorage.setItem("mu_user_name", data.name || data.email);
+
+                      // Wyczyszczenie tokena z adresu URL, żeby estetycznie wyglądał
+                      window.history.replaceState({}, document.title, window.location.pathname);
+                      
+                      checkAuthUI();
+                  }
+              })
+              .catch(err => console.error("Błąd pobierania profilu użytkownika:", err));
+      }
   }
 
   function checkAuthUI() {
@@ -1261,14 +1280,15 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
           if(loginBtnContainer) {
               loginBtnContainer.style.display = "block";
+              // Jeśli przycisk to zwykły div, nadaj mu wygląd i funkcję przekierowania
+              if (!loginBtnContainer.onclick) {
+                  loginBtnContainer.innerHTML = `<button id="google-login-btn" class="btn-primary" style="width: 100%; padding: 10px; cursor: pointer;">Zaloguj przez Google</button>`;
+                  document.getElementById("google-login-btn").onclick = redirectToGoogleAuth;
+              }
           }
           if(profileContainer) profileContainer.style.display = "none";
 
           setAccessRestrictions(false);
-          
-          if (typeof google !== 'undefined' && loginBtnContainer && loginBtnContainer.innerHTML === "") {
-              initGoogleAuth();
-          }
       }
   }
 
@@ -1279,25 +1299,7 @@ document.addEventListener('DOMContentLoaded', () => {
           localStorage.removeItem("mu_user_email");
           localStorage.removeItem("mu_user_name");
           
-          if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-              google.accounts.id.disableAutoSelect();
-          }
-
           checkAuthUI();
-
-          // Natychmiastowe ponowne wyrenderowanie przycisku Google po wylogowaniu
-          setTimeout(() => {
-              if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
-                  const loginBtnContainer = document.getElementById("google-login-button");
-                  if (loginBtnContainer) {
-                      loginBtnContainer.innerHTML = "";
-                      google.accounts.id.renderButton(
-                          loginBtnContainer,
-                          { theme: "outline", size: "large", width: "100%", text: "signin_with", locale: "pl" }
-                      );
-                  }
-              }
-          }, 50);
       };
   }
 

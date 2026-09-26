@@ -1119,3 +1119,9 @@ input:focus, select:focus {
   background: #c0392b;
   transform: scale(1.02);
 }
+#google-login-container, 
+#google-login-button, 
+#google-login-button iframe {
+  width: 100% !important;
+  max-width: 100% !important;
+}

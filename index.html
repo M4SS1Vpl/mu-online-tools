@@ -95,8 +95,8 @@
           <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
         </div>
 
-        <!-- Box 2 -->
-        <div class="home-card" onclick="switchTab('bossView')">
+        <!-- Box 2: Boss Timer z id -->
+        <div id="homeBossCard" class="home-card" onclick="switchTab('bossView')">
           <div class="home-card-icon">⏰</div>
           <h3>Boss Timer</h3>
           <p>Śledź czasy respawnu bossów z powiadomieniami dźwiękowymi dopasowanymi do Twojego czasu.</p>
@@ -111,19 +111,16 @@
           <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
         </div>
 
-        <!-- Box 4: Events -->
-        <div class="home-card" onclick="switchTab('eventsView')">
+        <!-- Box 4: Events z id -->
+        <div id="homeEventsCard" class="home-card" onclick="switchTab('eventsView')">
           <div class="home-card-icon">📅</div>
           <h3>Events</h3>
           <p>Śledź nadchodzące eventy globalne w MU Online, sprawdź godziny wejść i wymagane poziomy.</p>
           <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
         </div>
       </div>
-
-      <div class="home-footer-note">
-        <small>💡 Wszystkie dane (np. zapamiętane czasy bossów) są bezpiecznie zapisywane w pamięci Twojej przeglądarki.</small>
-      </div>
-  </div>
+    </div> <!-- <--- TUTAJ BRAKUJE ZAMKNIĘCIA DIV DLA .home-grid ORAZ DLA #homeView! -->
+  </div> <!--
 
   <!-- ========================================== -->
   <!-- WIDOK: TIMER (OSOBNA ZAKŁADKA) -->
@@ -279,7 +276,7 @@
     <div id="results" class="results-panel">
       <p><strong>Brakujący EXP na obecnym poziomie:</strong> <span id="currentLevelRemainingExp">-</span></p>
       <p><strong>Łączny brakujący EXP do celu:</strong> <span id="expNeeded">-</span></p>
-      <p><strong>Czas do docelowego poziomu:</strong> <span id="timeToTarget">-</span></p>
+      <p><strong>Czas do docelowego poziomu:</strong> <span id="timeToTarget" style="color: #ffab24; font-weight: bold;">-</span></p>
     </div>
   </div>
 

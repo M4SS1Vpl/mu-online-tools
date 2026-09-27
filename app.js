@@ -2,13 +2,20 @@
 // 1. GLOBALNE FUNKCJE I ZAKŁADKI
 // ==========================================
 function switchTab(viewId) {
-  const cards = document.querySelectorAll('.calculator-card');
-  cards.forEach(card => card.classList.add('hidden'));
+  const views = ['homeView', 'calcView', 'bossView', 'timerView', 'eventsView', 'speedView'];
 
-  const activeCard = document.getElementById(viewId);
-  if (activeCard) {
-    activeCard.classList.remove('hidden');
-  }
+  views.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      if (id === viewId) {
+        el.classList.remove('hidden');
+        el.style.display = 'block'; // Wymuszenie widoczności dla pewności
+      } else {
+        el.classList.add('hidden');
+        el.style.display = 'none';  // Wymuszenie ukrycia
+      }
+    }
+  });
 
   const buttons = document.querySelectorAll('.tab-btn');
   buttons.forEach(btn => btn.classList.remove('active'));
@@ -20,11 +27,13 @@ function switchTab(viewId) {
   if (viewId === 'eventsView') document.getElementById('tabEventsBtn')?.classList.add('active');
   if (viewId === 'speedView') {
     document.getElementById('tabSpeedBtn')?.classList.add('active');
-    updateSpeedGaps();
+    if (typeof updateSpeedGaps === 'function') {
+      updateSpeedGaps();
+    }
   }
 }
-window.switchTab = switchTab;
 
+window.switchTab = switchTab;
 // ==========================================
 // 2. BAZA DANYCH SPEED GAPS
 // ==========================================
@@ -468,6 +477,7 @@ function updateSpeedGaps() {
 // 3. GŁÓWNY START APLIKACJI
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
+  switchTab('homeView');
   // Podwójne kliknięcie zaznacza input
   document.querySelectorAll('input').forEach(input => {
     input.addEventListener('dblclick', function () {
@@ -873,7 +883,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cc: { 
       name: "Chaos Castle", 
       tbodyId: "ccTableBody",
-      times: ["01:00", "03:00", "05:00", "07:00", "09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00", "23:00"]
+      times: ["01:00", "15:00", "17:00", "19:00", "21:00", "23:00",]
     }
   };
 
@@ -1244,10 +1254,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const bossBtn = document.getElementById("tabBossBtn");
     const eventsBtn = document.getElementById("tabEventsBtn");
 
+    // Blokowanie przycisków w menu głównym
     [bossBtn, eventsBtn].forEach(btn => {
       if (btn) {
         btn.style.opacity = fullAccess ? "1" : "0.3";
         btn.style.pointerEvents = fullAccess ? "auto" : "none";
+      }
+    });
+
+    // Blokowanie kafelków na stronie głównej (Home)
+    const homeBossCard = document.getElementById("homeBossCard");
+    const homeEventsCard = document.getElementById("homeEventsCard");
+
+    [homeBossCard, homeEventsCard].forEach(card => {
+      if (card) {
+        card.style.opacity = fullAccess ? "1" : "0.3";
+        card.style.pointerEvents = fullAccess ? "auto" : "none";
+        card.style.filter = fullAccess ? "none" : "grayscale(80%)";
+        card.style.cursor = fullAccess ? "pointer" : "not-allowed";
       }
     });
   }

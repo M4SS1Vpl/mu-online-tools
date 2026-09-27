@@ -1141,3 +1141,17 @@ input:focus, select:focus {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 179, 126, 0.25);
 }
+/* Styl dla zablokowanych kafelków na stronie głównej */
+.home-card.disabled-card {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+    pointer-events: none; /* Blokuje jakiekolwiek kliknięcia */
+    filter: grayscale(80%);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+.calculator-card.hidden {
+  display: none !important;
+}
+.calculator-card {
+  display: block;
+}

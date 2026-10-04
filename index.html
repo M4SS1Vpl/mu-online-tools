@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="exp_data.js" defer></script>
-  <script src="app.js" defer></script>
+  <script type="module" src="app.js"></script>
 </head>
 <body>
     <!-- WSPÓLNY KONTENER NA GÓRZE: PRZYCISK GOOGLE / PANEL POWITALNY -->
@@ -35,6 +35,20 @@
         <button id="logout-btn" class="logout-action-btn">Wyloguj</button>
     </div>
 </div>
+<!-- SEKCJA ZGÓD I CHECKBOXÓW -->
+  <div id="consentContainer" style="margin: 15px 0; text-align: left; font-family: sans-serif; font-size: 0.8rem; color: #c9c9c9;">
+    <!-- Checkbox 1: Regulamin (Wymagany) -->
+    <label style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; cursor: pointer;">
+      <input type="checkbox" id="acceptTerms" required style="margin-top: 3px; accent-color: #00b37e; cursor: pointer;">
+      <span>Oświadczam, że zapoznałem się z <a href="regulamin.html" target="_blank" style="color: #00b37e; text-decoration: underline;">Regulaminem</a> i akceptuję jego postanowienia. <span style="color: #f75a68;">*</span></span>
+    </label>
+
+    <!-- Checkbox 2: Newsletter / Baza danych / Powiadomienia (Opcjonalny) -->
+    <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+      <input type="checkbox" id="acceptMarketing" style="margin-top: 3px; accent-color: #00b37e; cursor: pointer;">
+      <span>Wyrażam zgodę na przesyłanie informacji o nowych narzędzeniach i aktualizacjach w M4SS1V TOOLS.</span>
+    </label>
+  </div>
 
     <!-- NAGŁÓWEK Z LOGOTYPIAMI I NICKIEM -->
     <header class="main-header">
@@ -115,12 +129,11 @@
         <div id="homeEventsCard" class="home-card" onclick="switchTab('eventsView')">
           <div class="home-card-icon">📅</div>
           <h3>Events</h3>
-          <p>Śledź nadchodzące eventy globalne w MU Online, sprawdź godziny wejść i wymagane poziomy.</p>
+          <p>Śledź nadchodzące eventy w MU Online Global, sprawdź godziny wejść i wymagane poziomy.</p>
           <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
         </div>
       </div>
-    </div> <!-- <--- TUTAJ BRAKUJE ZAMKNIĘCIA DIV DLA .home-grid ORAZ DLA #homeView! -->
-  </div> <!--
+  </div>
 
   <!-- ========================================== -->
   <!-- WIDOK: TIMER (OSOBNA ZAKŁADKA) -->
@@ -386,16 +399,33 @@
     </div>
   </div>
 
-  <!-- STOPKA -->
-  <footer class="main-footer">
+  <!-- STOPKA PROFESJONALNA Z LINKAMI -->
+  <footer class="site-footer">
     <div class="footer-content">
-      <p class="copyright">&copy; 2026 <strong>M4SS1V</strong>. Wszelkie prawa zastrzeżone.</p>
-      <p class="disclaimer">
+      <div class="footer-legal-links">
+        <a href="regulamin.html" target="_blank">Regulamin Serwisu</a>
+        <span>•</span>
+        <a href="polityka.html" target="_blank">Polityka Prywatności</a>
+      </div>
+      <p class="footer-disclaimer">
         MU Online jest zarejestrowanym znakiem towarowym firmy Webzen Inc. 
-        Ta strona jest niezależnym projektem fanowskim i nie jest w żaden sposób powiązana, 
+        Ta strona jest niezależnym projektem hobbystycznym i nie jest w żaden sposób powiązana, 
         sponsorowana ani wspierana przez Webzen Inc.
       </p>
+      <p class="footer-copy">&copy; 2026 <strong>M4SS1V</strong>. Wszelkie prawa zastrzeżone.</p>
     </div>
   </footer>
+
+  <!-- BANER COOKIES -->
+  <div id="cookieBanner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #121214; border-top: 1px solid #29292e; padding: 15px 20px; box-sizing: border-box; z-index: 9999; box-shadow: 0 -4px 16px rgba(0,0,0,0.5); font-family: 'Orbitron', sans-serif;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+      <p style="color: #c9c9c9; font-size: 0.85rem; margin: 0; line-height: 1.4; font-family: sans-serif;">
+        🍪 Ta strona używa plików cookie oraz technologii Google Analytics w celu zapewnienia prawidłowego działania oraz analizy ruchu. Korzystając z niej, wyrażasz na to zgodę.
+      </p>
+      <button id="acceptCookiesBtn" style="background: #00b37e; color: #ffffff; border: none; padding: 8px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem;">
+        Rozumiem i akceptuję
+      </button>
+    </div>
+  </div>
 </body>
 </html>

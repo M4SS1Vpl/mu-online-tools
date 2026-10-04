@@ -1155,3 +1155,61 @@ input:focus, select:focus {
 .calculator-card {
   display: block;
 }
+/* Styl stopki i linków prawnych */
+.site-footer {
+  background-color: #121214;
+  color: #8c939d;
+  padding: 30px 20px;
+  font-size: 0.85rem;
+  text-align: center;
+  border-top: 1px solid #29292e;
+  margin-top: 40px;
+  font-family: sans-serif;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-legal-links a {
+  color: #00b37e;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-legal-links a:hover {
+  color: #00f0a8;
+  text-decoration: underline;
+}
+
+.footer-legal-links span {
+  color: #495057;
+}
+
+.footer-disclaimer {
+  color: #8c939d;
+  font-size: 0.78rem;
+  max-width: 750px;
+  line-height: 1.4;
+  margin: 5px 0;
+}
+
+.footer-copy {
+  color: #c9c9c9;
+  font-size: 0.82rem;
+  margin: 0;
+}

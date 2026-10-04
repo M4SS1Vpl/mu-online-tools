@@ -1,3 +1,20 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAx6B6N7vMk-Cs78vg8pdM90KNx2ZoB1zs",
+  authDomain: "m4ssiv-mu-tools.firebaseapp.com",
+  projectId: "m4ssiv-mu-tools",
+  storageBucket: "m4ssiv-mu-tools.firebasestorage.app",
+  messagingSenderId: "347183436765",
+  appId: "1:347183436765:web:e762e9e7edd9224ce4dc34"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+const db = getFirestore(app);
 // ==========================================
 // 1. GLOBALNE FUNKCJE I ZAKŁADKI
 // ==========================================
@@ -9,10 +26,10 @@ function switchTab(viewId) {
     if (el) {
       if (id === viewId) {
         el.classList.remove('hidden');
-        el.style.display = 'block'; // Wymuszenie widoczności dla pewności
+        el.style.display = 'block';
       } else {
         el.classList.add('hidden');
-        el.style.display = 'none';  // Wymuszenie ukrycia
+        el.style.display = 'none';
       }
     }
   });
@@ -34,6 +51,7 @@ function switchTab(viewId) {
 }
 
 window.switchTab = switchTab;
+
 // ==========================================
 // 2. BAZA DANYCH SPEED GAPS
 // ==========================================
@@ -478,11 +496,33 @@ function updateSpeedGaps() {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   switchTab('homeView');
+
   // Podwójne kliknięcie zaznacza input
   document.querySelectorAll('input').forEach(input => {
     input.addEventListener('dblclick', function () {
       this.select();
     });
+  });
+
+  // ==========================================
+  // OBSŁUGA BANERU COOKIES
+  // ==========================================
+  const cookieBanner = document.getElementById('cookieBanner');
+  const acceptBtn = document.getElementById('acceptCookiesBtn');
+
+  if (!localStorage.getItem('mu_cookies_accepted')) {
+    if (cookieBanner) cookieBanner.style.display = 'block';
+  }
+
+  acceptBtn?.addEventListener('click', () => {
+    localStorage.setItem('mu_cookies_accepted', 'true');
+    if (cookieBanner) {
+      cookieBanner.style.opacity = '0';
+      cookieBanner.style.transition = 'opacity 0.3s ease';
+      setTimeout(() => {
+        cookieBanner.style.display = 'none';
+      }, 300);
+    }
   });
 
   // Przypisanie nawigacji zakładek
@@ -568,8 +608,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   calcBtn?.addEventListener('click', () => {
     try {
-      const currentLvl = parseInt(document.getElementById('currentLvl').value);
-      const targetLvl = parseInt(document.getElementById('targetLvl').value);
+      const currentLvl = parseInt(document.getElementById('currentLvl').value, 10);
+      const targetLvl = parseInt(document.getElementById('targetLvl').value, 10);
       const expPerSec = parseFloat(document.getElementById('expPerSec').value);
       const expBar = parseFloat(document.getElementById('expBar').value) || 0;
 
@@ -634,8 +674,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const h = parseInt(parts[0]);
-    const m = parseInt(parts[1]);
+    const h = parseInt(parts[0], 10);
+    const m = parseInt(parts[1], 10);
 
     if (isNaN(h) || isNaN(m) || h < 0 || m < 0 || m > 59 || (h === 0 && m === 0)) {
       alert("Wpisz poprawny czas w formacie H:M!");
@@ -649,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const targetDate = new Date(Date.now() + (h * 3600 + m * 60) * 1000);
-    const internalId = 'boss_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4);
+    const internalId = 'boss_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6);
 
     bossData.push({
       id: internalId,
@@ -804,7 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const minInput = document.getElementById('customTimerMinutes');
 
     const label = labelInput ? labelInput.value.trim() || 'Timer' : 'Timer';
-    const minutes = minInput ? parseInt(minInput.value) || 10 : 10;
+    const minutes = minInput ? parseInt(minInput.value, 10) || 10 : 10;
 
     customTimers.push({
       id: Date.now(),
@@ -883,7 +923,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cc: { 
       name: "Chaos Castle", 
       tbodyId: "ccTableBody",
-      times: ["01:00", "15:00", "17:00", "19:00", "21:00", "23:00",]
+      times: ["01:00", "15:00", "17:00", "19:00", "21:00", "23:00"]
     }
   };
 
@@ -1157,104 +1197,131 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHomeQuickWidgets();
 
   // ==========================================
-  // 9. GOOGLE AUTHENTICATION (OAuth 2.0 / GIS)
+  // 9. GOOGLE AUTHENTICATION (FIREBASE)
   // ==========================================
-  const GOOGLE_CLIENT_ID = "848462196396-frjjusbappmjq6r7a8st9mscp3jbngoo.apps.googleusercontent.com";
-  const REDIRECT_URI = window.location.origin + window.location.pathname; 
+  
+  function updateLoginButtonState() {
+    const loginBtnContainer = document.getElementById("google-login-button");
+    if (!loginBtnContainer) return;
 
-  function initGoogleAuth() {
-    const hash = window.location.hash.substring(1);
-    const params = new URLSearchParams(hash);
-    const accessToken = params.get("access_token");
-
-    if (accessToken) {
-      fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.email) {
-            localStorage.setItem("mu_logged_in", "true");
-            localStorage.setItem("mu_user_email", data.email);
-            localStorage.setItem("mu_user_name", data.name || data.email);
-            window.history.replaceState({}, document.title, window.location.pathname);
-            checkAuthUI();
-          }
-        })
-        .catch(err => console.error("Błąd pobierania profilu:", err));
+    const termsCheckbox = document.querySelector('input[type="checkbox"]'); 
+    
+    // Sprawdzamy czy checkbox jest zaznaczony LUB czy zgoda była już wcześniej zapamiętana w localStorage
+    const isSavedAgreement = localStorage.getItem("mu_terms_accepted") === "true";
+    if (termsCheckbox && isSavedAgreement) {
+      termsCheckbox.checked = true;
     }
-    checkAuthUI();
+
+    const isAgreed = (termsCheckbox && termsCheckbox.checked) || isSavedAgreement;
+
+    loginBtnContainer.style.display = "block";
+    loginBtnContainer.innerHTML = `
+      <button id="customLoginBtn" style="width: 100%; padding: 12px 16px; background: ${isAgreed ? '#ffffff' : '#f1f3f4'}; color: ${isAgreed ? '#3c4043' : '#9aa0a6'}; border: 1px solid #dadce0; border-radius: 6px; font-weight: 500; cursor: ${isAgreed ? 'pointer' : 'not-allowed'}; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 0.95rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); opacity: ${isAgreed ? '1' : '0.5'};">
+        <svg width="18" height="18" viewBox="0 0 48 48" style="opacity: ${isAgreed ? '1' : '0.5'};">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.7 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        <span>Zaloguj się przez Google</span>
+      </button>
+    `;
+
+    const btn = document.getElementById("customLoginBtn");
+    if (btn) {
+      if (isAgreed) {
+        btn.onclick = () => {
+          signInWithPopup(auth, provider).catch((error) => {
+            console.error("Błąd logowania Firebase:", error);
+          });
+        };
+      } else {
+        btn.onclick = (e) => {
+          e.preventDefault();
+          alert("Musisz najpierw zaakceptować Regulamin, aby się zalogować.");
+        };
+      }
+    }
   }
 
-  function checkAuthUI() {
-  try {
-    const isLoggedIn = localStorage.getItem("mu_logged_in") === "true";
-    const userName = localStorage.getItem("mu_user_name") || "Witaj!";
-    
-    const profileContainer = document.getElementById("user-profile-info");
-    const loginBtnContainer = document.getElementById("google-login-button");
-    const displayNameSpan = document.getElementById("user-display-name");
+  onAuthStateChanged(auth, async (user) => { 
+  const profileContainer = document.getElementById("user-profile-info");
+  const loginBtnContainer = document.getElementById("google-login-button");
+  const displayNameSpan = document.getElementById("user-display-name");
+  const consentContainer = document.getElementById("consentContainer");
 
-    if (isLoggedIn) {
-      if (loginBtnContainer) loginBtnContainer.style.display = "none";
-      if (profileContainer) {
-        profileContainer.style.display = "flex";
-        if (displayNameSpan) displayNameSpan.textContent = `Witaj, ${userName}!`;
-      }
-      setAccessRestrictions(true);
-    } else {
+  if (user) {
+    localStorage.setItem("mu_logged_in", "true");
+    localStorage.setItem("mu_user_email", user.email);
+    localStorage.setItem("mu_user_name", user.displayName || user.email);
+
+    // ==========================================
+    // 2. TUTAJ WKLEJAMY ZAPIS DO BAZY FIRESTORE:
+    // ==========================================
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const termsAccepted = localStorage.getItem("mu_terms_accepted") === "true";
+      
+      await setDoc(userRef, {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName || "",
+        termsAccepted: termsAccepted,
+        lastLogin: serverTimestamp()
+      }, { merge: true });
+    } catch (error) {
+      console.error("Błąd zapisu użytkownika w bazie Firestore:", error);
+    }
+    // ==========================================
+
+    if (loginBtnContainer) loginBtnContainer.style.display = "none";
+    if (consentContainer) consentContainer.style.display = "none";
+    if (profileContainer) {
+      profileContainer.style.display = "flex";
+      if (displayNameSpan) displayNameSpan.textContent = `Witaj, ${user.displayName || user.email}!`;
+    }
+    setAccessRestrictions(true);
+  } else {
+      localStorage.removeItem("mu_logged_in");
+      localStorage.removeItem("mu_user_email");
+      localStorage.removeItem("mu_user_name");
+
       if (profileContainer) profileContainer.style.display = "none";
-      if (loginBtnContainer) {
-        loginBtnContainer.style.display = "block";
-        
-        // Biały przycisk Google z ikoną SVG
-        loginBtnContainer.innerHTML = `
-          <button id="customLoginBtn" style="width: 100%; padding: 12px 16px; background: #ffffff; color: #3c4043; border: 1px solid #dadce0; border-radius: 6px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 0.95rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <svg width="18" height="18" viewBox="0 0 48 48">
-              <path fill="#EA4335" d="M24 9.5c3.54 0 6.7 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.46-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-            </svg>
-            <span>Zaloguj się przez Google</span>
-          </button>
-        `;
-
-        setTimeout(() => {
-          const btn = document.getElementById("customLoginBtn");
-          if (btn) {
-            btn.onclick = () => {
-              const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
-              const params = new URLSearchParams({
-                client_id: GOOGLE_CLIENT_ID,
-                redirect_uri: REDIRECT_URI,
-                response_type: "token",
-                scope: "email profile",
-                include_granted_scopes: "true",
-                state: "security_token_" + Math.random()
-              });
-              window.location.href = `${rootUrl}?${params.toString()}`;
-            };
-          }
-        }, 50);
+      
+      // Jeśli zgoda była wcześniej zaakceptowana, ukrywamy sekcję checkboxów również po wylogowaniu
+      const isSavedAgreement = localStorage.getItem("mu_terms_accepted") === "true";
+      if (consentContainer) {
+        consentContainer.style.display = isSavedAgreement ? "none" : "block";
       }
+
+      updateLoginButtonState();
       setAccessRestrictions(false);
     }
-  } catch (err) {
-    console.error("Błąd w checkAuthUI:", err);
-  }
-}
+  });
+
+  // Nasłuchiwanie zmian na checkboxach zgody i zapisywanie w localStorage
+  document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+    chk.addEventListener('change', (e) => {
+      // Jeśli to checkbox regulaminu (pierwszy checkbox)
+      if (e.target.id === "acceptTerms" || e.target.checked) {
+        localStorage.setItem("mu_terms_accepted", "true");
+      }
+      if (!auth.currentUser) {
+        updateLoginButtonState();
+      }
+    });
+  });
 
   document.getElementById("logout-btn")?.addEventListener('click', () => {
-    localStorage.removeItem("mu_logged_in");
-    localStorage.removeItem("mu_user_email");
-    localStorage.removeItem("mu_user_name");
-    checkAuthUI();
+    signOut(auth).catch((error) => {
+      console.error("Błąd wylogowania:", error);
+    });
   });
 
   function setAccessRestrictions(fullAccess) {
     const bossBtn = document.getElementById("tabBossBtn");
     const eventsBtn = document.getElementById("tabEventsBtn");
 
-    // Blokowanie przycisków w menu głównym
     [bossBtn, eventsBtn].forEach(btn => {
       if (btn) {
         btn.style.opacity = fullAccess ? "1" : "0.3";
@@ -1262,7 +1329,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Blokowanie kafelków na stronie głównej (Home)
     const homeBossCard = document.getElementById("homeBossCard");
     const homeEventsCard = document.getElementById("homeEventsCard");
 
@@ -1276,6 +1342,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  initGoogleAuth();
   updateSpeedGaps();
 });

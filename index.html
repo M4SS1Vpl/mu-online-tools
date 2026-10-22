@@ -22,7 +22,7 @@
   <script type="module" src="app.js"></script>
 </head>
 <body>
-    <!-- WSPÓLNY KONTENER NA GÓRZE: PRZYCISK GOOGLE / PANEL POWITALNY -->
+    <!-- WSPÓLny KONTENER NA GÓRZE: PRZYCISK GOOGLE / PANEL POWITALNY -->
 <div style="text-align: center; margin: 5px auto 15px auto; width: 100%; max-width: 520px; box-sizing: border-box;">
     <!-- Przycisk logowania Google -->
     <div id="google-login-container" style="display: block; width: 100%;">
@@ -35,15 +35,13 @@
         <button id="logout-btn" class="logout-action-btn">Wyloguj</button>
     </div>
 </div>
+
 <!-- SEKCJA ZGÓD I CHECKBOXÓW -->
   <div id="consentContainer" style="margin: 15px 0; text-align: left; font-family: sans-serif; font-size: 0.8rem; color: #c9c9c9;">
-    <!-- Checkbox 1: Regulamin (Wymagany) -->
     <label style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; cursor: pointer;">
       <input type="checkbox" id="acceptTerms" required style="margin-top: 3px; accent-color: #00b37e; cursor: pointer;">
       <span>Oświadczam, że zapoznałem się z <a href="regulamin.html" target="_blank" style="color: #00b37e; text-decoration: underline;">Regulaminem</a> i akceptuję jego postanowienia. <span style="color: #f75a68;">*</span></span>
     </label>
-
-    <!-- Checkbox 2: Newsletter / Baza danych / Powiadomienia (Opcjonalny) -->
     <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
       <input type="checkbox" id="acceptMarketing" style="margin-top: 3px; accent-color: #00b37e; cursor: pointer;">
       <span>Wyrażam zgodę na przesyłanie informacji o nowych narzędzeniach i aktualizacjach w M4SS1V TOOLS.</span>
@@ -56,88 +54,70 @@
             <img src="img/webzen.png" alt="Webzen Logo" class="logo-webzen">
             <img src="img/mu_logo.png" alt="MU Online Logo" class="logo-mu">
         </div>
-
         <h1 class="main-title">
             <span class="nick">M4SS1V</span>
             <span class="subtitle">Mu Online TOOLS PANEL</span>
         </h1>
     </header>
 
-  <!-- NAWIGACJA TABÓW (2 RZĘDY PO 3 PRZYCISKI) -->
+  <!-- NAWIGACJA TABÓW -->
   <div class="nav-container">
-    <!-- Rząd 1 -->
     <div class="tab-row">
       <button id="tabHomeBtn" class="tab-btn active" onclick="switchTab('homeView')">Home</button>
       <button id="tabTimerBtn" class="tab-btn" onclick="switchTab('timerView')">Timer</button>
       <button id="tabSpeedBtn" class="tab-btn" onclick="switchTab('speedView')">Speed Gaps</button>
     </div>
-    <!-- Rząd 2 -->
     <div class="tab-row">
-      <button id="tabCalcBtn" class="tab-btn" onclick="switchTab('calcView')">Kalkulator EXP</button>
+      <button id="tabCalcBtn" class="tab-btn" onclick="switchTab('calcView')">Exp Calc & Boosts</button>
       <button id="tabBossBtn" class="tab-btn" onclick="switchTab('bossView')">Boss Timer</button>
       <button id="tabEventsBtn" class="tab-btn" onclick="switchTab('eventsView')">Events</button>
     </div>
   </div>
 
-  <!-- KARTA HOME (STRONA GŁÓWNA) -->
+  <!-- KARTA HOME -->
   <div id="homeView" class="calculator-card">
-    
-    <!-- Szybki Podgląd Aktywności - rozciągnięty na całą szerokość -->
     <div style="display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: bold; color: #ffffff; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px;">
       <span>Mu Online Global</span>
       <span class="live-badge" style="background-color: #d63031; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; display: inline-flex; align-items: center; gap: 4px;">
         <span style="width: 6px; height: 6px; background-color: white; border-radius: 50%; display: inline-block;"></span> LIVE
       </span>
     </div>
-
     <div id="homeQuickGrid" class="upcoming-events-grid" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
         <div style="color: #aaa; text-align: center; padding: 10px;">Ładowanie podglądu...</div>
     </div>
-
-    <!-- POWITANIE I OPISY -->
     <div class="home-hero">
       <h2>Witaj w M4SS1V Tools!</h2>
       <p>Zestaw pomocniczych narzędzi dla graczy MU Online, stworzony z myślą o precyzji i wygodzie podczas rozgrywki.</p>
     </div>
-
     <div class="home-grid">
-        <!-- Box 1 -->
         <div class="home-card" onclick="switchTab('calcView')">
           <div class="home-card-icon">⚡</div>
           <h3>Kalkulator EXP</h3>
           <p>Przelicz czas potrzebny do wbicia docelowego poziomu na podstawie aktualnego EXP/sek.</p>
           <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
         </div>
-
-        <!-- Box 2: Boss Timer z id -->
         <div id="homeBossCard" class="home-card" onclick="switchTab('bossView')">
           <div class="home-card-icon">⏰</div>
           <h3>Boss Timer</h3>
           <p>Śledź czasy respawnu bossów z powiadomieniami dźwiękowymi dopasowanymi do Twojego czasu.</p>
           <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
         </div>
-
-        <!-- Box 3 -->
         <div class="home-card" onclick="switchTab('speedView')">
           <div class="home-card-icon">🗡️</div>
           <h3>Speed Gaps</h3>
           <p>Sprawdź progi prędkości ataku (Attack Speed) i uniknij zbugowanych animacji czarów.</p>
           <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
         </div>
-
-        <!-- Box 4: Events z id -->
         <div id="homeEventsCard" class="home-card" onclick="switchTab('eventsView')">
           <div class="home-card-icon">📅</div>
           <h3>Events</h3>
           <p>Śledź nadchodzące eventy w MU Online Global, sprawdź godziny wejść i wymagane poziomy.</p>
           <span class="home-card-btn">Otwórz narzędzie &rarr;</span>
         </div>
-      </div>
+    </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- WIDOK: TIMER (OSOBNA ZAKŁADKA) -->
-  <!-- ========================================== -->
+  <!-- WIDOK: TIMER -->
   <div id="timerView" class="calculator-card hidden">
     <h2>Wielokrotny Timer</h2>
     <div class="timer-add-panel">
@@ -154,26 +134,20 @@
     <div id="activeTimersContainer" class="timers-grid"></div>
   </div>
 
-  <!-- ========================================== -->
   <!-- WIDOK: EVENTS -->
-  <!-- ========================================== -->
   <div id="eventsView" class="calculator-card hidden">
     <h2>Harmonogram Eventów</h2>
     <div class="event-sound-toggle" style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #aaa;">
       <input type="checkbox" id="eventSoundToggle" checked style="cursor: pointer; accent-color: #f39c12;">
       <label for="eventSoundToggle" style="cursor: pointer;">Dźwięk ostrzegawczy 5 min przed eventem</label>
     </div>
-
     <div class="upcoming-events-section">
       <div style="display: flex; align-items: center; gap: 10px;">
         <h3 style="margin: 0;">Eventy Global Mu Online</h3>
-        <span class="live-badge" style="position: relative; top: 6px;">
-          <span class="live-dot"></span> LIVE
-        </span>
+        <span class="live-badge" style="position: relative; top: 6px;"><span class="live-dot"></span> LIVE</span>
       </div>
       <div id="upcomingEventsList" class="upcoming-events-grid"></div>
     </div>
-
     <div class="events-tables-section">
       <h3 class="section-subtitle-main">Pełna Lista Godzin & Wymagany Level</h3>
       <div class="event-tabs-nav">
@@ -181,120 +155,63 @@
         <button class="event-tab-btn" data-tab="ds">😈 Devil Square</button>
         <button class="event-tab-btn" data-tab="cc">⚔️ Chaos Castle</button>
       </div>
-
-      <!-- BLOOD CASTLE -->
       <div class="event-schedule-box event-tab-content active" id="tab-bc">
-        <div class="event-box-header">
-          <h4>🏰 Blood Castle</h4>
-          <div class="level-badges-grid">
-            <div class="lvl-badge"><span class="lvl-tag">BC 1</span><span class="lvl-val">50 - 399</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">BC 2</span><span class="lvl-val">400 - 799</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">BC 3</span><span class="lvl-val">800 - 999</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">BC 4</span><span class="lvl-val">1000 - 1199</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">BC 5</span><span class="lvl-val">1200 - 1399</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">BC 6</span><span class="lvl-val">1400 - 1599</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">BC 7</span><span class="lvl-val">1600+</span></div>
-          </div>
-        </div>
         <table class="event-clean-table">
-          <thead>
-            <tr>
-              <th>Lp.</th>
-              <th>Godzina Wejścia (Czas Lokalny)</th>
-              <th>Status</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Lp.</th><th>Godzina Wejścia (Czas Lokalny)</th><th>Status</th></tr></thead>
           <tbody id="bcTableBody"></tbody>
         </table>
       </div>
-
-      <!-- DEVIL SQUARE -->
       <div class="event-schedule-box event-tab-content" id="tab-ds" style="display: none;">
-        <div class="event-box-header">
-          <h4>😈 Devil Square</h4>
-          <div class="level-badges-grid">
-            <div class="lvl-badge"><span class="lvl-tag">DS 1</span><span class="lvl-val">50 - 399</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">DS 2</span><span class="lvl-val">400 - 799</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">DS 3</span><span class="lvl-val">800 - 999</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">DS 4</span><span class="lvl-val">1000 - 1199</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">DS 5</span><span class="lvl-val">1200 - 1399</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">DS 6</span><span class="lvl-val">1400 - 1599</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">DS 7</span><span class="lvl-val">1600+</span></div>
-          </div>
-        </div>
         <table class="event-clean-table">
-          <thead>
-            <tr>
-              <th>Lp.</th>
-              <th>Godzina Wejścia (Czas Lokalny)</th>
-              <th>Status</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Lp.</th><th>Godzina Wejścia (Czas Lokalny)</th><th>Status</th></tr></thead>
           <tbody id="dsTableBody"></tbody>
         </table>
       </div>
-
-      <!-- CHAOS CASTLE -->
       <div class="event-schedule-box event-tab-content" id="tab-cc" style="display: none;">
-        <div class="event-box-header">
-          <h4>⚔️ Chaos Castle</h4>
-          <div class="level-badges-grid">
-            <div class="lvl-badge"><span class="lvl-tag">CC 1</span><span class="lvl-val">50 - 399</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">CC 2</span><span class="lvl-val">400 - 799</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">CC 3</span><span class="lvl-val">800 - 999</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">CC 4</span><span class="lvl-val">1000 - 1199</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">CC 5</span><span class="lvl-val">1200 - 1399</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">CC 6</span><span class="lvl-val">1400 - 1599</span></div>
-            <div class="lvl-badge"><span class="lvl-tag">CC 7</span><span class="lvl-val">1600+</span></div>
-          </div>
-        </div>
         <table class="event-clean-table">
-          <thead>
-            <tr>
-              <th>Lp.</th>
-              <th>Godzina Wejścia (Czas Lokalny)</th>
-              <th>Status</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Lp.</th><th>Godzina Wejścia (Czas Lokalny)</th><th>Status</th></tr></thead>
           <tbody id="ccTableBody"></tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <!-- ========================================== -->
   <!-- WIDOK: KALKULATOR EXP & BOOSTÓW -->
-  <!-- ========================================== -->
   <div id="calcView" class="calculator-card hidden">
-    <!-- 1. CZĘŚĆ: KALKULATOR CZASU LEVELOWANIA -->
-    <h2>EXP Kalkulator</h2>
-    <div class="row">
-      <div class="field-group">
-        <label for="currentLvl">Aktualny Lvl:</label>
-        <input type="number" id="currentLvl" value="1" min="1">
+    <div style="margin-top: 5px; padding-top: 5px;">
+      <h2 style="color: #10b981; font-size: 1.3rem; margin-top: 0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
+        🎯 EXP Kalkulator (1 - 1700 Level)
+      </h2>
+      <p style="color: #a1a1aa; font-size: 0.85rem; margin-bottom: 20px;">
+       Policz czas potrzebny do wbicia docelowego poziomu na podstawie aktualnego EXP/sek. oraz aktualnego stanu paska EXP.
+      </p>
+      <div class="row">
+        <div class="field-group">
+          <label for="currentLvl">Aktualny Lvl:</label>
+          <input type="number" id="currentLvl" value="1" min="1">
+        </div>
+        <div class="field-group">
+          <label for="targetLvl">Docelowy Lvl:</label>
+          <input type="number" id="targetLvl" value="400" min="1">
+        </div>
       </div>
       <div class="field-group">
-        <label for="targetLvl">Docelowy Lvl:</label>
-        <input type="number" id="targetLvl" value="400" min="1">
+        <label for="expPerSec">EXP na sekundę (EXP/s):</label>
+        <input type="number" id="expPerSec" placeholder="np. 2500" min="1">
       </div>
-    </div>
-    <div class="field-group">
-      <label for="expPerSec">EXP na sekundę (EXP/s):</label>
-      <input type="number" id="expPerSec" placeholder="np. 2500" min="1">
-    </div>
-    <div class="field-group">
-      <label for="expBar">Bar (0 - 10):</label>
-      <input type="number" id="expBar" value="0" min="0" max="10" step="0.1" placeholder="np. 4.5">
-    </div>
-    <button id="calcBtn" class="btn-primary">Oblicz czas</button>
-    
-    <div id="results" class="results-panel">
-      <p><strong>Brakujący EXP na obecnym poziomie:</strong> <span id="currentLevelRemainingExp">-</span></p>
-      <p><strong>Łączny brakujący EXP do celu:</strong> <span id="expNeeded">-</span></p>
-      <p><strong>Czas do docelowego poziomu:</strong> <span id="timeToTarget" style="color: #ffab24; font-weight: bold;">-</span></p>
+      <div class="field-group">
+        <label for="expBar">Bar (0 - 10):</label>
+        <input type="number" id="expBar" value="0" min="0" max="10" step="0.1" placeholder="np. 4.5">
+      </div>
+      <button id="calcBtn" class="btn-primary">Oblicz czas</button>
+      
+      <div id="results" class="results-panel">
+        <p><strong>Brakujący EXP na obecnym poziomie:</strong> <span id="currentLevelRemainingExp">-</span></p>
+        <p><strong>Łączny brakujący EXP do celu:</strong> <span id="expNeeded">-</span></p>
+        <p><strong>Czas do docelowego poziomu:</strong> <span id="timeToTarget" style="color: #ffab24; font-weight: bold;">-</span></p>
+      </div>
     </div>
 
-    <!-- 2. CZĘŚĆ: OSOBNY SYMULATOR BOOSTÓW EXP -->
     <div style="margin-top: 35px; border-top: 2px solid #323238; padding-top: 25px;">
       <h2 style="color: #10b981; font-size: 1.3rem; margin-top: 0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
         ⚡ SYMULATOR BOOSTÓW
@@ -303,7 +220,6 @@
         Wybierz przedział poziomów postaci, zaznacz aktywne boosty, a na końcu podaj bazowy EXP/s ze spotu.
       </p>
 
-      <!-- 0. WYBÓR POZIOMU POSTACI -->
       <div style="background: #09090b; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #27272a;">
         <label style="color: #10b981; font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 10px;">
           PRZEDZIAŁ POZIOMU POSTACI:
@@ -329,11 +245,9 @@
         <h3 style="color: #fff; font-size: 0.95rem; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #27272a; padding-bottom: 8px;">
           (A) Additional EXP (Suma bonusów)
         </h3>
-
         <div style="display: flex; flex-direction: column; gap: 16px;">
-          <!-- SEALE / PIECZĘCIE -->
           <div>
-            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Seale / Pieczęcie</span>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">Seale / Pieczęcie</span>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk" value="50"> Blessing of Eunice (+50%)</label>
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk" value="50"> Seal of Healing (+50%)</label>
@@ -344,9 +258,8 @@
             </div>
           </div>
 
-          <!-- TALIZMANY (EXCLUSIVE) -->
           <div>
-            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Talizmany</span>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">Talizmany</span>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk tali-exclusive" value="50"> Talisman of Ascension 1 (+50%)</label>
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk tali-exclusive" value="100"> Talisman of Ascension 2 (+100%)</label>
@@ -354,9 +267,8 @@
             </div>
           </div>
 
-          <!-- BLESSINGI / BŁOGOSŁAWIEŃSTWA -->
           <div>
-            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Blessingi / Błogosławieństwa</span>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">Blessingi / Błogosławieństwa</span>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk bol-exclusive" value="50"> Blessing of Light 1 (+50%)</label>
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk bol-exclusive" value="100"> Blessing of Light 2 (+100%)</label>
@@ -364,39 +276,47 @@
             </div>
           </div>
 
-          <!-- PIERŚCIENIE (MAX 1) -->
           <div>
-            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Pierścienie (Max 1)</span>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">Pierścienie & Pety</span>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ring-exclusive" data-ring-type="pink_brown" value="50"> Pink Panda Ring (+50%)</label>
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ring-exclusive" data-ring-type="pink_brown" value="50"> Brown Panda Ring (+50%)</label>
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ring-exclusive" data-ring-type="panda" value="50"> Panda Ring (+50%)</label>
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ring-exclusive" data-ring-type="skeleton" value="50"> Skeleton Ring (+50%)</label>
-            </div>
-
-            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-top: 12px;">Pety (Max 1)</span>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk pet-exclusive" data-pet-type="panda" value="50"> Pet Panda (+50%)</label>
               <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk pet-exclusive" data-pet-type="skeleton" value="30"> Pet Skeleton (+30%)</label>
             </div>
-            
-            <!-- INFORMACJA O AUTOMATYCZNYM COMBO -->
             <div style="margin-top: 10px; padding: 8px 12px; background: #18181b; border-radius: 6px; border: 1px solid #3f3f46; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; color: #f59e0b;">
-              <span>Bonus Zestawu (Pink/Brown Ring + Pet Combo):</span>
+              <span>Pet, Transformation Ring Set:</span>
               <strong id="autoComboDisplay" style="font-size: 1rem;">+0%</strong>
             </div>
           </div>
 
-          <!-- INNE / EVENTOWE -->
           <div>
-            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Wydarzenia & Nagrody</span>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
-              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk" value="20"> Arca War Siege Rewards (+20%)</label>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">Wydarzenia & Nagrody Regionalne</span>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;">
+                <input type="checkbox" class="boost-chk" value="20"> Arca War Siege Rewards (+20%)
+              </label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;">
+                <input type="checkbox" class="boost-chk" value="15"> Acheron Area Additional EXP (+15%)
+              </label>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%;">
+                <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
+                  <input type="checkbox" id="fereaPartyCheck" style="accent-color: #10b981; cursor: pointer;">
+                  <span>Ferea region Party EXP buff</span>
+                </label>
+                <select id="fereaPartySelect" disabled style="background: #18181b; color: #fff; border: 1px solid #3f3f46; border-radius: 4px; padding: 2px 6px; font-size: 0.8rem; cursor: pointer; width: 75px; flex-shrink: 0;">
+                  <option value="5">+5%</option>
+                  <option value="10" selected>+10%</option>
+                  <option value="15">+15%</option>
+                  <option value="20">+20%</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- SUMA A -->
         <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #3f3f46; font-size: 0.95rem; color: #a1a1aa; text-align: right;">
           (A) Additional EXP: <strong id="sumGroupAText" style="color: #10b981; font-size: 1.15rem;">0%</strong>
         </div>
@@ -407,29 +327,25 @@
         <h3 style="color: #fff; font-size: 0.95rem; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #27272a; padding-bottom: 8px;">
           (B) EXP Multiplier (Mnożniki)
         </h3>
-
         <div style="display: flex; flex-direction: column; gap: 12px;">
           <label style="font-size: 0.85rem; color: #d4d4d8; display: flex; align-items: center; gap: 8px; cursor: pointer;">
             <input type="checkbox" id="boostEventCheck" value="1.3" class="multiplier-chk" style="accent-color: #10b981;"> 
             <span>EXP Event (x1.3)</span>
           </label>
-
-          <!-- NOWY CHECKBOX: SPEED SERVER -->
           <label style="font-size: 0.85rem; color: #d4d4d8; display: flex; align-items: center; gap: 8px; cursor: pointer;">
             <input type="checkbox" id="boostSpeedServerCheck" value="2.0" class="multiplier-chk" style="accent-color: #10b981;"> 
             <span>Speed Server (x2.0)</span>
           </label>
-
           <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #d4d4d8; background: #18181b; padding: 8px 12px; border-radius: 6px; border: 1px solid #3f3f46;">
-            <span>Automatyczny Premium EXP (skalowany z grupy A):</span>
+            <span>Premium EXP:</span>
             <strong id="autoPremiumDisplay" style="color: #10b981; font-size: 1rem;">1.00X</strong>
           </div>
         </div>
-
         <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #3f3f46; font-size: 0.95rem; color: #a1a1aa; text-align: right;">
           Łączny Mnożnik (B): <strong id="sumGroupBText" style="color: #38bdf8; font-size: 1.15rem;">1.00X</strong>
         </div>
       </div>
+
       <!-- (C) GOLD CHANNEL PASS -->
       <div style="background: #09090b; padding: 18px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #27272a;">
         <h3 style="color: #fff; font-size: 0.95rem; margin-top: 0; margin-bottom: 10px;">(C) Gold Channel</h3>
@@ -439,7 +355,7 @@
         </label>
       </div>
 
-      <!-- BAZOWY EXP/S (PRZENIESIONY NA DÓŁ PRZED PRZELICZNIKIEM) -->
+      <!-- BAZOWY EXP/S -->
       <div style="background: #09090b; padding: 18px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #27272a;">
         <label for="baseBoostExpInput" style="color: #10b981; font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 8px;">
           BAZOWY EXP/S ZE SPOTU (100% CZYSTY EXP BEZ BUFFÓW):
@@ -453,7 +369,6 @@
         <div id="boostTotalPercentage" style="font-size: 1.35rem; font-weight: bold; color: #10b981;">
           Gaining 100% EXP out of Base EXP
         </div>
-
         <div style="margin-top: 15px; font-size: 0.85rem; color: #a1a1aa;">
           Przewidywany EXP na sekundę z boostami:
         </div>
@@ -462,7 +377,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> <!-- Prawidłowe zamknięcie #calcView -->
 
   <!-- WIDOK: BOSS TIMER -->
   <div id="bossView" class="calculator-card hidden">
@@ -475,7 +390,6 @@
       <span class="clock-label">CZAS LOKALNY</span>
       <div id="systemClock" class="clock-value">--:--:--</div>
     </div>
-
     <div class="boss-control-panel">
       <div class="boss-form-grid">
         <div class="field-group">
@@ -508,7 +422,6 @@
         <button id="addBossBtn" class="btn-primary">DODAJ DO LISTY</button>
       </div>
     </div>
-
     <div class="table-container" style="margin-top: 20px;">
       <table class="boss-table">
         <thead>
@@ -524,16 +437,13 @@
         <tbody id="bossTableBody"></tbody>
       </table>
     </div>
-
     <div class="button-row" style="margin-top: 20px;">
       <button id="removeSelectedBtn" class="btn-secondary">USUŃ ZAZNACZONE</button>
       <button id="clearAllBossesBtn" class="btn-danger">WYCZYŚĆ CAŁĄ LISTĘ</button>
     </div>
   </div>
 
-  <!-- ========================================== -->
   <!-- WIDOK: SPEED GAPS -->
-  <!-- ========================================== -->
   <div id="speedView" class="calculator-card hidden">
     <h2>MU ONLINE - SPEED GAPS (ATTACK SPEED)</h2>
     <div class="class-selector">
@@ -557,7 +467,6 @@
         <option value="cru">Crusader</option>
       </select>
     </div>
-
     <div class="gap-card-vertical">
       <div class="hero-header-center">
         <div class="hero-preview-center">

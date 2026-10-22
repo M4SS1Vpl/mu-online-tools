@@ -630,10 +630,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 4B. OSOBNY SYMULATOR BOOSTÓW EXP (Z WZAJEMNYM WYKLUCZANIEM I AUTO COMBO)
+  // 4B. OSOBNY SYMULATOR BOOSTÓW EXP
   // ==========================================
   
-  // PŁYNNA INTERPOLACJA LINIOWA DLA PREMIUM EXP
   function getAutomaticPremiumMultiplier(sumA) {
     const points = [
       [0, 1.00],
@@ -670,7 +669,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return 1.30;
   }
 
-  // OBSŁUGA WZAJEMNEGO WYKLUCZANIA SIĘ BOOSTÓW (MAX 1 DANEGO TYPU)
   function setupExclusiveCheckboxes(className) {
     const checkboxes = document.querySelectorAll(`.${className}`);
     checkboxes.forEach(chk => {
@@ -685,15 +683,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // AKTYWACJA REGUŁ WYKLUCZEŃ
-  setupExclusiveCheckboxes('ascension-seal-exclusive'); // Wyklucza tylko Ascension 1, 2, 3 miedzy soba
+  setupExclusiveCheckboxes('ascension-seal-exclusive');
   setupExclusiveCheckboxes('tali-exclusive');
   setupExclusiveCheckboxes('bol-exclusive');
   setupExclusiveCheckboxes('ring-exclusive');
   setupExclusiveCheckboxes('pet-exclusive');
 
   function updateBoostCalculator() {
-    // 0. Przedział poziomów
     const levelRangeEl = document.querySelector('input[name="levelRange"]:checked');
     const levelRange = levelRangeEl ? levelRangeEl.value : '800+';
 
@@ -708,10 +704,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // 1. Grupa A - Suma Additional EXP
     let sumGroupA = 0;
-
-    // Sumujemy wszystkie zaznaczone z grupy A (w tym bazowe 50% ringu i bazowe % peta)
     const checkedA = document.querySelectorAll('#calcView .boost-chk:checked');
     checkedA.forEach(chk => {
       const val = parseInt(chk.value, 10);
@@ -720,28 +713,35 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // DODATKOWY BONUS ZESTAWU COMBO COMBO (+65%)
+    // OBSŁUGA FEREA REGION PARTY EXP BUFF
+    const fereaCheck = document.getElementById('fereaPartyCheck');
+    const fereaSelect = document.getElementById('fereaPartySelect');
+
+    if (fereaCheck && fereaSelect) {
+      fereaSelect.disabled = !fereaCheck.checked;
+      if (fereaCheck.checked) {
+        sumGroupA += parseInt(fereaSelect.value, 10) || 0;
+      }
+    }
+
     const selectedRing = document.querySelector('.ring-exclusive:checked');
     const selectedPet = document.querySelector('.pet-exclusive:checked');
 
     let extraComboBonus = 0;
-
-    // Jeśli gracz wybrał Pink/Brown Ring ORAZ jakiegokolwiek Peta -> wpadają dodatkowe 65% z zestawu
     if (selectedRing && selectedPet) {
       const ringType = selectedRing.dataset.ringType;
       if (ringType === 'pink_brown') {
-        extraComboBonus = 65; // Pet, Transformation Ring Set (+65%)
+        extraComboBonus = 65; // Dodatkowy bonus zestawu dla Pink/Brown Panda
       }
     }
 
     sumGroupA += extraComboBonus;
 
-    // Wyświetlenie w UI podglądu Combo
     const comboDisplayEl = document.getElementById('autoComboDisplay');
     if (comboDisplayEl) {
       comboDisplayEl.innerText = extraComboBonus > 0 ? `+${extraComboBonus}%` : '+0%';
     }
-    // Wyświetlenie łącznej sumy grupy A
+
     const sumGroupAEl = document.getElementById('sumGroupAText');
     if (sumGroupAEl) {
       sumGroupAEl.innerText = `${sumGroupA}%`;
@@ -749,22 +749,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const totalGroupA = 100 + sumGroupA;
 
-    // 2. Grupa B - Multipliers
     let multiplierB = 1.0;
 
-    // EXP Event
     const eventCheck = document.getElementById('boostEventCheck');
     if (eventCheck && eventCheck.checked) {
       multiplierB *= parseFloat(eventCheck.value);
     }
 
-    // Speed Server
     const speedServerCheck = document.getElementById('boostSpeedServerCheck');
     if (speedServerCheck && speedServerCheck.checked) {
       multiplierB *= parseFloat(speedServerCheck.value);
     }
 
-    // Premium / VIP EXP (automatyczny z płynnej interpolacji)
     const autoPremiumMult = getAutomaticPremiumMultiplier(sumGroupA);
     multiplierB *= autoPremiumMult;
 
@@ -773,7 +769,6 @@ document.addEventListener('DOMContentLoaded', () => {
       autoPremiumDisplayEl.innerText = `${autoPremiumMult.toFixed(2)}X`;
     }
 
-    // Gold Channel
     const goldCheck = document.getElementById('boostGoldCheck');
     let goldBonusC = 0;
 
@@ -793,8 +788,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const subtotal = totalGroupA * multiplierB;
-
-    // 3. Łączny procent
     const finalPercentage = subtotal + goldBonusC;
 
     const percentLabel = document.getElementById('boostTotalPercentage');
@@ -802,7 +795,6 @@ document.addEventListener('DOMContentLoaded', () => {
       percentLabel.innerText = `Gaining ${Math.floor(finalPercentage)}% EXP out of Base EXP`;
     }
 
-    // Przeliczenie na sekundę
     const baseExpInput = document.getElementById('baseBoostExpInput');
     const baseExpSec = parseFloat(baseExpInput?.value) || 0;
     const resSecEl = document.getElementById('boostResultSec');
@@ -815,11 +807,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // NASŁUCHIWANIE NA CAŁYM KONTENERZE (dla eventów, gold channel itp.)
   const calcViewEl = document.getElementById('calcView');
   if (calcViewEl) {
     calcViewEl.addEventListener('change', (e) => {
-      // Wykluczenia obsługujemy osobno, ale zmiany eventów/gold/bazowego exp odświeżamy tutaj
       if (!e.target.classList.contains('ascension-seal-exclusive') && 
           !e.target.classList.contains('tali-exclusive') && 
           !e.target.classList.contains('bol-exclusive') && 
@@ -831,7 +821,6 @@ document.addEventListener('DOMContentLoaded', () => {
     calcViewEl.addEventListener('input', updateBoostCalculator);
   }
 
-  // Inicjalizacja na start
   updateBoostCalculator();
 
   // ==========================================
@@ -1270,7 +1259,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(updateEventsSystem, 1000);
   updateEventsSystem();
 
-  // Obsługa zakładek w panelu eventów
   document.addEventListener('click', function(e) {
     const btn = e.target.closest('.event-tab-btn');
     if (btn) {
@@ -1404,14 +1392,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 9. GOOGLE AUTHENTICATION (FIREBASE)
   // ==========================================
-  
   function updateLoginButtonState() {
     const loginBtnContainer = document.getElementById("google-login-button");
     if (!loginBtnContainer) return;
 
     const termsCheckbox = document.querySelector('input[type="checkbox"]'); 
-    
-    // Sprawdzamy czy checkbox jest zaznaczony LUB czy zgoda była już wcześniej zapamiętana w localStorage
     const isSavedAgreement = localStorage.getItem("mu_terms_accepted") === "true";
     if (termsCheckbox && isSavedAgreement) {
       termsCheckbox.checked = true;
@@ -1450,50 +1435,45 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   onAuthStateChanged(auth, async (user) => { 
-  const profileContainer = document.getElementById("user-profile-info");
-  const loginBtnContainer = document.getElementById("google-login-button");
-  const displayNameSpan = document.getElementById("user-display-name");
-  const consentContainer = document.getElementById("consentContainer");
+    const profileContainer = document.getElementById("user-profile-info");
+    const loginBtnContainer = document.getElementById("google-login-button");
+    const displayNameSpan = document.getElementById("user-display-name");
+    const consentContainer = document.getElementById("consentContainer");
 
-  if (user) {
-    localStorage.setItem("mu_logged_in", "true");
-    localStorage.setItem("mu_user_email", user.email);
-    localStorage.setItem("mu_user_name", user.displayName || user.email);
+    if (user) {
+      localStorage.setItem("mu_logged_in", "true");
+      localStorage.setItem("mu_user_email", user.email);
+      localStorage.setItem("mu_user_name", user.displayName || user.email);
 
-    // ==========================================
-    // 2. TUTAJ WKLEJAMY ZAPIS DO BAZY FIRESTORE:
-    // ==========================================
-    try {
-      const userRef = doc(db, "users", user.uid);
-      const termsAccepted = localStorage.getItem("mu_terms_accepted") === "true";
-      
-      await setDoc(userRef, {
-        uid: user.uid,
-        email: user.email,
-        displayName: user.displayName || "",
-        termsAccepted: termsAccepted,
-        lastLogin: serverTimestamp()
-      }, { merge: true });
-    } catch (error) {
-      console.error("Błąd zapisu użytkownika w bazie Firestore:", error);
-    }
-    // ==========================================
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const termsAccepted = localStorage.getItem("mu_terms_accepted") === "true";
+        
+        await setDoc(userRef, {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName || "",
+          termsAccepted: termsAccepted,
+          lastLogin: serverTimestamp()
+        }, { merge: true });
+      } catch (error) {
+        console.error("Błąd zapisu użytkownika w bazie Firestore:", error);
+      }
 
-    if (loginBtnContainer) loginBtnContainer.style.display = "none";
-    if (consentContainer) consentContainer.style.display = "none";
-    if (profileContainer) {
-      profileContainer.style.display = "flex";
-      if (displayNameSpan) displayNameSpan.textContent = `Witaj, ${user.displayName || user.email}!`;
-    }
-    setAccessRestrictions(true);
-  } else {
+      if (loginBtnContainer) loginBtnContainer.style.display = "none";
+      if (consentContainer) consentContainer.style.display = "none";
+      if (profileContainer) {
+        profileContainer.style.display = "flex";
+        if (displayNameSpan) displayNameSpan.textContent = `Witaj, ${user.displayName || user.email}!`;
+      }
+      setAccessRestrictions(true);
+    } else {
       localStorage.removeItem("mu_logged_in");
       localStorage.removeItem("mu_user_email");
       localStorage.removeItem("mu_user_name");
 
       if (profileContainer) profileContainer.style.display = "none";
       
-      // Jeśli zgoda była wcześniej zaakceptowana, ukrywamy sekcję checkboxów również po wylogowaniu
       const isSavedAgreement = localStorage.getItem("mu_terms_accepted") === "true";
       if (consentContainer) {
         consentContainer.style.display = isSavedAgreement ? "none" : "block";
@@ -1504,10 +1484,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Nasłuchiwanie zmian na checkboxach zgody i zapisywanie w localStorage
   document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
     chk.addEventListener('change', (e) => {
-      // Jeśli to checkbox regulaminu (pierwszy checkbox)
       if (e.target.id === "acceptTerms" || e.target.checked) {
         localStorage.setItem("mu_terms_accepted", "true");
       }

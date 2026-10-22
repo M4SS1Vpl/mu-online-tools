@@ -568,7 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const playedReady = new Set();
 
   // ==========================================
-  // 4. KALKULATOR EXP
+  // 4. KALKULATOR EXP (PIERWOTNY)
   // ==========================================
   const calcBtn = document.getElementById('calcBtn');
 
@@ -628,6 +628,211 @@ document.addEventListener('DOMContentLoaded', () => {
       alert(err.message);
     }
   });
+
+  // ==========================================
+  // 4B. OSOBNY SYMULATOR BOOSTÓW EXP (Z WZAJEMNYM WYKLUCZANIEM I AUTO COMBO)
+  // ==========================================
+  
+  // PŁYNNA INTERPOLACJA LINIOWA DLA PREMIUM EXP
+  function getAutomaticPremiumMultiplier(sumA) {
+    const points = [
+      [0, 1.00],
+      [50, 1.00],
+      [150, 1.03],
+      [180, 1.06],
+      [200, 1.06],
+      [310, 1.12],
+      [365, 1.15],
+      [380, 1.15],
+      [400, 1.15],
+      [515, 1.22],
+      [580, 1.24],
+      [600, 1.24],
+      [615, 1.26],
+      [630, 1.26],
+      [665, 1.29],
+      [695, 1.29],
+      [785, 1.30],
+      [815, 1.30],
+      [830, 1.30]
+    ];
+
+    if (sumA <= points[0][0]) return points[0][1];
+    if (sumA >= points[points.length - 1][0]) return points[points.length - 1][1];
+
+    for (let i = 0; i < points.length - 1; i++) {
+      const [x0, y0] = points[i];
+      const [x1, y1] = points[i + 1];
+      if (sumA >= x0 && sumA <= x1) {
+        return y0 + ((sumA - x0) / (x1 - x0)) * (y1 - y0);
+      }
+    }
+    return 1.30;
+  }
+
+  // OBSŁUGA WZAJEMNEGO WYKLUCZANIA SIĘ BOOSTÓW (MAX 1 DANEGO TYPU)
+  function setupExclusiveCheckboxes(className) {
+    const checkboxes = document.querySelectorAll(`.${className}`);
+    checkboxes.forEach(chk => {
+      chk.addEventListener('change', function() {
+        if (this.checked) {
+          checkboxes.forEach(other => {
+            if (other !== this) other.checked = false;
+          });
+        }
+        updateBoostCalculator();
+      });
+    });
+  }
+
+  // AKTYWACJA REGUŁ WYKLUCZEŃ
+  setupExclusiveCheckboxes('ascension-seal-exclusive'); // Wyklucza tylko Ascension 1, 2, 3 miedzy soba
+  setupExclusiveCheckboxes('tali-exclusive');
+  setupExclusiveCheckboxes('bol-exclusive');
+  setupExclusiveCheckboxes('ring-exclusive');
+  setupExclusiveCheckboxes('pet-exclusive');
+
+  function updateBoostCalculator() {
+    // 0. Przedział poziomów
+    const levelRangeEl = document.querySelector('input[name="levelRange"]:checked');
+    const levelRange = levelRangeEl ? levelRangeEl.value : '800+';
+
+    const goldLabelEl = document.getElementById('goldChannelLabelText');
+    if (goldLabelEl) {
+      if (levelRange === '1-400') {
+        goldLabelEl.innerText = "Gold Channel Pass (3.33X)";
+      } else if (levelRange === '400-800') {
+        goldLabelEl.innerText = "Gold Channel Pass (2.00X)";
+      } else {
+        goldLabelEl.innerText = "Gold Channel Pass (+200%)";
+      }
+    }
+
+    // 1. Grupa A - Suma Additional EXP
+    let sumGroupA = 0;
+
+    // Sumujemy wszystkie zaznaczone z grupy A (w tym bazowe 50% ringu i bazowe % peta)
+    const checkedA = document.querySelectorAll('#calcView .boost-chk:checked');
+    checkedA.forEach(chk => {
+      const val = parseInt(chk.value, 10);
+      if (!isNaN(val)) {
+        sumGroupA += val;
+      }
+    });
+
+    // DODATKOWY BONUS ZESTAWU COMBO COMBO (+65%)
+    const selectedRing = document.querySelector('.ring-exclusive:checked');
+    const selectedPet = document.querySelector('.pet-exclusive:checked');
+
+    let extraComboBonus = 0;
+
+    // Jeśli gracz wybrał Pink/Brown Ring ORAZ jakiegokolwiek Peta -> wpadają dodatkowe 65% z zestawu
+    if (selectedRing && selectedPet) {
+      const ringType = selectedRing.dataset.ringType;
+      if (ringType === 'pink_brown') {
+        extraComboBonus = 65; // Pet, Transformation Ring Set (+65%)
+      }
+    }
+
+    sumGroupA += extraComboBonus;
+
+    // Wyświetlenie w UI podglądu Combo
+    const comboDisplayEl = document.getElementById('autoComboDisplay');
+    if (comboDisplayEl) {
+      comboDisplayEl.innerText = extraComboBonus > 0 ? `+${extraComboBonus}%` : '+0%';
+    }
+    // Wyświetlenie łącznej sumy grupy A
+    const sumGroupAEl = document.getElementById('sumGroupAText');
+    if (sumGroupAEl) {
+      sumGroupAEl.innerText = `${sumGroupA}%`;
+    }
+
+    const totalGroupA = 100 + sumGroupA;
+
+    // 2. Grupa B - Multipliers
+    let multiplierB = 1.0;
+
+    // EXP Event
+    const eventCheck = document.getElementById('boostEventCheck');
+    if (eventCheck && eventCheck.checked) {
+      multiplierB *= parseFloat(eventCheck.value);
+    }
+
+    // Speed Server
+    const speedServerCheck = document.getElementById('boostSpeedServerCheck');
+    if (speedServerCheck && speedServerCheck.checked) {
+      multiplierB *= parseFloat(speedServerCheck.value);
+    }
+
+    // Premium / VIP EXP (automatyczny z płynnej interpolacji)
+    const autoPremiumMult = getAutomaticPremiumMultiplier(sumGroupA);
+    multiplierB *= autoPremiumMult;
+
+    const autoPremiumDisplayEl = document.getElementById('autoPremiumDisplay');
+    if (autoPremiumDisplayEl) {
+      autoPremiumDisplayEl.innerText = `${autoPremiumMult.toFixed(2)}X`;
+    }
+
+    // Gold Channel
+    const goldCheck = document.getElementById('boostGoldCheck');
+    let goldBonusC = 0;
+
+    if (goldCheck && goldCheck.checked) {
+      if (levelRange === '1-400') {
+        multiplierB *= 3.3333333;
+      } else if (levelRange === '400-800') {
+        multiplierB *= 2.0;
+      } else {
+        goldBonusC = 200;
+      }
+    }
+
+    const sumGroupBEl = document.getElementById('sumGroupBText');
+    if (sumGroupBEl) {
+      sumGroupBEl.innerText = `${multiplierB.toFixed(2)}X`;
+    }
+
+    const subtotal = totalGroupA * multiplierB;
+
+    // 3. Łączny procent
+    const finalPercentage = subtotal + goldBonusC;
+
+    const percentLabel = document.getElementById('boostTotalPercentage');
+    if (percentLabel) {
+      percentLabel.innerText = `Gaining ${Math.floor(finalPercentage)}% EXP out of Base EXP`;
+    }
+
+    // Przeliczenie na sekundę
+    const baseExpInput = document.getElementById('baseBoostExpInput');
+    const baseExpSec = parseFloat(baseExpInput?.value) || 0;
+    const resSecEl = document.getElementById('boostResultSec');
+
+    if (baseExpSec > 0) {
+      const boostedSec = baseExpSec * (finalPercentage / 100.0);
+      if (resSecEl) resSecEl.innerText = Math.round(boostedSec).toLocaleString('pl-PL') + " EXP/s";
+    } else {
+      if (resSecEl) resSecEl.innerText = "-";
+    }
+  }
+
+  // NASŁUCHIWANIE NA CAŁYM KONTENERZE (dla eventów, gold channel itp.)
+  const calcViewEl = document.getElementById('calcView');
+  if (calcViewEl) {
+    calcViewEl.addEventListener('change', (e) => {
+      // Wykluczenia obsługujemy osobno, ale zmiany eventów/gold/bazowego exp odświeżamy tutaj
+      if (!e.target.classList.contains('ascension-seal-exclusive') && 
+          !e.target.classList.contains('tali-exclusive') && 
+          !e.target.classList.contains('bol-exclusive') && 
+          !e.target.classList.contains('ring-exclusive') && 
+          !e.target.classList.contains('pet-exclusive')) {
+        updateBoostCalculator();
+      }
+    });
+    calcViewEl.addEventListener('input', updateBoostCalculator);
+  }
+
+  // Inicjalizacja na start
+  updateBoostCalculator();
 
   // ==========================================
   // 5. BOSS TIMER LOGIKA

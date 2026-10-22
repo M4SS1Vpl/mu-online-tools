@@ -263,10 +263,11 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- WIDOK: KALKULATOR EXP -->
+  <!-- WIDOK: KALKULATOR EXP & BOOSTÓW -->
   <!-- ========================================== -->
   <div id="calcView" class="calculator-card hidden">
-    <h2>MU Online - Kalkulator EXP</h2>
+    <!-- 1. CZĘŚĆ: KALKULATOR CZASU LEVELOWANIA -->
+    <h2>EXP Kalkulator</h2>
     <div class="row">
       <div class="field-group">
         <label for="currentLvl">Aktualny Lvl:</label>
@@ -286,10 +287,180 @@
       <input type="number" id="expBar" value="0" min="0" max="10" step="0.1" placeholder="np. 4.5">
     </div>
     <button id="calcBtn" class="btn-primary">Oblicz czas</button>
+    
     <div id="results" class="results-panel">
       <p><strong>Brakujący EXP na obecnym poziomie:</strong> <span id="currentLevelRemainingExp">-</span></p>
       <p><strong>Łączny brakujący EXP do celu:</strong> <span id="expNeeded">-</span></p>
       <p><strong>Czas do docelowego poziomu:</strong> <span id="timeToTarget" style="color: #ffab24; font-weight: bold;">-</span></p>
+    </div>
+
+    <!-- 2. CZĘŚĆ: OSOBNY SYMULATOR BOOSTÓW EXP -->
+    <div style="margin-top: 35px; border-top: 2px solid #323238; padding-top: 25px;">
+      <h2 style="color: #10b981; font-size: 1.3rem; margin-top: 0; margin-bottom: 5px; display: flex; align-items: center; gap: 8px;">
+        ⚡ SYMULATOR BOOSTÓW
+      </h2>
+      <p style="color: #a1a1aa; font-size: 0.85rem; margin-bottom: 20px;">
+        Wybierz przedział poziomów postaci, zaznacz aktywne boosty, a na końcu podaj bazowy EXP/s ze spotu.
+      </p>
+
+      <!-- 0. WYBÓR POZIOMU POSTACI -->
+      <div style="background: #09090b; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #27272a;">
+        <label style="color: #10b981; font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 10px;">
+          PRZEDZIAŁ POZIOMU POSTACI:
+        </label>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; font-size: 0.85rem;">
+          <label style="cursor: pointer; display: flex; align-items: center; gap: 6px; background: #18181b; padding: 8px 12px; border-radius: 6px; border: 1px solid #3f3f46;">
+            <input type="radio" name="levelRange" value="1-400" checked style="accent-color: #10b981;">
+            <span><strong>1 – 400 lvl</strong></span>
+          </label>
+          <label style="cursor: pointer; display: flex; align-items: center; gap: 6px; background: #18181b; padding: 8px 12px; border-radius: 6px; border: 1px solid #3f3f46;">
+            <input type="radio" name="levelRange" value="400-800" style="accent-color: #10b981;">
+            <span><strong>400 – 800 lvl</strong></span>
+          </label>
+          <label style="cursor: pointer; display: flex; align-items: center; gap: 6px; background: #18181b; padding: 8px 12px; border-radius: 6px; border: 1px solid #3f3f46;">
+            <input type="radio" name="levelRange" value="800+" style="accent-color: #10b981;">
+            <span><strong>800+ lvl</strong></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- (A) ADDITIONAL EXP -->
+      <div style="background: #09090b; padding: 18px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #27272a;">
+        <h3 style="color: #fff; font-size: 0.95rem; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #27272a; padding-bottom: 8px;">
+          (A) Additional EXP (Suma bonusów)
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- SEALE / PIECZĘCIE -->
+          <div>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Seale / Pieczęcie</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk" value="50"> Blessing of Eunice (+50%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk" value="50"> Seal of Healing (+50%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk" value="100"> Seal of Wealth (+100%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ascension-seal-exclusive" value="50"> Seal of Ascension 1 (+50%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ascension-seal-exclusive" value="100"> Seal of Ascension 2 (+100%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ascension-seal-exclusive" value="200"> Seal of Ascension 3 (+200%)</label>
+            </div>
+          </div>
+
+          <!-- TALIZMANY (EXCLUSIVE) -->
+          <div>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Talizmany</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk tali-exclusive" value="50"> Talisman of Ascension 1 (+50%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk tali-exclusive" value="100"> Talisman of Ascension 2 (+100%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk tali-exclusive" value="200"> Talisman of Ascension 3 (+200%)</label>
+            </div>
+          </div>
+
+          <!-- BLESSINGI / BŁOGOSŁAWIEŃSTWA -->
+          <div>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Blessingi / Błogosławieństwa</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk bol-exclusive" value="50"> Blessing of Light 1 (+50%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk bol-exclusive" value="100"> Blessing of Light 2 (+100%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk bol-exclusive" value="200"> Blessing of Light 3 (+200%)</label>
+            </div>
+          </div>
+
+          <!-- PIERŚCIENIE (MAX 1) -->
+          <div>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Pierścienie (Max 1)</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ring-exclusive" data-ring-type="pink_brown" value="50"> Pink Panda Ring (+50%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ring-exclusive" data-ring-type="pink_brown" value="50"> Brown Panda Ring (+50%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ring-exclusive" data-ring-type="panda" value="50"> Panda Ring (+50%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk ring-exclusive" data-ring-type="skeleton" value="50"> Skeleton Ring (+50%)</label>
+            </div>
+
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-top: 12px;">Pety (Max 1)</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk pet-exclusive" data-pet-type="panda" value="50"> Pet Panda (+50%)</label>
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk pet-exclusive" data-pet-type="skeleton" value="30"> Pet Skeleton (+30%)</label>
+            </div>
+            
+            <!-- INFORMACJA O AUTOMATYCZNYM COMBO -->
+            <div style="margin-top: 10px; padding: 8px 12px; background: #18181b; border-radius: 6px; border: 1px solid #3f3f46; display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; color: #f59e0b;">
+              <span>Bonus Zestawu (Pink/Brown Ring + Pet Combo):</span>
+              <strong id="autoComboDisplay" style="font-size: 1rem;">+0%</strong>
+            </div>
+          </div>
+
+          <!-- INNE / EVENTOWE -->
+          <div>
+            <span style="color: #10b981; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">Wydarzenia & Nagrody</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 6px;">
+              <label style="font-size: 0.85rem; color: #d4d4d8; cursor: pointer;"><input type="checkbox" class="boost-chk" value="20"> Arca War Siege Rewards (+20%)</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUMA A -->
+        <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #3f3f46; font-size: 0.95rem; color: #a1a1aa; text-align: right;">
+          (A) Additional EXP: <strong id="sumGroupAText" style="color: #10b981; font-size: 1.15rem;">0%</strong>
+        </div>
+      </div>
+
+      <!-- (B) EXP MULTIPLIER -->
+      <div style="background: #09090b; padding: 18px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #27272a;">
+        <h3 style="color: #fff; font-size: 0.95rem; margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid #27272a; padding-bottom: 8px;">
+          (B) EXP Multiplier (Mnożniki)
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <label style="font-size: 0.85rem; color: #d4d4d8; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="checkbox" id="boostEventCheck" value="1.3" class="multiplier-chk" style="accent-color: #10b981;"> 
+            <span>EXP Event (x1.3)</span>
+          </label>
+
+          <!-- NOWY CHECKBOX: SPEED SERVER -->
+          <label style="font-size: 0.85rem; color: #d4d4d8; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="checkbox" id="boostSpeedServerCheck" value="2.0" class="multiplier-chk" style="accent-color: #10b981;"> 
+            <span>Speed Server (x2.0)</span>
+          </label>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #d4d4d8; background: #18181b; padding: 8px 12px; border-radius: 6px; border: 1px solid #3f3f46;">
+            <span>Automatyczny Premium EXP (skalowany z grupy A):</span>
+            <strong id="autoPremiumDisplay" style="color: #10b981; font-size: 1rem;">1.00X</strong>
+          </div>
+        </div>
+
+        <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #3f3f46; font-size: 0.95rem; color: #a1a1aa; text-align: right;">
+          Łączny Mnożnik (B): <strong id="sumGroupBText" style="color: #38bdf8; font-size: 1.15rem;">1.00X</strong>
+        </div>
+      </div>
+      <!-- (C) GOLD CHANNEL PASS -->
+      <div style="background: #09090b; padding: 18px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #27272a;">
+        <h3 style="color: #fff; font-size: 0.95rem; margin-top: 0; margin-bottom: 10px;">(C) Gold Channel</h3>
+        <label style="font-size: 0.85rem; color: #d4d4d8; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+          <input type="checkbox" id="boostGoldCheck" style="accent-color: #10b981;">
+          <span id="goldChannelLabelText">Gold Channel Pass Active</span>
+        </label>
+      </div>
+
+      <!-- BAZOWY EXP/S (PRZENIESIONY NA DÓŁ PRZED PRZELICZNIKIEM) -->
+      <div style="background: #09090b; padding: 18px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #27272a;">
+        <label for="baseBoostExpInput" style="color: #10b981; font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 8px;">
+          BAZOWY EXP/S ZE SPOTU (100% CZYSTY EXP BEZ BUFFÓW):
+        </label>
+        <input type="number" id="baseBoostExpInput" placeholder="np. 1000" class="modern-input" style="width: 100%; padding: 10px; background: #18181b; border: 1px solid #3f3f46; border-radius: 6px; color: #fff; font-size: 1rem;">
+      </div>
+
+      <!-- WYNIK LOGIKI Z GRY -->
+      <div style="background: #09090b; padding: 20px; border-radius: 8px; text-align: center; border: 1px dashed #10b981;">
+        <div style="font-size: 0.85rem; color: #a1a1aa; margin-bottom: 6px;">Przelicznik gry:</div>
+        <div id="boostTotalPercentage" style="font-size: 1.35rem; font-weight: bold; color: #10b981;">
+          Gaining 100% EXP out of Base EXP
+        </div>
+
+        <div style="margin-top: 15px; font-size: 0.85rem; color: #a1a1aa;">
+          Przewidywany EXP na sekundę z boostami:
+        </div>
+        <div id="boostResultSec" style="font-size: 1.6rem; font-weight: bold; color: #38bdf8; margin-top: 4px;">
+          -
+        </div>
+      </div>
     </div>
   </div>
 

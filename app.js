@@ -18,7 +18,24 @@ const db = getFirestore(app);
 // ==========================================
 // 1. GLOBALNE FUNKCJE I ZAKŁADKI
 // ==========================================
+function escapeHTML(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 function switchTab(viewId) {
+  const protectedViews = ['bossView', 'eventsView'];
+  const isLoggedIn = (auth && auth.currentUser) || localStorage.getItem("mu_logged_in") === "true";
+  if (protectedViews.includes(viewId) && !isLoggedIn) {
+    alert("Dostęp do tej zakładki wymaga wcześniejszego zalogowania się kontem Google na samej górze strony.");
+    const loginSection = document.getElementById("google-login-container");
+    if (loginSection) loginSection.scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
   const views = ['homeView', 'calcView', 'bossView', 'timerView', 'eventsView', 'speedView'];
 
   views.forEach(id => {
@@ -951,14 +968,27 @@ document.addEventListener('DOMContentLoaded', () => {
         <td style="text-align: center;"><input type="checkbox" class="boss-row-checkbox" data-id="${item.id}" ${selectedBossIds.has(item.id) ? 'checked' : ''} style="cursor: pointer;"></td>
         <td>${index + 1}</td>
         <td>${formatHM(tObj)}</td>
-        <td class="${statusClass}">${item.boss}</td>
-        <td class="${statusClass}">${item.ch}</td>
+        <td class="${statusClass}">${escapeHTML(item.boss)}</td>
+        <td class="${statusClass}">${escapeHTML(item.ch)}</td>
         <td class="${statusClass}">${remainsText}</td>
       `;
 
       const checkbox = tr.querySelector('.boss-row-checkbox');
-      const toggleSelection = (e) => {
+
+      checkbox.addEventListener('click', (e) => {
         e.stopPropagation();
+        if (checkbox.checked) {
+          selectedBossIds.add(item.id);
+          tr.classList.add('selected');
+        } else {
+          selectedBossIds.delete(item.id);
+          tr.classList.remove('selected');
+        }
+        updateSelectAllMasterCheckbox();
+      });
+
+      tr.addEventListener('click', (e) => {
+        if (e.target === checkbox) return;
         checkbox.checked = !checkbox.checked;
         if (checkbox.checked) {
           selectedBossIds.add(item.id);
@@ -968,10 +998,7 @@ document.addEventListener('DOMContentLoaded', () => {
           tr.classList.remove('selected');
         }
         updateSelectAllMasterCheckbox();
-      };
-
-      checkbox.addEventListener('click', toggleSelection);
-      tr.addEventListener('click', toggleSelection);
+      });
 
       tbody.appendChild(tr);
     });
@@ -1029,9 +1056,35 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 6. WIELOKROTNE TIMERY
+  // 6. WIELOKROTNE TIMERY (Z OCHRONĄ PRZED USYPIANIEM KART I AUTOSAVEM)
   // ==========================================
   let customTimers = [];
+  try {
+    const savedTimers = localStorage.getItem('mu_custom_timers');
+    if (savedTimers) {
+      customTimers = JSON.parse(savedTimers);
+      const now = Date.now();
+      customTimers.forEach(t => {
+        if (t.isRunning && t.targetEndTime) {
+          t.remainingSeconds = Math.max(0, Math.ceil((t.targetEndTime - now) / 1000));
+          if (t.remainingSeconds === 0) {
+            t.isRunning = false;
+          }
+        }
+      });
+    }
+  } catch (e) {
+    console.error("B\u0142\u0105d odczytu timer\u00f3w:", e);
+    customTimers = [];
+  }
+
+  function saveCustomTimers() {
+    try {
+      localStorage.setItem('mu_custom_timers', JSON.stringify(customTimers));
+    } catch (e) {
+      console.error("B\u0142\u0105d zapisu timer\u00f3w:", e);
+    }
+  }
 
   document.getElementById('addCustomTimerBtn')?.addEventListener('click', () => {
     const labelInput = document.getElementById('customTimerLabel');
@@ -1039,16 +1092,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const label = labelInput ? labelInput.value.trim() || 'Timer' : 'Timer';
     const minutes = minInput ? parseInt(minInput.value, 10) || 10 : 10;
+    const totalSec = Math.max(1, minutes * 60);
 
     customTimers.push({
-      id: Date.now(),
+      id: Date.now() + '_' + Math.random().toString(36).substring(2, 6),
       label: label,
-      remainingSeconds: minutes * 60,
-      isRunning: true
+      totalSeconds: totalSec,
+      remainingSeconds: totalSec,
+      targetEndTime: Date.now() + totalSec * 1000,
+      isRunning: true,
+      hasPlayedAlert: false
     });
 
     if (labelInput) labelInput.value = '';
     playSound('click');
+    saveCustomTimers();
     renderCustomTimers();
   });
 
@@ -1066,21 +1124,35 @@ document.addEventListener('DOMContentLoaded', () => {
       const s = String(timer.remainingSeconds % 60).padStart(2, '0');
 
       card.innerHTML = `
-        <div class="timer-card-title">${timer.label}</div>
+        <div class="timer-card-title">${escapeHTML(timer.label)}</div>
         <div class="timer-card-time">${m}:${s}</div>
         <div class="timer-card-controls">
           <button class="btn-secondary toggle-btn">${timer.isRunning ? 'Pauza' : 'Start'}</button>
-          <button class="btn-danger delete-btn">Usuń</button>
+          <button class="btn-danger delete-btn">Usu\u0144</button>
         </div>
       `;
 
       card.querySelector('.toggle-btn').addEventListener('click', () => {
-        timer.isRunning = !timer.isRunning;
+        if (timer.isRunning) {
+          timer.isRunning = false;
+          if (timer.targetEndTime) {
+            timer.remainingSeconds = Math.max(0, Math.ceil((timer.targetEndTime - Date.now()) / 1000));
+          }
+        } else {
+          if (timer.remainingSeconds <= 0) {
+            timer.remainingSeconds = timer.totalSeconds || 600;
+            timer.hasPlayedAlert = false;
+          }
+          timer.isRunning = true;
+          timer.targetEndTime = Date.now() + timer.remainingSeconds * 1000;
+        }
+        saveCustomTimers();
         renderCustomTimers();
       });
 
       card.querySelector('.delete-btn').addEventListener('click', () => {
         customTimers = customTimers.filter(t => t.id !== timer.id);
+        saveCustomTimers();
         renderCustomTimers();
       });
 
@@ -1090,16 +1162,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setInterval(() => {
     let changed = false;
+    const now = Date.now();
     customTimers.forEach(timer => {
-      if (timer.isRunning && timer.remainingSeconds > 0) {
-        timer.remainingSeconds--;
-        changed = true;
-        if (timer.remainingSeconds === 0) playSound('ready');
+      if (timer.isRunning) {
+        const left = Math.max(0, Math.ceil((timer.targetEndTime - now) / 1000));
+        if (left !== timer.remainingSeconds) {
+          timer.remainingSeconds = left;
+          changed = true;
+        }
+        if (left === 0) {
+          timer.isRunning = false;
+          if (!timer.hasPlayedAlert) {
+            playSound('ready');
+            timer.hasPlayedAlert = true;
+            saveCustomTimers();
+          }
+        }
       }
     });
     if (changed) renderCustomTimers();
   }, 1000);
 
+  window.addEventListener('focus', () => {
+    const now = Date.now();
+    customTimers.forEach(timer => {
+      if (timer.isRunning && timer.targetEndTime) {
+        timer.remainingSeconds = Math.max(0, Math.ceil((timer.targetEndTime - now) / 1000));
+        if (timer.remainingSeconds === 0) {
+          timer.isRunning = false;
+          if (!timer.hasPlayedAlert) {
+            playSound('ready');
+            timer.hasPlayedAlert = true;
+          }
+        }
+      }
+    });
+    renderCustomTimers();
+  });
+
+  renderCustomTimers();
   // ==========================================
   // 7. HARMONOGRAM EVENTÓW
   // ==========================================
@@ -1366,7 +1467,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         htmlContent += `
           <div class="${statusClass}" style="margin: 0; width: 100%;">
-            <div class="event-card-name" style="color: #ffffff;">${boss.boss} (CH ${boss.ch})</div>
+            <div class="event-card-name" style="color: #ffffff;">${escapeHTML(boss.boss)} (CH ${escapeHTML(boss.ch)})</div>
             <div class="event-card-timer" style="font-size: 1.0rem;">${timerDisplay}</div>
             <div class="event-card-localtime">Resp: <strong>${formatHM(new Date(boss.targetTime))}</strong></div>
           </div>
@@ -1396,10 +1497,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginBtnContainer = document.getElementById("google-login-button");
     if (!loginBtnContainer) return;
 
-    const termsCheckbox = document.querySelector('input[type="checkbox"]'); 
+    const termsCheckbox = document.getElementById("acceptTerms");
+    const marketingCheckbox = document.getElementById("acceptMarketing");
+
     const isSavedAgreement = localStorage.getItem("mu_terms_accepted") === "true";
-    if (termsCheckbox && isSavedAgreement) {
-      termsCheckbox.checked = true;
+    if (termsCheckbox) {
+      termsCheckbox.checked = isSavedAgreement;
+    }
+    if (marketingCheckbox) {
+      marketingCheckbox.checked = localStorage.getItem("mu_marketing_accepted") === "true";
     }
 
     const isAgreed = (termsCheckbox && termsCheckbox.checked) || isSavedAgreement;
@@ -1449,11 +1555,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const userRef = doc(db, "users", user.uid);
         const termsAccepted = localStorage.getItem("mu_terms_accepted") === "true";
         
+        const marketingAccepted = localStorage.getItem("mu_marketing_accepted") === "true";
+
         await setDoc(userRef, {
           uid: user.uid,
           email: user.email,
           displayName: user.displayName || "",
           termsAccepted: termsAccepted,
+          marketingAccepted: marketingAccepted,
           lastLogin: serverTimestamp()
         }, { merge: true });
       } catch (error) {
@@ -1484,15 +1593,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  document.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-    chk.addEventListener('change', (e) => {
-      if (e.target.id === "acceptTerms" || e.target.checked) {
-        localStorage.setItem("mu_terms_accepted", "true");
-      }
-      if (!auth.currentUser) {
-        updateLoginButtonState();
-      }
-    });
+  const acceptTermsEl = document.getElementById("acceptTerms");
+  const acceptMarketingEl = document.getElementById("acceptMarketing");
+
+  acceptTermsEl?.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      localStorage.setItem("mu_terms_accepted", "true");
+    } else {
+      localStorage.removeItem("mu_terms_accepted");
+    }
+    if (!auth.currentUser) {
+      updateLoginButtonState();
+    }
+  });
+
+  acceptMarketingEl?.addEventListener('change', (e) => {
+    if (e.target.checked) {
+      localStorage.setItem("mu_marketing_accepted", "true");
+    } else {
+      localStorage.removeItem("mu_marketing_accepted");
+    }
   });
 
   document.getElementById("logout-btn")?.addEventListener('click', () => {
